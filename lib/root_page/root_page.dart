@@ -9,76 +9,19 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
-
   HomeTabViewModel _tabViewModel = new HomeTabViewModel(0);
-  add() {
+  changeTabIndex(int index) {
     setState(() {
-      _tabViewModel.currentIndex++;
+      _tabViewModel.currentIndex = index;
     });
   }
   @override
   Widget build(BuildContext context) {
-    return ModelContainer(model: this, child: ModelWidget(), increment: add);
-  }
-}
-
-class ModelWidget extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    ModelContainer container = ModelContainer.of(context);
     return Scaffold(
       body: PageView(
-        children: [
-          Text("${container.model._tabViewModel.currentIndex}")
-        ],
+
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: themeColor(),
-        unselectedItemColor: Color(0xff9a9a9a),
-        currentIndex: container.model._tabViewModel.currentIndex,
-        // onTap: (index){
-        //   // model.changeBottomTabIndex(index);
-        //   // print(model);
-        //   setState(() {
-        //     model.changeBottomTabIndex(index);
-        //     // model.currentIndex= index;
-        //   });
-        //   print(model.currentIndex);
-        //
-        // },
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              activeIcon: Icon(Icons.home, color: themeColor()),
-              label: StringConfig.HOME
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.find_in_page),
-              activeIcon: Icon(Icons.find_in_page, color: themeColor()),
-              label: StringConfig.FIND
-          )
-        ],
-      ),
+      // bottomNavigationBar: ,
     );
   }
-
-}
-
-class ModelContainer extends InheritedWidget{
-  static ModelContainer? of(BuildContext context) {
-     return context.dependOnInheritedWidgetOfExactType<ModelContainer>();
-  }
-
-  final _RootPageState model;
-  final Function() increment;
-
-  ModelContainer({
-    Key? key,
-    required this.model,
-    required Widget child,
-    required this.increment,
-  }):super(key: key, child: child);
-
-  @override
-  bool updateShouldNotify(ModelContainer oldWidget) => model != oldWidget.model;
 }
