@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:demo2_eye/utils/theme.dart';
 import 'package:demo2_eye/config/string_config.dart';
-import 'package:demo2_eye/view_model/home_view_model/home_tab_view_model.dart';
+
+class HomeTabViewModel {
+  int currentIndex = 0;
+  // void changeBottomTabIndex(int index){
+  //   currentIndex = index;
+  //   // 刷新數據
+  //   notifyListeners();
+  // }
+HomeTabViewModel(this.currentIndex);
+}
 
 class RootPage extends StatefulWidget {
   @override

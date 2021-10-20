@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-// 借助ChangeNotifier实现发布者-订阅者模式
+// Model 借助ChangeNotifier实现发布者-订阅者模式
 // notifyListeners 告知听众刷新
 // class UserInfoModel with ChangeNotifier{... notifyListeners() }
 
+// 使用ChangeNotifierProvider将Model和Widget相关联
 // ChangeNotifierProvider.value 管理数据状态，放在公共父组件的位置
 // ChangeNotifierProvider.value(value: UserInfoModel()),
 // 管理多个 MultiProvider
@@ -17,12 +18,37 @@ import 'package:provider/provider.dart';
 
 
 class ProviderWidget<T extends ChangeNotifier> extends StatefulWidget{
+  final T model;
+  final Widget? child;
+  final Widget Function(BuildContext context, T model, Widget? child) builder;
+
+  const ProviderWidget({
+    Key? key,
+    required this.model,
+    required this.builder,
+    this.child,
+  }):super(key: key);
+
   @override
-  _ProviderWidgetState createState() => _ProviderWidgetState();
+  _ProviderWidgetState createState() => _ProviderWidgetState<T>();
 }
 
-class _ProviderWidgetState extends State{
+class _ProviderWidgetState<T extends ChangeNotifier> extends State<ProviderWidget<T>>{
+  late T model;
+
+  @override
+  void initState(){
+    super.initState();
+    model = widget.model;
+  }
+
+  @override
   Widget build(BuildContext context){
-    return Text('123');
+    return ChangeNotifierProvider(
+        create: (_) => model,
+        child: Consumer(
+      builder: widget.builder,
+      child: widget.child
+    ));
   }
 }
