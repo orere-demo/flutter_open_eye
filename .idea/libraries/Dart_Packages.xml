@@ -107,6 +107,13 @@
             </list>
           </value>
         </entry>
+        <entry key="pull_to_refresh">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../../flutter/flutter2.0.2/.pub-cache/hosted/pub.flutter-io.cn/pull_to_refresh-2.0.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="sky_engine">
           <value>
             <list>
@@ -186,6 +193,7 @@
       <root url="file://$PROJECT_DIR$/../../../flutter/flutter2.0.2/.pub-cache/hosted/pub.flutter-io.cn/nested-1.0.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/flutter2.0.2/.pub-cache/hosted/pub.flutter-io.cn/path-1.8.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/flutter2.0.2/.pub-cache/hosted/pub.flutter-io.cn/provider-5.0.0/lib" />
+      <root url="file://$PROJECT_DIR$/../../../flutter/flutter2.0.2/.pub-cache/hosted/pub.flutter-io.cn/pull_to_refresh-2.0.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/flutter2.0.2/.pub-cache/hosted/pub.flutter-io.cn/source_span-1.8.1/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/flutter2.0.2/.pub-cache/hosted/pub.flutter-io.cn/stack_trace-1.10.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/flutter2.0.2/.pub-cache/hosted/pub.flutter-io.cn/stream_channel-2.1.0/lib" />
