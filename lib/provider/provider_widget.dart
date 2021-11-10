@@ -21,12 +21,14 @@ class ProviderWidget<T extends ChangeNotifier> extends StatefulWidget{
   final T model;
   final Widget? child;
   final Widget Function(BuildContext context, T model, Widget? child) builder;
+  final Function(T)? onModelInit;
 
   const ProviderWidget({
     Key? key,
     required this.model,
     required this.builder,
     this.child,
+    this.onModelInit,
   }):super(key: key);
 
   @override
@@ -40,6 +42,9 @@ class _ProviderWidgetState<T extends ChangeNotifier> extends State<ProviderWidge
   void initState(){
     super.initState();
     model = widget.model;
+    if(widget.onModelInit != null ){
+      widget.onModelInit!(model);
+    }
   }
 
   @override

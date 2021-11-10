@@ -2,6 +2,7 @@ import 'package:demo2_eye/config/color_config.dart';
 import 'package:flutter/material.dart';
 import 'package:demo2_eye/root_page/home_page/home_body_page_widget.dart';
 import 'package:demo2_eye/utils/util.dart';
+import 'package:demo2_eye/config/string_config.dart';
 
 class HomePageWidget extends StatefulWidget {
   HomePageWidget({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class _HomePageWidgetState extends State<HomePageWidget> with AutomaticKeepAlive
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      appBar: appBar('首页', backgroundColor: ColorConfig.themeColor),
+      appBar: appBar(StringConfig.HOME, backgroundColor: ColorConfig.themeColor),
       body: HomeBodyPageWidget(),
     );
   }

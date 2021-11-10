@@ -12,11 +12,12 @@ class LoadingWidget extends StatelessWidget{
   // 0: 成功；1完成并停止；2错误
   int type = 0;
 
-  Widget child;
+  final Widget child;
 
   Function reload;
 
-  LoadingWidget({Key? key, this.type = LOADING, required this.child, required this.reload }) : super(key:key)
+  LoadingWidget({Key? key, this.type = LOADING, required this.child, required this.reload }) : super(key:key);
+
 
   @override
   Widget build(BuildContext context) {

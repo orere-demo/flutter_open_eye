@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\1024\\my-demo\\my-project\\flutter-demo\\demo2_eye\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
+            "outputFile": "D:\\1024\\github_myDamo\\flutter_open_eye\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
             "map": [
                 {
-                    "source": "D:\\1024\\my-demo\\my-project\\flutter-demo\\demo2_eye\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "D:\\1024\\github_myDamo\\flutter_open_eye\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

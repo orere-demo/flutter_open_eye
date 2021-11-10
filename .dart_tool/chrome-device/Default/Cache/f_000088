@@ -1,0 +1,1670 @@
+define(['dart_sdk', 'packages/flutter/src/widgets/widget_span.dart', 'packages/flutter/src/foundation/synchronous_future.dart'], (function load__packages__pull_to_refresh__src__internals__refresh_localizations_dart(dart_sdk, packages__flutter__src__widgets__widget_span$46dart, packages__flutter__src__foundation__synchronous_future$46dart) {
+  'use strict';
+  const core = dart_sdk.core;
+  const _js_helper = dart_sdk._js_helper;
+  const ui = dart_sdk.ui;
+  const _interceptors = dart_sdk._interceptors;
+  const async = dart_sdk.async;
+  const dart = dart_sdk.dart;
+  const dartx = dart_sdk.dartx;
+  const localizations = packages__flutter__src__widgets__widget_span$46dart.src__widgets__localizations;
+  const synchronous_future = packages__flutter__src__foundation__synchronous_future$46dart.src__foundation__synchronous_future;
+  var refresh_localizations = Object.create(dart.library);
+  var $containsKey = dartx.containsKey;
+  var $_get = dartx._get;
+  var $contains = dartx.contains;
+  dart._checkModuleNullSafetyMode(true);
+  var T = {
+    IdentityMapOfString$RefreshString: () => (T.IdentityMapOfString$RefreshString = dart.constFn(_js_helper.IdentityMap$(core.String, refresh_localizations.RefreshString)))(),
+    JSArrayOfString: () => (T.JSArrayOfString = dart.constFn(_interceptors.JSArray$(core.String)))(),
+    SynchronousFutureOfRefreshLocalizations: () => (T.SynchronousFutureOfRefreshLocalizations = dart.constFn(synchronous_future.SynchronousFuture$(refresh_localizations.RefreshLocalizations)))(),
+    LocalizationsDelegateOfRefreshLocalizations: () => (T.LocalizationsDelegateOfRefreshLocalizations = dart.constFn(localizations.LocalizationsDelegate$(refresh_localizations.RefreshLocalizations)))()
+  };
+  const CT = Object.create({
+    _: () => (C, CT)
+  });
+  dart.defineLazy(CT, {
+    get C0() {
+      return C[0] = dart.const({
+        __proto__: refresh_localizations.RefreshLocalizationsDelegate.prototype
+      });
+    }
+  }, false);
+  var C = [void 0];
+  var I = ["package:pull_to_refresh/src/internals/refresh_localizations.dart"];
+  var locale$ = dart.privateName(refresh_localizations, "RefreshLocalizations.locale");
+  var values = dart.privateName(refresh_localizations, "RefreshLocalizations.values");
+  refresh_localizations.RefreshLocalizations = class RefreshLocalizations extends core.Object {
+    get locale() {
+      return this[locale$];
+    }
+    set locale(value) {
+      super.locale = value;
+    }
+    get values() {
+      return this[values];
+    }
+    set values(value) {
+      this[values] = value;
+    }
+    get currentLocalization() {
+      if (this.values[$containsKey](this.locale.languageCode)) {
+        return this.values[$_get](this.locale.languageCode);
+      }
+      return this.values[$_get]("en");
+    }
+    static of(context) {
+      return localizations.Localizations.of(refresh_localizations.RefreshLocalizations, context, dart.wrapType(refresh_localizations.RefreshLocalizations));
+    }
+  };
+  (refresh_localizations.RefreshLocalizations.new = function(locale) {
+    this[values] = new (T.IdentityMapOfString$RefreshString()).from(["en", new refresh_localizations.EnRefreshString.new(), "zh", new refresh_localizations.ChRefreshString.new(), "fr", new refresh_localizations.FrRefreshString.new(), "ru", new refresh_localizations.RuRefreshString.new(), "uk", new refresh_localizations.UkRefreshString.new(), "it", new refresh_localizations.ItRefreshString.new(), "ja", new refresh_localizations.JpRefreshString.new(), "de", new refresh_localizations.DeRefreshString.new(), "es", new refresh_localizations.EsRefreshString.new(), "nl", new refresh_localizations.NlRefreshString.new(), "sv", new refresh_localizations.SvRefreshString.new(), "pt", new refresh_localizations.PtRefreshString.new(), "ko", new refresh_localizations.KrRefreshString.new()]);
+    this[locale$] = locale;
+    ;
+  }).prototype = refresh_localizations.RefreshLocalizations.prototype;
+  dart.addTypeTests(refresh_localizations.RefreshLocalizations);
+  dart.addTypeCaches(refresh_localizations.RefreshLocalizations);
+  dart.setGetterSignature(refresh_localizations.RefreshLocalizations, () => ({
+    __proto__: dart.getGetters(refresh_localizations.RefreshLocalizations.__proto__),
+    currentLocalization: dart.nullable(refresh_localizations.RefreshString)
+  }));
+  dart.setLibraryUri(refresh_localizations.RefreshLocalizations, I[0]);
+  dart.setFieldSignature(refresh_localizations.RefreshLocalizations, () => ({
+    __proto__: dart.getFields(refresh_localizations.RefreshLocalizations.__proto__),
+    locale: dart.finalFieldType(ui.Locale),
+    values: dart.fieldType(core.Map$(core.String, refresh_localizations.RefreshString))
+  }));
+  dart.defineLazy(refresh_localizations.RefreshLocalizations, {
+    /*refresh_localizations.RefreshLocalizations.delegate*/get delegate() {
+      return C[0] || CT.C0;
+    }
+  }, false);
+  refresh_localizations.RefreshLocalizationsDelegate = class RefreshLocalizationsDelegate extends localizations.LocalizationsDelegate$(refresh_localizations.RefreshLocalizations) {
+    isSupported(locale) {
+      return T.JSArrayOfString().of(["en", "zh", "fr", "ru", "uk", "ja", "it", "de", "ko", "pt", "sv", "nl", "es"])[$contains](locale.languageCode);
+    }
+    load(locale) {
+      return new (T.SynchronousFutureOfRefreshLocalizations()).new(new refresh_localizations.RefreshLocalizations.new(locale));
+    }
+    shouldReload(old) {
+      T.LocalizationsDelegateOfRefreshLocalizations().as(old);
+      return false;
+    }
+  };
+  (refresh_localizations.RefreshLocalizationsDelegate.new = function() {
+    refresh_localizations.RefreshLocalizationsDelegate.__proto__.new.call(this);
+    ;
+  }).prototype = refresh_localizations.RefreshLocalizationsDelegate.prototype;
+  dart.addTypeTests(refresh_localizations.RefreshLocalizationsDelegate);
+  dart.addTypeCaches(refresh_localizations.RefreshLocalizationsDelegate);
+  dart.setMethodSignature(refresh_localizations.RefreshLocalizationsDelegate, () => ({
+    __proto__: dart.getMethods(refresh_localizations.RefreshLocalizationsDelegate.__proto__),
+    isSupported: dart.fnType(core.bool, [ui.Locale]),
+    load: dart.fnType(async.Future$(refresh_localizations.RefreshLocalizations), [ui.Locale]),
+    shouldReload: dart.fnType(core.bool, [dart.nullable(core.Object)])
+  }));
+  dart.setLibraryUri(refresh_localizations.RefreshLocalizationsDelegate, I[0]);
+  var idleRefreshText = dart.privateName(refresh_localizations, "RefreshString.idleRefreshText");
+  var canRefreshText = dart.privateName(refresh_localizations, "RefreshString.canRefreshText");
+  var refreshingText = dart.privateName(refresh_localizations, "RefreshString.refreshingText");
+  var refreshCompleteText = dart.privateName(refresh_localizations, "RefreshString.refreshCompleteText");
+  var refreshFailedText = dart.privateName(refresh_localizations, "RefreshString.refreshFailedText");
+  var canTwoLevelText = dart.privateName(refresh_localizations, "RefreshString.canTwoLevelText");
+  var idleLoadingText = dart.privateName(refresh_localizations, "RefreshString.idleLoadingText");
+  var canLoadingText = dart.privateName(refresh_localizations, "RefreshString.canLoadingText");
+  var loadingText = dart.privateName(refresh_localizations, "RefreshString.loadingText");
+  var loadFailedText = dart.privateName(refresh_localizations, "RefreshString.loadFailedText");
+  var noMoreText = dart.privateName(refresh_localizations, "RefreshString.noMoreText");
+  refresh_localizations.RefreshString = class RefreshString extends core.Object {
+    get idleRefreshText() {
+      return this[idleRefreshText];
+    }
+    set idleRefreshText(value) {
+      this[idleRefreshText] = value;
+    }
+    get canRefreshText() {
+      return this[canRefreshText];
+    }
+    set canRefreshText(value) {
+      this[canRefreshText] = value;
+    }
+    get refreshingText() {
+      return this[refreshingText];
+    }
+    set refreshingText(value) {
+      this[refreshingText] = value;
+    }
+    get refreshCompleteText() {
+      return this[refreshCompleteText];
+    }
+    set refreshCompleteText(value) {
+      this[refreshCompleteText] = value;
+    }
+    get refreshFailedText() {
+      return this[refreshFailedText];
+    }
+    set refreshFailedText(value) {
+      this[refreshFailedText] = value;
+    }
+    get canTwoLevelText() {
+      return this[canTwoLevelText];
+    }
+    set canTwoLevelText(value) {
+      this[canTwoLevelText] = value;
+    }
+    get idleLoadingText() {
+      return this[idleLoadingText];
+    }
+    set idleLoadingText(value) {
+      this[idleLoadingText] = value;
+    }
+    get canLoadingText() {
+      return this[canLoadingText];
+    }
+    set canLoadingText(value) {
+      this[canLoadingText] = value;
+    }
+    get loadingText() {
+      return this[loadingText];
+    }
+    set loadingText(value) {
+      this[loadingText] = value;
+    }
+    get loadFailedText() {
+      return this[loadFailedText];
+    }
+    set loadFailedText(value) {
+      this[loadFailedText] = value;
+    }
+    get noMoreText() {
+      return this[noMoreText];
+    }
+    set noMoreText(value) {
+      this[noMoreText] = value;
+    }
+  };
+  (refresh_localizations.RefreshString.new = function() {
+    this[idleRefreshText] = null;
+    this[canRefreshText] = null;
+    this[refreshingText] = null;
+    this[refreshCompleteText] = null;
+    this[refreshFailedText] = null;
+    this[canTwoLevelText] = null;
+    this[idleLoadingText] = null;
+    this[canLoadingText] = null;
+    this[loadingText] = null;
+    this[loadFailedText] = null;
+    this[noMoreText] = null;
+    ;
+  }).prototype = refresh_localizations.RefreshString.prototype;
+  dart.addTypeTests(refresh_localizations.RefreshString);
+  dart.addTypeCaches(refresh_localizations.RefreshString);
+  dart.setLibraryUri(refresh_localizations.RefreshString, I[0]);
+  dart.setFieldSignature(refresh_localizations.RefreshString, () => ({
+    __proto__: dart.getFields(refresh_localizations.RefreshString.__proto__),
+    idleRefreshText: dart.fieldType(dart.nullable(core.String)),
+    canRefreshText: dart.fieldType(dart.nullable(core.String)),
+    refreshingText: dart.fieldType(dart.nullable(core.String)),
+    refreshCompleteText: dart.fieldType(dart.nullable(core.String)),
+    refreshFailedText: dart.fieldType(dart.nullable(core.String)),
+    canTwoLevelText: dart.fieldType(dart.nullable(core.String)),
+    idleLoadingText: dart.fieldType(dart.nullable(core.String)),
+    canLoadingText: dart.fieldType(dart.nullable(core.String)),
+    loadingText: dart.fieldType(dart.nullable(core.String)),
+    loadFailedText: dart.fieldType(dart.nullable(core.String)),
+    noMoreText: dart.fieldType(dart.nullable(core.String))
+  }));
+  var canLoadingText$ = dart.privateName(refresh_localizations, "ChRefreshString.canLoadingText");
+  var canRefreshText$ = dart.privateName(refresh_localizations, "ChRefreshString.canRefreshText");
+  var canTwoLevelText$ = dart.privateName(refresh_localizations, "ChRefreshString.canTwoLevelText");
+  var idleLoadingText$ = dart.privateName(refresh_localizations, "ChRefreshString.idleLoadingText");
+  var idleRefreshText$ = dart.privateName(refresh_localizations, "ChRefreshString.idleRefreshText");
+  var loadFailedText$ = dart.privateName(refresh_localizations, "ChRefreshString.loadFailedText");
+  var loadingText$ = dart.privateName(refresh_localizations, "ChRefreshString.loadingText");
+  var noMoreText$ = dart.privateName(refresh_localizations, "ChRefreshString.noMoreText");
+  var refreshCompleteText$ = dart.privateName(refresh_localizations, "ChRefreshString.refreshCompleteText");
+  var refreshFailedText$ = dart.privateName(refresh_localizations, "ChRefreshString.refreshFailedText");
+  var refreshingText$ = dart.privateName(refresh_localizations, "ChRefreshString.refreshingText");
+  refresh_localizations.ChRefreshString = class ChRefreshString extends core.Object {
+    get canLoadingText() {
+      return this[canLoadingText$];
+    }
+    set canLoadingText(value) {
+      this[canLoadingText$] = value;
+    }
+    get canRefreshText() {
+      return this[canRefreshText$];
+    }
+    set canRefreshText(value) {
+      this[canRefreshText$] = value;
+    }
+    get canTwoLevelText() {
+      return this[canTwoLevelText$];
+    }
+    set canTwoLevelText(value) {
+      this[canTwoLevelText$] = value;
+    }
+    get idleLoadingText() {
+      return this[idleLoadingText$];
+    }
+    set idleLoadingText(value) {
+      this[idleLoadingText$] = value;
+    }
+    get idleRefreshText() {
+      return this[idleRefreshText$];
+    }
+    set idleRefreshText(value) {
+      this[idleRefreshText$] = value;
+    }
+    get loadFailedText() {
+      return this[loadFailedText$];
+    }
+    set loadFailedText(value) {
+      this[loadFailedText$] = value;
+    }
+    get loadingText() {
+      return this[loadingText$];
+    }
+    set loadingText(value) {
+      this[loadingText$] = value;
+    }
+    get noMoreText() {
+      return this[noMoreText$];
+    }
+    set noMoreText(value) {
+      this[noMoreText$] = value;
+    }
+    get refreshCompleteText() {
+      return this[refreshCompleteText$];
+    }
+    set refreshCompleteText(value) {
+      this[refreshCompleteText$] = value;
+    }
+    get refreshFailedText() {
+      return this[refreshFailedText$];
+    }
+    set refreshFailedText(value) {
+      this[refreshFailedText$] = value;
+    }
+    get refreshingText() {
+      return this[refreshingText$];
+    }
+    set refreshingText(value) {
+      this[refreshingText$] = value;
+    }
+  };
+  (refresh_localizations.ChRefreshString.new = function() {
+    this[canLoadingText$] = "松手开始加载数据";
+    this[canRefreshText$] = "松开开始刷新数据";
+    this[canTwoLevelText$] = "释放手势,进入二楼";
+    this[idleLoadingText$] = "上拉加载";
+    this[idleRefreshText$] = "下拉刷新";
+    this[loadFailedText$] = "加载失败";
+    this[loadingText$] = "加载中…";
+    this[noMoreText$] = "没有更多数据了";
+    this[refreshCompleteText$] = "刷新成功";
+    this[refreshFailedText$] = "刷新失败";
+    this[refreshingText$] = "刷新中…";
+    ;
+  }).prototype = refresh_localizations.ChRefreshString.prototype;
+  dart.addTypeTests(refresh_localizations.ChRefreshString);
+  dart.addTypeCaches(refresh_localizations.ChRefreshString);
+  refresh_localizations.ChRefreshString[dart.implements] = () => [refresh_localizations.RefreshString];
+  dart.setLibraryUri(refresh_localizations.ChRefreshString, I[0]);
+  dart.setFieldSignature(refresh_localizations.ChRefreshString, () => ({
+    __proto__: dart.getFields(refresh_localizations.ChRefreshString.__proto__),
+    canLoadingText: dart.fieldType(dart.nullable(core.String)),
+    canRefreshText: dart.fieldType(dart.nullable(core.String)),
+    canTwoLevelText: dart.fieldType(dart.nullable(core.String)),
+    idleLoadingText: dart.fieldType(dart.nullable(core.String)),
+    idleRefreshText: dart.fieldType(dart.nullable(core.String)),
+    loadFailedText: dart.fieldType(dart.nullable(core.String)),
+    loadingText: dart.fieldType(dart.nullable(core.String)),
+    noMoreText: dart.fieldType(dart.nullable(core.String)),
+    refreshCompleteText: dart.fieldType(dart.nullable(core.String)),
+    refreshFailedText: dart.fieldType(dart.nullable(core.String)),
+    refreshingText: dart.fieldType(dart.nullable(core.String))
+  }));
+  var canLoadingText$0 = dart.privateName(refresh_localizations, "EnRefreshString.canLoadingText");
+  var canRefreshText$0 = dart.privateName(refresh_localizations, "EnRefreshString.canRefreshText");
+  var canTwoLevelText$0 = dart.privateName(refresh_localizations, "EnRefreshString.canTwoLevelText");
+  var idleLoadingText$0 = dart.privateName(refresh_localizations, "EnRefreshString.idleLoadingText");
+  var idleRefreshText$0 = dart.privateName(refresh_localizations, "EnRefreshString.idleRefreshText");
+  var loadFailedText$0 = dart.privateName(refresh_localizations, "EnRefreshString.loadFailedText");
+  var loadingText$0 = dart.privateName(refresh_localizations, "EnRefreshString.loadingText");
+  var noMoreText$0 = dart.privateName(refresh_localizations, "EnRefreshString.noMoreText");
+  var refreshCompleteText$0 = dart.privateName(refresh_localizations, "EnRefreshString.refreshCompleteText");
+  var refreshFailedText$0 = dart.privateName(refresh_localizations, "EnRefreshString.refreshFailedText");
+  var refreshingText$0 = dart.privateName(refresh_localizations, "EnRefreshString.refreshingText");
+  refresh_localizations.EnRefreshString = class EnRefreshString extends core.Object {
+    get canLoadingText() {
+      return this[canLoadingText$0];
+    }
+    set canLoadingText(value) {
+      this[canLoadingText$0] = value;
+    }
+    get canRefreshText() {
+      return this[canRefreshText$0];
+    }
+    set canRefreshText(value) {
+      this[canRefreshText$0] = value;
+    }
+    get canTwoLevelText() {
+      return this[canTwoLevelText$0];
+    }
+    set canTwoLevelText(value) {
+      this[canTwoLevelText$0] = value;
+    }
+    get idleLoadingText() {
+      return this[idleLoadingText$0];
+    }
+    set idleLoadingText(value) {
+      this[idleLoadingText$0] = value;
+    }
+    get idleRefreshText() {
+      return this[idleRefreshText$0];
+    }
+    set idleRefreshText(value) {
+      this[idleRefreshText$0] = value;
+    }
+    get loadFailedText() {
+      return this[loadFailedText$0];
+    }
+    set loadFailedText(value) {
+      this[loadFailedText$0] = value;
+    }
+    get loadingText() {
+      return this[loadingText$0];
+    }
+    set loadingText(value) {
+      this[loadingText$0] = value;
+    }
+    get noMoreText() {
+      return this[noMoreText$0];
+    }
+    set noMoreText(value) {
+      this[noMoreText$0] = value;
+    }
+    get refreshCompleteText() {
+      return this[refreshCompleteText$0];
+    }
+    set refreshCompleteText(value) {
+      this[refreshCompleteText$0] = value;
+    }
+    get refreshFailedText() {
+      return this[refreshFailedText$0];
+    }
+    set refreshFailedText(value) {
+      this[refreshFailedText$0] = value;
+    }
+    get refreshingText() {
+      return this[refreshingText$0];
+    }
+    set refreshingText(value) {
+      this[refreshingText$0] = value;
+    }
+  };
+  (refresh_localizations.EnRefreshString.new = function() {
+    this[canLoadingText$0] = "Release to load more";
+    this[canRefreshText$0] = "Release to refresh";
+    this[canTwoLevelText$0] = "Release to enter secondfloor";
+    this[idleLoadingText$0] = "Pull up Load more";
+    this[idleRefreshText$0] = "Pull down Refresh";
+    this[loadFailedText$0] = "Load Failed";
+    this[loadingText$0] = "Loading…";
+    this[noMoreText$0] = "No more data";
+    this[refreshCompleteText$0] = "Refresh completed";
+    this[refreshFailedText$0] = "Refresh failed";
+    this[refreshingText$0] = "Refreshing…";
+    ;
+  }).prototype = refresh_localizations.EnRefreshString.prototype;
+  dart.addTypeTests(refresh_localizations.EnRefreshString);
+  dart.addTypeCaches(refresh_localizations.EnRefreshString);
+  refresh_localizations.EnRefreshString[dart.implements] = () => [refresh_localizations.RefreshString];
+  dart.setLibraryUri(refresh_localizations.EnRefreshString, I[0]);
+  dart.setFieldSignature(refresh_localizations.EnRefreshString, () => ({
+    __proto__: dart.getFields(refresh_localizations.EnRefreshString.__proto__),
+    canLoadingText: dart.fieldType(dart.nullable(core.String)),
+    canRefreshText: dart.fieldType(dart.nullable(core.String)),
+    canTwoLevelText: dart.fieldType(dart.nullable(core.String)),
+    idleLoadingText: dart.fieldType(dart.nullable(core.String)),
+    idleRefreshText: dart.fieldType(dart.nullable(core.String)),
+    loadFailedText: dart.fieldType(dart.nullable(core.String)),
+    loadingText: dart.fieldType(dart.nullable(core.String)),
+    noMoreText: dart.fieldType(dart.nullable(core.String)),
+    refreshCompleteText: dart.fieldType(dart.nullable(core.String)),
+    refreshFailedText: dart.fieldType(dart.nullable(core.String)),
+    refreshingText: dart.fieldType(dart.nullable(core.String))
+  }));
+  var canLoadingText$1 = dart.privateName(refresh_localizations, "FrRefreshString.canLoadingText");
+  var canRefreshText$1 = dart.privateName(refresh_localizations, "FrRefreshString.canRefreshText");
+  var canTwoLevelText$1 = dart.privateName(refresh_localizations, "FrRefreshString.canTwoLevelText");
+  var idleLoadingText$1 = dart.privateName(refresh_localizations, "FrRefreshString.idleLoadingText");
+  var idleRefreshText$1 = dart.privateName(refresh_localizations, "FrRefreshString.idleRefreshText");
+  var loadFailedText$1 = dart.privateName(refresh_localizations, "FrRefreshString.loadFailedText");
+  var loadingText$1 = dart.privateName(refresh_localizations, "FrRefreshString.loadingText");
+  var noMoreText$1 = dart.privateName(refresh_localizations, "FrRefreshString.noMoreText");
+  var refreshCompleteText$1 = dart.privateName(refresh_localizations, "FrRefreshString.refreshCompleteText");
+  var refreshFailedText$1 = dart.privateName(refresh_localizations, "FrRefreshString.refreshFailedText");
+  var refreshingText$1 = dart.privateName(refresh_localizations, "FrRefreshString.refreshingText");
+  refresh_localizations.FrRefreshString = class FrRefreshString extends core.Object {
+    get canLoadingText() {
+      return this[canLoadingText$1];
+    }
+    set canLoadingText(value) {
+      this[canLoadingText$1] = value;
+    }
+    get canRefreshText() {
+      return this[canRefreshText$1];
+    }
+    set canRefreshText(value) {
+      this[canRefreshText$1] = value;
+    }
+    get canTwoLevelText() {
+      return this[canTwoLevelText$1];
+    }
+    set canTwoLevelText(value) {
+      this[canTwoLevelText$1] = value;
+    }
+    get idleLoadingText() {
+      return this[idleLoadingText$1];
+    }
+    set idleLoadingText(value) {
+      this[idleLoadingText$1] = value;
+    }
+    get idleRefreshText() {
+      return this[idleRefreshText$1];
+    }
+    set idleRefreshText(value) {
+      this[idleRefreshText$1] = value;
+    }
+    get loadFailedText() {
+      return this[loadFailedText$1];
+    }
+    set loadFailedText(value) {
+      this[loadFailedText$1] = value;
+    }
+    get loadingText() {
+      return this[loadingText$1];
+    }
+    set loadingText(value) {
+      this[loadingText$1] = value;
+    }
+    get noMoreText() {
+      return this[noMoreText$1];
+    }
+    set noMoreText(value) {
+      this[noMoreText$1] = value;
+    }
+    get refreshCompleteText() {
+      return this[refreshCompleteText$1];
+    }
+    set refreshCompleteText(value) {
+      this[refreshCompleteText$1] = value;
+    }
+    get refreshFailedText() {
+      return this[refreshFailedText$1];
+    }
+    set refreshFailedText(value) {
+      this[refreshFailedText$1] = value;
+    }
+    get refreshingText() {
+      return this[refreshingText$1];
+    }
+    set refreshingText(value) {
+      this[refreshingText$1] = value;
+    }
+  };
+  (refresh_localizations.FrRefreshString.new = function() {
+    this[canLoadingText$1] = "Relâchez pour charger davantage";
+    this[canRefreshText$1] = "Relâchez pour rafraîchir";
+    this[canTwoLevelText$1] = "Relâchez pour entrer secondfloor";
+    this[idleLoadingText$1] = "Tirez pour charger davantage";
+    this[idleRefreshText$1] = "Tirez pour rafraîchir";
+    this[loadFailedText$1] = "Chargement échoué";
+    this[loadingText$1] = "Chargement…";
+    this[noMoreText$1] = "Aucune autre donnée";
+    this[refreshCompleteText$1] = "Rafraîchissement terminé";
+    this[refreshFailedText$1] = "Rafraîchissement échoué";
+    this[refreshingText$1] = "Rafraîchissement…";
+    ;
+  }).prototype = refresh_localizations.FrRefreshString.prototype;
+  dart.addTypeTests(refresh_localizations.FrRefreshString);
+  dart.addTypeCaches(refresh_localizations.FrRefreshString);
+  refresh_localizations.FrRefreshString[dart.implements] = () => [refresh_localizations.RefreshString];
+  dart.setLibraryUri(refresh_localizations.FrRefreshString, I[0]);
+  dart.setFieldSignature(refresh_localizations.FrRefreshString, () => ({
+    __proto__: dart.getFields(refresh_localizations.FrRefreshString.__proto__),
+    canLoadingText: dart.fieldType(dart.nullable(core.String)),
+    canRefreshText: dart.fieldType(dart.nullable(core.String)),
+    canTwoLevelText: dart.fieldType(dart.nullable(core.String)),
+    idleLoadingText: dart.fieldType(dart.nullable(core.String)),
+    idleRefreshText: dart.fieldType(dart.nullable(core.String)),
+    loadFailedText: dart.fieldType(dart.nullable(core.String)),
+    loadingText: dart.fieldType(dart.nullable(core.String)),
+    noMoreText: dart.fieldType(dart.nullable(core.String)),
+    refreshCompleteText: dart.fieldType(dart.nullable(core.String)),
+    refreshFailedText: dart.fieldType(dart.nullable(core.String)),
+    refreshingText: dart.fieldType(dart.nullable(core.String))
+  }));
+  var canLoadingText$2 = dart.privateName(refresh_localizations, "RuRefreshString.canLoadingText");
+  var canRefreshText$2 = dart.privateName(refresh_localizations, "RuRefreshString.canRefreshText");
+  var canTwoLevelText$2 = dart.privateName(refresh_localizations, "RuRefreshString.canTwoLevelText");
+  var idleLoadingText$2 = dart.privateName(refresh_localizations, "RuRefreshString.idleLoadingText");
+  var idleRefreshText$2 = dart.privateName(refresh_localizations, "RuRefreshString.idleRefreshText");
+  var loadFailedText$2 = dart.privateName(refresh_localizations, "RuRefreshString.loadFailedText");
+  var loadingText$2 = dart.privateName(refresh_localizations, "RuRefreshString.loadingText");
+  var noMoreText$2 = dart.privateName(refresh_localizations, "RuRefreshString.noMoreText");
+  var refreshCompleteText$2 = dart.privateName(refresh_localizations, "RuRefreshString.refreshCompleteText");
+  var refreshFailedText$2 = dart.privateName(refresh_localizations, "RuRefreshString.refreshFailedText");
+  var refreshingText$2 = dart.privateName(refresh_localizations, "RuRefreshString.refreshingText");
+  refresh_localizations.RuRefreshString = class RuRefreshString extends core.Object {
+    get canLoadingText() {
+      return this[canLoadingText$2];
+    }
+    set canLoadingText(value) {
+      this[canLoadingText$2] = value;
+    }
+    get canRefreshText() {
+      return this[canRefreshText$2];
+    }
+    set canRefreshText(value) {
+      this[canRefreshText$2] = value;
+    }
+    get canTwoLevelText() {
+      return this[canTwoLevelText$2];
+    }
+    set canTwoLevelText(value) {
+      this[canTwoLevelText$2] = value;
+    }
+    get idleLoadingText() {
+      return this[idleLoadingText$2];
+    }
+    set idleLoadingText(value) {
+      this[idleLoadingText$2] = value;
+    }
+    get idleRefreshText() {
+      return this[idleRefreshText$2];
+    }
+    set idleRefreshText(value) {
+      this[idleRefreshText$2] = value;
+    }
+    get loadFailedText() {
+      return this[loadFailedText$2];
+    }
+    set loadFailedText(value) {
+      this[loadFailedText$2] = value;
+    }
+    get loadingText() {
+      return this[loadingText$2];
+    }
+    set loadingText(value) {
+      this[loadingText$2] = value;
+    }
+    get noMoreText() {
+      return this[noMoreText$2];
+    }
+    set noMoreText(value) {
+      this[noMoreText$2] = value;
+    }
+    get refreshCompleteText() {
+      return this[refreshCompleteText$2];
+    }
+    set refreshCompleteText(value) {
+      this[refreshCompleteText$2] = value;
+    }
+    get refreshFailedText() {
+      return this[refreshFailedText$2];
+    }
+    set refreshFailedText(value) {
+      this[refreshFailedText$2] = value;
+    }
+    get refreshingText() {
+      return this[refreshingText$2];
+    }
+    set refreshingText(value) {
+      this[refreshingText$2] = value;
+    }
+  };
+  (refresh_localizations.RuRefreshString.new = function() {
+    this[canLoadingText$2] = "Отпустите, чтобы загрузить больше";
+    this[canRefreshText$2] = "Отпустите, чтобы обновить";
+    this[canTwoLevelText$2] = "Отпустите, чтобы войти на второй уровень";
+    this[idleLoadingText$2] = "Тянуть вверх, чтобы загрузить больше";
+    this[idleRefreshText$2] = "Тянуть вниз, чтобы обновить";
+    this[loadFailedText$2] = "Ошибка загрузки";
+    this[loadingText$2] = "Загрузка…";
+    this[noMoreText$2] = "Больше данных нет";
+    this[refreshCompleteText$2] = "Обновление завершено";
+    this[refreshFailedText$2] = "Не удалось обновить";
+    this[refreshingText$2] = "Обновление…";
+    ;
+  }).prototype = refresh_localizations.RuRefreshString.prototype;
+  dart.addTypeTests(refresh_localizations.RuRefreshString);
+  dart.addTypeCaches(refresh_localizations.RuRefreshString);
+  refresh_localizations.RuRefreshString[dart.implements] = () => [refresh_localizations.RefreshString];
+  dart.setLibraryUri(refresh_localizations.RuRefreshString, I[0]);
+  dart.setFieldSignature(refresh_localizations.RuRefreshString, () => ({
+    __proto__: dart.getFields(refresh_localizations.RuRefreshString.__proto__),
+    canLoadingText: dart.fieldType(dart.nullable(core.String)),
+    canRefreshText: dart.fieldType(dart.nullable(core.String)),
+    canTwoLevelText: dart.fieldType(dart.nullable(core.String)),
+    idleLoadingText: dart.fieldType(dart.nullable(core.String)),
+    idleRefreshText: dart.fieldType(dart.nullable(core.String)),
+    loadFailedText: dart.fieldType(dart.nullable(core.String)),
+    loadingText: dart.fieldType(dart.nullable(core.String)),
+    noMoreText: dart.fieldType(dart.nullable(core.String)),
+    refreshCompleteText: dart.fieldType(dart.nullable(core.String)),
+    refreshFailedText: dart.fieldType(dart.nullable(core.String)),
+    refreshingText: dart.fieldType(dart.nullable(core.String))
+  }));
+  var canLoadingText$3 = dart.privateName(refresh_localizations, "UkRefreshString.canLoadingText");
+  var canRefreshText$3 = dart.privateName(refresh_localizations, "UkRefreshString.canRefreshText");
+  var canTwoLevelText$3 = dart.privateName(refresh_localizations, "UkRefreshString.canTwoLevelText");
+  var idleLoadingText$3 = dart.privateName(refresh_localizations, "UkRefreshString.idleLoadingText");
+  var idleRefreshText$3 = dart.privateName(refresh_localizations, "UkRefreshString.idleRefreshText");
+  var loadFailedText$3 = dart.privateName(refresh_localizations, "UkRefreshString.loadFailedText");
+  var loadingText$3 = dart.privateName(refresh_localizations, "UkRefreshString.loadingText");
+  var noMoreText$3 = dart.privateName(refresh_localizations, "UkRefreshString.noMoreText");
+  var refreshCompleteText$3 = dart.privateName(refresh_localizations, "UkRefreshString.refreshCompleteText");
+  var refreshFailedText$3 = dart.privateName(refresh_localizations, "UkRefreshString.refreshFailedText");
+  var refreshingText$3 = dart.privateName(refresh_localizations, "UkRefreshString.refreshingText");
+  refresh_localizations.UkRefreshString = class UkRefreshString extends core.Object {
+    get canLoadingText() {
+      return this[canLoadingText$3];
+    }
+    set canLoadingText(value) {
+      this[canLoadingText$3] = value;
+    }
+    get canRefreshText() {
+      return this[canRefreshText$3];
+    }
+    set canRefreshText(value) {
+      this[canRefreshText$3] = value;
+    }
+    get canTwoLevelText() {
+      return this[canTwoLevelText$3];
+    }
+    set canTwoLevelText(value) {
+      this[canTwoLevelText$3] = value;
+    }
+    get idleLoadingText() {
+      return this[idleLoadingText$3];
+    }
+    set idleLoadingText(value) {
+      this[idleLoadingText$3] = value;
+    }
+    get idleRefreshText() {
+      return this[idleRefreshText$3];
+    }
+    set idleRefreshText(value) {
+      this[idleRefreshText$3] = value;
+    }
+    get loadFailedText() {
+      return this[loadFailedText$3];
+    }
+    set loadFailedText(value) {
+      this[loadFailedText$3] = value;
+    }
+    get loadingText() {
+      return this[loadingText$3];
+    }
+    set loadingText(value) {
+      this[loadingText$3] = value;
+    }
+    get noMoreText() {
+      return this[noMoreText$3];
+    }
+    set noMoreText(value) {
+      this[noMoreText$3] = value;
+    }
+    get refreshCompleteText() {
+      return this[refreshCompleteText$3];
+    }
+    set refreshCompleteText(value) {
+      this[refreshCompleteText$3] = value;
+    }
+    get refreshFailedText() {
+      return this[refreshFailedText$3];
+    }
+    set refreshFailedText(value) {
+      this[refreshFailedText$3] = value;
+    }
+    get refreshingText() {
+      return this[refreshingText$3];
+    }
+    set refreshingText(value) {
+      this[refreshingText$3] = value;
+    }
+  };
+  (refresh_localizations.UkRefreshString.new = function() {
+    this[canLoadingText$3] = "Відпустіть, щоб завантажити більше";
+    this[canRefreshText$3] = "Відпустіть, щоб оновити";
+    this[canTwoLevelText$3] = "Відпустіть, щоб увійти на другий рівень";
+    this[idleLoadingText$3] = "Тягнути вгору, щоб завантажити більше";
+    this[idleRefreshText$3] = "Тягнути вниз, щоб оновити";
+    this[loadFailedText$3] = "Помилка завантаження";
+    this[loadingText$3] = "Завантаження…";
+    this[noMoreText$3] = "Більше даних немає";
+    this[refreshCompleteText$3] = "Оновлення завершено";
+    this[refreshFailedText$3] = "Не вдалося оновити";
+    this[refreshingText$3] = "Оновлення…";
+    ;
+  }).prototype = refresh_localizations.UkRefreshString.prototype;
+  dart.addTypeTests(refresh_localizations.UkRefreshString);
+  dart.addTypeCaches(refresh_localizations.UkRefreshString);
+  refresh_localizations.UkRefreshString[dart.implements] = () => [refresh_localizations.RefreshString];
+  dart.setLibraryUri(refresh_localizations.UkRefreshString, I[0]);
+  dart.setFieldSignature(refresh_localizations.UkRefreshString, () => ({
+    __proto__: dart.getFields(refresh_localizations.UkRefreshString.__proto__),
+    canLoadingText: dart.fieldType(dart.nullable(core.String)),
+    canRefreshText: dart.fieldType(dart.nullable(core.String)),
+    canTwoLevelText: dart.fieldType(dart.nullable(core.String)),
+    idleLoadingText: dart.fieldType(dart.nullable(core.String)),
+    idleRefreshText: dart.fieldType(dart.nullable(core.String)),
+    loadFailedText: dart.fieldType(dart.nullable(core.String)),
+    loadingText: dart.fieldType(dart.nullable(core.String)),
+    noMoreText: dart.fieldType(dart.nullable(core.String)),
+    refreshCompleteText: dart.fieldType(dart.nullable(core.String)),
+    refreshFailedText: dart.fieldType(dart.nullable(core.String)),
+    refreshingText: dart.fieldType(dart.nullable(core.String))
+  }));
+  var canLoadingText$4 = dart.privateName(refresh_localizations, "ItRefreshString.canLoadingText");
+  var canRefreshText$4 = dart.privateName(refresh_localizations, "ItRefreshString.canRefreshText");
+  var canTwoLevelText$4 = dart.privateName(refresh_localizations, "ItRefreshString.canTwoLevelText");
+  var idleLoadingText$4 = dart.privateName(refresh_localizations, "ItRefreshString.idleLoadingText");
+  var idleRefreshText$4 = dart.privateName(refresh_localizations, "ItRefreshString.idleRefreshText");
+  var loadFailedText$4 = dart.privateName(refresh_localizations, "ItRefreshString.loadFailedText");
+  var loadingText$4 = dart.privateName(refresh_localizations, "ItRefreshString.loadingText");
+  var noMoreText$4 = dart.privateName(refresh_localizations, "ItRefreshString.noMoreText");
+  var refreshCompleteText$4 = dart.privateName(refresh_localizations, "ItRefreshString.refreshCompleteText");
+  var refreshFailedText$4 = dart.privateName(refresh_localizations, "ItRefreshString.refreshFailedText");
+  var refreshingText$4 = dart.privateName(refresh_localizations, "ItRefreshString.refreshingText");
+  refresh_localizations.ItRefreshString = class ItRefreshString extends core.Object {
+    get canLoadingText() {
+      return this[canLoadingText$4];
+    }
+    set canLoadingText(value) {
+      this[canLoadingText$4] = value;
+    }
+    get canRefreshText() {
+      return this[canRefreshText$4];
+    }
+    set canRefreshText(value) {
+      this[canRefreshText$4] = value;
+    }
+    get canTwoLevelText() {
+      return this[canTwoLevelText$4];
+    }
+    set canTwoLevelText(value) {
+      this[canTwoLevelText$4] = value;
+    }
+    get idleLoadingText() {
+      return this[idleLoadingText$4];
+    }
+    set idleLoadingText(value) {
+      this[idleLoadingText$4] = value;
+    }
+    get idleRefreshText() {
+      return this[idleRefreshText$4];
+    }
+    set idleRefreshText(value) {
+      this[idleRefreshText$4] = value;
+    }
+    get loadFailedText() {
+      return this[loadFailedText$4];
+    }
+    set loadFailedText(value) {
+      this[loadFailedText$4] = value;
+    }
+    get loadingText() {
+      return this[loadingText$4];
+    }
+    set loadingText(value) {
+      this[loadingText$4] = value;
+    }
+    get noMoreText() {
+      return this[noMoreText$4];
+    }
+    set noMoreText(value) {
+      this[noMoreText$4] = value;
+    }
+    get refreshCompleteText() {
+      return this[refreshCompleteText$4];
+    }
+    set refreshCompleteText(value) {
+      this[refreshCompleteText$4] = value;
+    }
+    get refreshFailedText() {
+      return this[refreshFailedText$4];
+    }
+    set refreshFailedText(value) {
+      this[refreshFailedText$4] = value;
+    }
+    get refreshingText() {
+      return this[refreshingText$4];
+    }
+    set refreshingText(value) {
+      this[refreshingText$4] = value;
+    }
+  };
+  (refresh_localizations.ItRefreshString.new = function() {
+    this[canLoadingText$4] = "Rilascia per caricare altro";
+    this[canRefreshText$4] = "Rilascia per aggiornare";
+    this[canTwoLevelText$4] = "Rilascia per accedere a secondfloor";
+    this[idleLoadingText$4] = "Tira per caricare altro";
+    this[idleRefreshText$4] = "Tira giù per aggiornare";
+    this[loadFailedText$4] = "Caricamento fallito";
+    this[loadingText$4] = "Caricamento…";
+    this[noMoreText$4] = "Nessun altro elemento";
+    this[refreshCompleteText$4] = "Aggiornamento completato";
+    this[refreshFailedText$4] = "Aggiornamento fallito";
+    this[refreshingText$4] = "Aggiornamento…";
+    ;
+  }).prototype = refresh_localizations.ItRefreshString.prototype;
+  dart.addTypeTests(refresh_localizations.ItRefreshString);
+  dart.addTypeCaches(refresh_localizations.ItRefreshString);
+  refresh_localizations.ItRefreshString[dart.implements] = () => [refresh_localizations.RefreshString];
+  dart.setLibraryUri(refresh_localizations.ItRefreshString, I[0]);
+  dart.setFieldSignature(refresh_localizations.ItRefreshString, () => ({
+    __proto__: dart.getFields(refresh_localizations.ItRefreshString.__proto__),
+    canLoadingText: dart.fieldType(dart.nullable(core.String)),
+    canRefreshText: dart.fieldType(dart.nullable(core.String)),
+    canTwoLevelText: dart.fieldType(dart.nullable(core.String)),
+    idleLoadingText: dart.fieldType(dart.nullable(core.String)),
+    idleRefreshText: dart.fieldType(dart.nullable(core.String)),
+    loadFailedText: dart.fieldType(dart.nullable(core.String)),
+    loadingText: dart.fieldType(dart.nullable(core.String)),
+    noMoreText: dart.fieldType(dart.nullable(core.String)),
+    refreshCompleteText: dart.fieldType(dart.nullable(core.String)),
+    refreshFailedText: dart.fieldType(dart.nullable(core.String)),
+    refreshingText: dart.fieldType(dart.nullable(core.String))
+  }));
+  var canLoadingText$5 = dart.privateName(refresh_localizations, "JpRefreshString.canLoadingText");
+  var canRefreshText$5 = dart.privateName(refresh_localizations, "JpRefreshString.canRefreshText");
+  var canTwoLevelText$5 = dart.privateName(refresh_localizations, "JpRefreshString.canTwoLevelText");
+  var idleLoadingText$5 = dart.privateName(refresh_localizations, "JpRefreshString.idleLoadingText");
+  var idleRefreshText$5 = dart.privateName(refresh_localizations, "JpRefreshString.idleRefreshText");
+  var loadFailedText$5 = dart.privateName(refresh_localizations, "JpRefreshString.loadFailedText");
+  var loadingText$5 = dart.privateName(refresh_localizations, "JpRefreshString.loadingText");
+  var noMoreText$5 = dart.privateName(refresh_localizations, "JpRefreshString.noMoreText");
+  var refreshCompleteText$5 = dart.privateName(refresh_localizations, "JpRefreshString.refreshCompleteText");
+  var refreshFailedText$5 = dart.privateName(refresh_localizations, "JpRefreshString.refreshFailedText");
+  var refreshingText$5 = dart.privateName(refresh_localizations, "JpRefreshString.refreshingText");
+  refresh_localizations.JpRefreshString = class JpRefreshString extends core.Object {
+    get canLoadingText() {
+      return this[canLoadingText$5];
+    }
+    set canLoadingText(value) {
+      this[canLoadingText$5] = value;
+    }
+    get canRefreshText() {
+      return this[canRefreshText$5];
+    }
+    set canRefreshText(value) {
+      this[canRefreshText$5] = value;
+    }
+    get canTwoLevelText() {
+      return this[canTwoLevelText$5];
+    }
+    set canTwoLevelText(value) {
+      this[canTwoLevelText$5] = value;
+    }
+    get idleLoadingText() {
+      return this[idleLoadingText$5];
+    }
+    set idleLoadingText(value) {
+      this[idleLoadingText$5] = value;
+    }
+    get idleRefreshText() {
+      return this[idleRefreshText$5];
+    }
+    set idleRefreshText(value) {
+      this[idleRefreshText$5] = value;
+    }
+    get loadFailedText() {
+      return this[loadFailedText$5];
+    }
+    set loadFailedText(value) {
+      this[loadFailedText$5] = value;
+    }
+    get loadingText() {
+      return this[loadingText$5];
+    }
+    set loadingText(value) {
+      this[loadingText$5] = value;
+    }
+    get noMoreText() {
+      return this[noMoreText$5];
+    }
+    set noMoreText(value) {
+      this[noMoreText$5] = value;
+    }
+    get refreshCompleteText() {
+      return this[refreshCompleteText$5];
+    }
+    set refreshCompleteText(value) {
+      this[refreshCompleteText$5] = value;
+    }
+    get refreshFailedText() {
+      return this[refreshFailedText$5];
+    }
+    set refreshFailedText(value) {
+      this[refreshFailedText$5] = value;
+    }
+    get refreshingText() {
+      return this[refreshingText$5];
+    }
+    set refreshingText(value) {
+      this[refreshingText$5] = value;
+    }
+  };
+  (refresh_localizations.JpRefreshString.new = function() {
+    this[canLoadingText$5] = "指を離して更に読み込む";
+    this[canRefreshText$5] = "指を離して更新";
+    this[canTwoLevelText$5] = "指を離して2段目を表示";
+    this[idleLoadingText$5] = "上方スワイプで更に読み込む";
+    this[idleRefreshText$5] = "下方スワイプでデータを更新";
+    this[loadFailedText$5] = "読み込みが失敗しました";
+    this[loadingText$5] = "読み込み中…";
+    this[noMoreText$5] = "データはありません";
+    this[refreshCompleteText$5] = "更新完了";
+    this[refreshFailedText$5] = "更新が失敗しました";
+    this[refreshingText$5] = "更新中…";
+    ;
+  }).prototype = refresh_localizations.JpRefreshString.prototype;
+  dart.addTypeTests(refresh_localizations.JpRefreshString);
+  dart.addTypeCaches(refresh_localizations.JpRefreshString);
+  refresh_localizations.JpRefreshString[dart.implements] = () => [refresh_localizations.RefreshString];
+  dart.setLibraryUri(refresh_localizations.JpRefreshString, I[0]);
+  dart.setFieldSignature(refresh_localizations.JpRefreshString, () => ({
+    __proto__: dart.getFields(refresh_localizations.JpRefreshString.__proto__),
+    canLoadingText: dart.fieldType(dart.nullable(core.String)),
+    canRefreshText: dart.fieldType(dart.nullable(core.String)),
+    canTwoLevelText: dart.fieldType(dart.nullable(core.String)),
+    idleLoadingText: dart.fieldType(dart.nullable(core.String)),
+    idleRefreshText: dart.fieldType(dart.nullable(core.String)),
+    loadFailedText: dart.fieldType(dart.nullable(core.String)),
+    loadingText: dart.fieldType(dart.nullable(core.String)),
+    noMoreText: dart.fieldType(dart.nullable(core.String)),
+    refreshCompleteText: dart.fieldType(dart.nullable(core.String)),
+    refreshFailedText: dart.fieldType(dart.nullable(core.String)),
+    refreshingText: dart.fieldType(dart.nullable(core.String))
+  }));
+  var canLoadingText$6 = dart.privateName(refresh_localizations, "DeRefreshString.canLoadingText");
+  var canRefreshText$6 = dart.privateName(refresh_localizations, "DeRefreshString.canRefreshText");
+  var canTwoLevelText$6 = dart.privateName(refresh_localizations, "DeRefreshString.canTwoLevelText");
+  var idleLoadingText$6 = dart.privateName(refresh_localizations, "DeRefreshString.idleLoadingText");
+  var idleRefreshText$6 = dart.privateName(refresh_localizations, "DeRefreshString.idleRefreshText");
+  var loadFailedText$6 = dart.privateName(refresh_localizations, "DeRefreshString.loadFailedText");
+  var loadingText$6 = dart.privateName(refresh_localizations, "DeRefreshString.loadingText");
+  var noMoreText$6 = dart.privateName(refresh_localizations, "DeRefreshString.noMoreText");
+  var refreshCompleteText$6 = dart.privateName(refresh_localizations, "DeRefreshString.refreshCompleteText");
+  var refreshFailedText$6 = dart.privateName(refresh_localizations, "DeRefreshString.refreshFailedText");
+  var refreshingText$6 = dart.privateName(refresh_localizations, "DeRefreshString.refreshingText");
+  refresh_localizations.DeRefreshString = class DeRefreshString extends core.Object {
+    get canLoadingText() {
+      return this[canLoadingText$6];
+    }
+    set canLoadingText(value) {
+      this[canLoadingText$6] = value;
+    }
+    get canRefreshText() {
+      return this[canRefreshText$6];
+    }
+    set canRefreshText(value) {
+      this[canRefreshText$6] = value;
+    }
+    get canTwoLevelText() {
+      return this[canTwoLevelText$6];
+    }
+    set canTwoLevelText(value) {
+      this[canTwoLevelText$6] = value;
+    }
+    get idleLoadingText() {
+      return this[idleLoadingText$6];
+    }
+    set idleLoadingText(value) {
+      this[idleLoadingText$6] = value;
+    }
+    get idleRefreshText() {
+      return this[idleRefreshText$6];
+    }
+    set idleRefreshText(value) {
+      this[idleRefreshText$6] = value;
+    }
+    get loadFailedText() {
+      return this[loadFailedText$6];
+    }
+    set loadFailedText(value) {
+      this[loadFailedText$6] = value;
+    }
+    get loadingText() {
+      return this[loadingText$6];
+    }
+    set loadingText(value) {
+      this[loadingText$6] = value;
+    }
+    get noMoreText() {
+      return this[noMoreText$6];
+    }
+    set noMoreText(value) {
+      this[noMoreText$6] = value;
+    }
+    get refreshCompleteText() {
+      return this[refreshCompleteText$6];
+    }
+    set refreshCompleteText(value) {
+      this[refreshCompleteText$6] = value;
+    }
+    get refreshFailedText() {
+      return this[refreshFailedText$6];
+    }
+    set refreshFailedText(value) {
+      this[refreshFailedText$6] = value;
+    }
+    get refreshingText() {
+      return this[refreshingText$6];
+    }
+    set refreshingText(value) {
+      this[refreshingText$6] = value;
+    }
+  };
+  (refresh_localizations.DeRefreshString.new = function() {
+    this[canLoadingText$6] = "Loslassen, um mehr zu laden";
+    this[canRefreshText$6] = "Zum Aktualisieren loslassen";
+    this[canTwoLevelText$6] = "Lassen Sie los, um den zweiten Stock zu betreten";
+    this[idleLoadingText$6] = "Hochziehen, mehr laden";
+    this[idleRefreshText$6] = "Ziehen für Aktualisierung";
+    this[loadFailedText$6] = "Laden ist fehlgeschlagen";
+    this[loadingText$6] = "Lade…";
+    this[noMoreText$6] = "Keine weitere Daten";
+    this[refreshCompleteText$6] = "Aktualisierung fertig";
+    this[refreshFailedText$6] = "Aktualisierung fehlgeschlagen";
+    this[refreshingText$6] = "Aktualisiere…";
+    ;
+  }).prototype = refresh_localizations.DeRefreshString.prototype;
+  dart.addTypeTests(refresh_localizations.DeRefreshString);
+  dart.addTypeCaches(refresh_localizations.DeRefreshString);
+  refresh_localizations.DeRefreshString[dart.implements] = () => [refresh_localizations.RefreshString];
+  dart.setLibraryUri(refresh_localizations.DeRefreshString, I[0]);
+  dart.setFieldSignature(refresh_localizations.DeRefreshString, () => ({
+    __proto__: dart.getFields(refresh_localizations.DeRefreshString.__proto__),
+    canLoadingText: dart.fieldType(dart.nullable(core.String)),
+    canRefreshText: dart.fieldType(dart.nullable(core.String)),
+    canTwoLevelText: dart.fieldType(dart.nullable(core.String)),
+    idleLoadingText: dart.fieldType(dart.nullable(core.String)),
+    idleRefreshText: dart.fieldType(dart.nullable(core.String)),
+    loadFailedText: dart.fieldType(dart.nullable(core.String)),
+    loadingText: dart.fieldType(dart.nullable(core.String)),
+    noMoreText: dart.fieldType(dart.nullable(core.String)),
+    refreshCompleteText: dart.fieldType(dart.nullable(core.String)),
+    refreshFailedText: dart.fieldType(dart.nullable(core.String)),
+    refreshingText: dart.fieldType(dart.nullable(core.String))
+  }));
+  var canLoadingText$7 = dart.privateName(refresh_localizations, "EsRefreshString.canLoadingText");
+  var canRefreshText$7 = dart.privateName(refresh_localizations, "EsRefreshString.canRefreshText");
+  var canTwoLevelText$7 = dart.privateName(refresh_localizations, "EsRefreshString.canTwoLevelText");
+  var idleLoadingText$7 = dart.privateName(refresh_localizations, "EsRefreshString.idleLoadingText");
+  var idleRefreshText$7 = dart.privateName(refresh_localizations, "EsRefreshString.idleRefreshText");
+  var loadFailedText$7 = dart.privateName(refresh_localizations, "EsRefreshString.loadFailedText");
+  var loadingText$7 = dart.privateName(refresh_localizations, "EsRefreshString.loadingText");
+  var noMoreText$7 = dart.privateName(refresh_localizations, "EsRefreshString.noMoreText");
+  var refreshCompleteText$7 = dart.privateName(refresh_localizations, "EsRefreshString.refreshCompleteText");
+  var refreshFailedText$7 = dart.privateName(refresh_localizations, "EsRefreshString.refreshFailedText");
+  var refreshingText$7 = dart.privateName(refresh_localizations, "EsRefreshString.refreshingText");
+  refresh_localizations.EsRefreshString = class EsRefreshString extends core.Object {
+    get canLoadingText() {
+      return this[canLoadingText$7];
+    }
+    set canLoadingText(value) {
+      this[canLoadingText$7] = value;
+    }
+    get canRefreshText() {
+      return this[canRefreshText$7];
+    }
+    set canRefreshText(value) {
+      this[canRefreshText$7] = value;
+    }
+    get canTwoLevelText() {
+      return this[canTwoLevelText$7];
+    }
+    set canTwoLevelText(value) {
+      this[canTwoLevelText$7] = value;
+    }
+    get idleLoadingText() {
+      return this[idleLoadingText$7];
+    }
+    set idleLoadingText(value) {
+      this[idleLoadingText$7] = value;
+    }
+    get idleRefreshText() {
+      return this[idleRefreshText$7];
+    }
+    set idleRefreshText(value) {
+      this[idleRefreshText$7] = value;
+    }
+    get loadFailedText() {
+      return this[loadFailedText$7];
+    }
+    set loadFailedText(value) {
+      this[loadFailedText$7] = value;
+    }
+    get loadingText() {
+      return this[loadingText$7];
+    }
+    set loadingText(value) {
+      this[loadingText$7] = value;
+    }
+    get noMoreText() {
+      return this[noMoreText$7];
+    }
+    set noMoreText(value) {
+      this[noMoreText$7] = value;
+    }
+    get refreshCompleteText() {
+      return this[refreshCompleteText$7];
+    }
+    set refreshCompleteText(value) {
+      this[refreshCompleteText$7] = value;
+    }
+    get refreshFailedText() {
+      return this[refreshFailedText$7];
+    }
+    set refreshFailedText(value) {
+      this[refreshFailedText$7] = value;
+    }
+    get refreshingText() {
+      return this[refreshingText$7];
+    }
+    set refreshingText(value) {
+      this[refreshingText$7] = value;
+    }
+  };
+  (refresh_localizations.EsRefreshString.new = function() {
+    this[canLoadingText$7] = "Suelte para cargar más";
+    this[canRefreshText$7] = "Suelte para actualizar";
+    this[canTwoLevelText$7] = "Suelte para entrar al segundo nivel";
+    this[idleLoadingText$7] = "Tire hacia arriba para cargar más";
+    this[idleRefreshText$7] = "Tire hacia abajo para refrescar";
+    this[loadFailedText$7] = "Error de carga";
+    this[loadingText$7] = "Cargando…";
+    this[noMoreText$7] = "No hay más datos disponibles";
+    this[refreshCompleteText$7] = "Actualización completada";
+    this[refreshFailedText$7] = "Error al actualizar";
+    this[refreshingText$7] = "Actualizando…";
+    ;
+  }).prototype = refresh_localizations.EsRefreshString.prototype;
+  dart.addTypeTests(refresh_localizations.EsRefreshString);
+  dart.addTypeCaches(refresh_localizations.EsRefreshString);
+  refresh_localizations.EsRefreshString[dart.implements] = () => [refresh_localizations.RefreshString];
+  dart.setLibraryUri(refresh_localizations.EsRefreshString, I[0]);
+  dart.setFieldSignature(refresh_localizations.EsRefreshString, () => ({
+    __proto__: dart.getFields(refresh_localizations.EsRefreshString.__proto__),
+    canLoadingText: dart.fieldType(dart.nullable(core.String)),
+    canRefreshText: dart.fieldType(dart.nullable(core.String)),
+    canTwoLevelText: dart.fieldType(dart.nullable(core.String)),
+    idleLoadingText: dart.fieldType(dart.nullable(core.String)),
+    idleRefreshText: dart.fieldType(dart.nullable(core.String)),
+    loadFailedText: dart.fieldType(dart.nullable(core.String)),
+    loadingText: dart.fieldType(dart.nullable(core.String)),
+    noMoreText: dart.fieldType(dart.nullable(core.String)),
+    refreshCompleteText: dart.fieldType(dart.nullable(core.String)),
+    refreshFailedText: dart.fieldType(dart.nullable(core.String)),
+    refreshingText: dart.fieldType(dart.nullable(core.String))
+  }));
+  var canLoadingText$8 = dart.privateName(refresh_localizations, "NlRefreshString.canLoadingText");
+  var canRefreshText$8 = dart.privateName(refresh_localizations, "NlRefreshString.canRefreshText");
+  var canTwoLevelText$8 = dart.privateName(refresh_localizations, "NlRefreshString.canTwoLevelText");
+  var idleLoadingText$8 = dart.privateName(refresh_localizations, "NlRefreshString.idleLoadingText");
+  var idleRefreshText$8 = dart.privateName(refresh_localizations, "NlRefreshString.idleRefreshText");
+  var loadFailedText$8 = dart.privateName(refresh_localizations, "NlRefreshString.loadFailedText");
+  var loadingText$8 = dart.privateName(refresh_localizations, "NlRefreshString.loadingText");
+  var noMoreText$8 = dart.privateName(refresh_localizations, "NlRefreshString.noMoreText");
+  var refreshCompleteText$8 = dart.privateName(refresh_localizations, "NlRefreshString.refreshCompleteText");
+  var refreshFailedText$8 = dart.privateName(refresh_localizations, "NlRefreshString.refreshFailedText");
+  var refreshingText$8 = dart.privateName(refresh_localizations, "NlRefreshString.refreshingText");
+  refresh_localizations.NlRefreshString = class NlRefreshString extends core.Object {
+    get canLoadingText() {
+      return this[canLoadingText$8];
+    }
+    set canLoadingText(value) {
+      this[canLoadingText$8] = value;
+    }
+    get canRefreshText() {
+      return this[canRefreshText$8];
+    }
+    set canRefreshText(value) {
+      this[canRefreshText$8] = value;
+    }
+    get canTwoLevelText() {
+      return this[canTwoLevelText$8];
+    }
+    set canTwoLevelText(value) {
+      this[canTwoLevelText$8] = value;
+    }
+    get idleLoadingText() {
+      return this[idleLoadingText$8];
+    }
+    set idleLoadingText(value) {
+      this[idleLoadingText$8] = value;
+    }
+    get idleRefreshText() {
+      return this[idleRefreshText$8];
+    }
+    set idleRefreshText(value) {
+      this[idleRefreshText$8] = value;
+    }
+    get loadFailedText() {
+      return this[loadFailedText$8];
+    }
+    set loadFailedText(value) {
+      this[loadFailedText$8] = value;
+    }
+    get loadingText() {
+      return this[loadingText$8];
+    }
+    set loadingText(value) {
+      this[loadingText$8] = value;
+    }
+    get noMoreText() {
+      return this[noMoreText$8];
+    }
+    set noMoreText(value) {
+      this[noMoreText$8] = value;
+    }
+    get refreshCompleteText() {
+      return this[refreshCompleteText$8];
+    }
+    set refreshCompleteText(value) {
+      this[refreshCompleteText$8] = value;
+    }
+    get refreshFailedText() {
+      return this[refreshFailedText$8];
+    }
+    set refreshFailedText(value) {
+      this[refreshFailedText$8] = value;
+    }
+    get refreshingText() {
+      return this[refreshingText$8];
+    }
+    set refreshingText(value) {
+      this[refreshingText$8] = value;
+    }
+  };
+  (refresh_localizations.NlRefreshString.new = function() {
+    this[canLoadingText$8] = "Laat los om meer te laden";
+    this[canRefreshText$8] = "Laat los om te vernieuwen";
+    this[canTwoLevelText$8] = "Laat los om naar tweede verdieping te gaan";
+    this[idleLoadingText$8] = "Trek omhoog om meer te laden";
+    this[idleRefreshText$8] = "Trek omlaag om te vernieuwen";
+    this[loadFailedText$8] = "Laden mislukt";
+    this[loadingText$8] = "Laden…";
+    this[noMoreText$8] = "Geen data meer";
+    this[refreshCompleteText$8] = "Vernieuwen voltooid";
+    this[refreshFailedText$8] = "Vernieuwen mislukt";
+    this[refreshingText$8] = "Vernieuwen…";
+    ;
+  }).prototype = refresh_localizations.NlRefreshString.prototype;
+  dart.addTypeTests(refresh_localizations.NlRefreshString);
+  dart.addTypeCaches(refresh_localizations.NlRefreshString);
+  refresh_localizations.NlRefreshString[dart.implements] = () => [refresh_localizations.RefreshString];
+  dart.setLibraryUri(refresh_localizations.NlRefreshString, I[0]);
+  dart.setFieldSignature(refresh_localizations.NlRefreshString, () => ({
+    __proto__: dart.getFields(refresh_localizations.NlRefreshString.__proto__),
+    canLoadingText: dart.fieldType(dart.nullable(core.String)),
+    canRefreshText: dart.fieldType(dart.nullable(core.String)),
+    canTwoLevelText: dart.fieldType(dart.nullable(core.String)),
+    idleLoadingText: dart.fieldType(dart.nullable(core.String)),
+    idleRefreshText: dart.fieldType(dart.nullable(core.String)),
+    loadFailedText: dart.fieldType(dart.nullable(core.String)),
+    loadingText: dart.fieldType(dart.nullable(core.String)),
+    noMoreText: dart.fieldType(dart.nullable(core.String)),
+    refreshCompleteText: dart.fieldType(dart.nullable(core.String)),
+    refreshFailedText: dart.fieldType(dart.nullable(core.String)),
+    refreshingText: dart.fieldType(dart.nullable(core.String))
+  }));
+  var canLoadingText$9 = dart.privateName(refresh_localizations, "SvRefreshString.canLoadingText");
+  var canRefreshText$9 = dart.privateName(refresh_localizations, "SvRefreshString.canRefreshText");
+  var canTwoLevelText$9 = dart.privateName(refresh_localizations, "SvRefreshString.canTwoLevelText");
+  var idleLoadingText$9 = dart.privateName(refresh_localizations, "SvRefreshString.idleLoadingText");
+  var idleRefreshText$9 = dart.privateName(refresh_localizations, "SvRefreshString.idleRefreshText");
+  var loadFailedText$9 = dart.privateName(refresh_localizations, "SvRefreshString.loadFailedText");
+  var loadingText$9 = dart.privateName(refresh_localizations, "SvRefreshString.loadingText");
+  var noMoreText$9 = dart.privateName(refresh_localizations, "SvRefreshString.noMoreText");
+  var refreshCompleteText$9 = dart.privateName(refresh_localizations, "SvRefreshString.refreshCompleteText");
+  var refreshFailedText$9 = dart.privateName(refresh_localizations, "SvRefreshString.refreshFailedText");
+  var refreshingText$9 = dart.privateName(refresh_localizations, "SvRefreshString.refreshingText");
+  refresh_localizations.SvRefreshString = class SvRefreshString extends core.Object {
+    get canLoadingText() {
+      return this[canLoadingText$9];
+    }
+    set canLoadingText(value) {
+      this[canLoadingText$9] = value;
+    }
+    get canRefreshText() {
+      return this[canRefreshText$9];
+    }
+    set canRefreshText(value) {
+      this[canRefreshText$9] = value;
+    }
+    get canTwoLevelText() {
+      return this[canTwoLevelText$9];
+    }
+    set canTwoLevelText(value) {
+      this[canTwoLevelText$9] = value;
+    }
+    get idleLoadingText() {
+      return this[idleLoadingText$9];
+    }
+    set idleLoadingText(value) {
+      this[idleLoadingText$9] = value;
+    }
+    get idleRefreshText() {
+      return this[idleRefreshText$9];
+    }
+    set idleRefreshText(value) {
+      this[idleRefreshText$9] = value;
+    }
+    get loadFailedText() {
+      return this[loadFailedText$9];
+    }
+    set loadFailedText(value) {
+      this[loadFailedText$9] = value;
+    }
+    get loadingText() {
+      return this[loadingText$9];
+    }
+    set loadingText(value) {
+      this[loadingText$9] = value;
+    }
+    get noMoreText() {
+      return this[noMoreText$9];
+    }
+    set noMoreText(value) {
+      this[noMoreText$9] = value;
+    }
+    get refreshCompleteText() {
+      return this[refreshCompleteText$9];
+    }
+    set refreshCompleteText(value) {
+      this[refreshCompleteText$9] = value;
+    }
+    get refreshFailedText() {
+      return this[refreshFailedText$9];
+    }
+    set refreshFailedText(value) {
+      this[refreshFailedText$9] = value;
+    }
+    get refreshingText() {
+      return this[refreshingText$9];
+    }
+    set refreshingText(value) {
+      this[refreshingText$9] = value;
+    }
+  };
+  (refresh_localizations.SvRefreshString.new = function() {
+    this[canLoadingText$9] = "Släpp för att ladda mer";
+    this[canRefreshText$9] = "Släpp för att uppdatera";
+    this[canTwoLevelText$9] = "Släpp för att gå till andra våningen";
+    this[idleLoadingText$9] = "Dra upp för att ladda mer";
+    this[idleRefreshText$9] = "Dra ner för att uppdatera";
+    this[loadFailedText$9] = "Hämtningen misslyckades";
+    this[loadingText$9] = "Laddar…";
+    this[noMoreText$9] = "Ingen mer data";
+    this[refreshCompleteText$9] = "Uppdaterad";
+    this[refreshFailedText$9] = "Kunde inte uppdatera";
+    this[refreshingText$9] = "Uppdaterar…";
+    ;
+  }).prototype = refresh_localizations.SvRefreshString.prototype;
+  dart.addTypeTests(refresh_localizations.SvRefreshString);
+  dart.addTypeCaches(refresh_localizations.SvRefreshString);
+  refresh_localizations.SvRefreshString[dart.implements] = () => [refresh_localizations.RefreshString];
+  dart.setLibraryUri(refresh_localizations.SvRefreshString, I[0]);
+  dart.setFieldSignature(refresh_localizations.SvRefreshString, () => ({
+    __proto__: dart.getFields(refresh_localizations.SvRefreshString.__proto__),
+    canLoadingText: dart.fieldType(dart.nullable(core.String)),
+    canRefreshText: dart.fieldType(dart.nullable(core.String)),
+    canTwoLevelText: dart.fieldType(dart.nullable(core.String)),
+    idleLoadingText: dart.fieldType(dart.nullable(core.String)),
+    idleRefreshText: dart.fieldType(dart.nullable(core.String)),
+    loadFailedText: dart.fieldType(dart.nullable(core.String)),
+    loadingText: dart.fieldType(dart.nullable(core.String)),
+    noMoreText: dart.fieldType(dart.nullable(core.String)),
+    refreshCompleteText: dart.fieldType(dart.nullable(core.String)),
+    refreshFailedText: dart.fieldType(dart.nullable(core.String)),
+    refreshingText: dart.fieldType(dart.nullable(core.String))
+  }));
+  var canLoadingText$10 = dart.privateName(refresh_localizations, "PtRefreshString.canLoadingText");
+  var canRefreshText$10 = dart.privateName(refresh_localizations, "PtRefreshString.canRefreshText");
+  var canTwoLevelText$10 = dart.privateName(refresh_localizations, "PtRefreshString.canTwoLevelText");
+  var idleLoadingText$10 = dart.privateName(refresh_localizations, "PtRefreshString.idleLoadingText");
+  var idleRefreshText$10 = dart.privateName(refresh_localizations, "PtRefreshString.idleRefreshText");
+  var loadFailedText$10 = dart.privateName(refresh_localizations, "PtRefreshString.loadFailedText");
+  var loadingText$10 = dart.privateName(refresh_localizations, "PtRefreshString.loadingText");
+  var noMoreText$10 = dart.privateName(refresh_localizations, "PtRefreshString.noMoreText");
+  var refreshCompleteText$10 = dart.privateName(refresh_localizations, "PtRefreshString.refreshCompleteText");
+  var refreshFailedText$10 = dart.privateName(refresh_localizations, "PtRefreshString.refreshFailedText");
+  var refreshingText$10 = dart.privateName(refresh_localizations, "PtRefreshString.refreshingText");
+  refresh_localizations.PtRefreshString = class PtRefreshString extends core.Object {
+    get canLoadingText() {
+      return this[canLoadingText$10];
+    }
+    set canLoadingText(value) {
+      this[canLoadingText$10] = value;
+    }
+    get canRefreshText() {
+      return this[canRefreshText$10];
+    }
+    set canRefreshText(value) {
+      this[canRefreshText$10] = value;
+    }
+    get canTwoLevelText() {
+      return this[canTwoLevelText$10];
+    }
+    set canTwoLevelText(value) {
+      this[canTwoLevelText$10] = value;
+    }
+    get idleLoadingText() {
+      return this[idleLoadingText$10];
+    }
+    set idleLoadingText(value) {
+      this[idleLoadingText$10] = value;
+    }
+    get idleRefreshText() {
+      return this[idleRefreshText$10];
+    }
+    set idleRefreshText(value) {
+      this[idleRefreshText$10] = value;
+    }
+    get loadFailedText() {
+      return this[loadFailedText$10];
+    }
+    set loadFailedText(value) {
+      this[loadFailedText$10] = value;
+    }
+    get loadingText() {
+      return this[loadingText$10];
+    }
+    set loadingText(value) {
+      this[loadingText$10] = value;
+    }
+    get noMoreText() {
+      return this[noMoreText$10];
+    }
+    set noMoreText(value) {
+      this[noMoreText$10] = value;
+    }
+    get refreshCompleteText() {
+      return this[refreshCompleteText$10];
+    }
+    set refreshCompleteText(value) {
+      this[refreshCompleteText$10] = value;
+    }
+    get refreshFailedText() {
+      return this[refreshFailedText$10];
+    }
+    set refreshFailedText(value) {
+      this[refreshFailedText$10] = value;
+    }
+    get refreshingText() {
+      return this[refreshingText$10];
+    }
+    set refreshingText(value) {
+      this[refreshingText$10] = value;
+    }
+  };
+  (refresh_localizations.PtRefreshString.new = function() {
+    this[canLoadingText$10] = "Solte para carregar mais";
+    this[canRefreshText$10] = "Solte para atualizar";
+    this[canTwoLevelText$10] = "Solte para entrar no segundo andar";
+    this[idleLoadingText$10] = "Puxe para cima para carregar mais";
+    this[idleRefreshText$10] = "Puxe para baixo para atualizar";
+    this[loadFailedText$10] = "Falha ao carregar";
+    this[loadingText$10] = "Carregando…";
+    this[noMoreText$10] = "Não há mais dados";
+    this[refreshCompleteText$10] = "Atualização completada";
+    this[refreshFailedText$10] = "Falha ao atualizar";
+    this[refreshingText$10] = "Atualizando…";
+    ;
+  }).prototype = refresh_localizations.PtRefreshString.prototype;
+  dart.addTypeTests(refresh_localizations.PtRefreshString);
+  dart.addTypeCaches(refresh_localizations.PtRefreshString);
+  refresh_localizations.PtRefreshString[dart.implements] = () => [refresh_localizations.RefreshString];
+  dart.setLibraryUri(refresh_localizations.PtRefreshString, I[0]);
+  dart.setFieldSignature(refresh_localizations.PtRefreshString, () => ({
+    __proto__: dart.getFields(refresh_localizations.PtRefreshString.__proto__),
+    canLoadingText: dart.fieldType(dart.nullable(core.String)),
+    canRefreshText: dart.fieldType(dart.nullable(core.String)),
+    canTwoLevelText: dart.fieldType(dart.nullable(core.String)),
+    idleLoadingText: dart.fieldType(dart.nullable(core.String)),
+    idleRefreshText: dart.fieldType(dart.nullable(core.String)),
+    loadFailedText: dart.fieldType(dart.nullable(core.String)),
+    loadingText: dart.fieldType(dart.nullable(core.String)),
+    noMoreText: dart.fieldType(dart.nullable(core.String)),
+    refreshCompleteText: dart.fieldType(dart.nullable(core.String)),
+    refreshFailedText: dart.fieldType(dart.nullable(core.String)),
+    refreshingText: dart.fieldType(dart.nullable(core.String))
+  }));
+  var canLoadingText$11 = dart.privateName(refresh_localizations, "KrRefreshString.canLoadingText");
+  var canRefreshText$11 = dart.privateName(refresh_localizations, "KrRefreshString.canRefreshText");
+  var canTwoLevelText$11 = dart.privateName(refresh_localizations, "KrRefreshString.canTwoLevelText");
+  var idleLoadingText$11 = dart.privateName(refresh_localizations, "KrRefreshString.idleLoadingText");
+  var idleRefreshText$11 = dart.privateName(refresh_localizations, "KrRefreshString.idleRefreshText");
+  var loadFailedText$11 = dart.privateName(refresh_localizations, "KrRefreshString.loadFailedText");
+  var loadingText$11 = dart.privateName(refresh_localizations, "KrRefreshString.loadingText");
+  var noMoreText$11 = dart.privateName(refresh_localizations, "KrRefreshString.noMoreText");
+  var refreshCompleteText$11 = dart.privateName(refresh_localizations, "KrRefreshString.refreshCompleteText");
+  var refreshFailedText$11 = dart.privateName(refresh_localizations, "KrRefreshString.refreshFailedText");
+  var refreshingText$11 = dart.privateName(refresh_localizations, "KrRefreshString.refreshingText");
+  refresh_localizations.KrRefreshString = class KrRefreshString extends core.Object {
+    get canLoadingText() {
+      return this[canLoadingText$11];
+    }
+    set canLoadingText(value) {
+      this[canLoadingText$11] = value;
+    }
+    get canRefreshText() {
+      return this[canRefreshText$11];
+    }
+    set canRefreshText(value) {
+      this[canRefreshText$11] = value;
+    }
+    get canTwoLevelText() {
+      return this[canTwoLevelText$11];
+    }
+    set canTwoLevelText(value) {
+      this[canTwoLevelText$11] = value;
+    }
+    get idleLoadingText() {
+      return this[idleLoadingText$11];
+    }
+    set idleLoadingText(value) {
+      this[idleLoadingText$11] = value;
+    }
+    get idleRefreshText() {
+      return this[idleRefreshText$11];
+    }
+    set idleRefreshText(value) {
+      this[idleRefreshText$11] = value;
+    }
+    get loadFailedText() {
+      return this[loadFailedText$11];
+    }
+    set loadFailedText(value) {
+      this[loadFailedText$11] = value;
+    }
+    get loadingText() {
+      return this[loadingText$11];
+    }
+    set loadingText(value) {
+      this[loadingText$11] = value;
+    }
+    get noMoreText() {
+      return this[noMoreText$11];
+    }
+    set noMoreText(value) {
+      this[noMoreText$11] = value;
+    }
+    get refreshCompleteText() {
+      return this[refreshCompleteText$11];
+    }
+    set refreshCompleteText(value) {
+      this[refreshCompleteText$11] = value;
+    }
+    get refreshFailedText() {
+      return this[refreshFailedText$11];
+    }
+    set refreshFailedText(value) {
+      this[refreshFailedText$11] = value;
+    }
+    get refreshingText() {
+      return this[refreshingText$11];
+    }
+    set refreshingText(value) {
+      this[refreshingText$11] = value;
+    }
+  };
+  (refresh_localizations.KrRefreshString.new = function() {
+    this[canLoadingText$11] = "당겨서 불러오기";
+    this[canRefreshText$11] = "당겨서 새로 고침";
+    this[canTwoLevelText$11] = "두 번째 레벨로 이동";
+    this[idleLoadingText$11] = "위로 당겨서 불러오기";
+    this[idleRefreshText$11] = "아래로 당겨서 새로 고침";
+    this[loadFailedText$11] = "로딩에 실패했습니다.";
+    this[loadingText$11] = "로딩 중…";
+    this[noMoreText$11] = "데이터가 더 이상 없습니다.";
+    this[refreshCompleteText$11] = "새로 고침 완료";
+    this[refreshFailedText$11] = "새로 고침에 실패했습니다.";
+    this[refreshingText$11] = "새로 고침 중…";
+    ;
+  }).prototype = refresh_localizations.KrRefreshString.prototype;
+  dart.addTypeTests(refresh_localizations.KrRefreshString);
+  dart.addTypeCaches(refresh_localizations.KrRefreshString);
+  refresh_localizations.KrRefreshString[dart.implements] = () => [refresh_localizations.RefreshString];
+  dart.setLibraryUri(refresh_localizations.KrRefreshString, I[0]);
+  dart.setFieldSignature(refresh_localizations.KrRefreshString, () => ({
+    __proto__: dart.getFields(refresh_localizations.KrRefreshString.__proto__),
+    canLoadingText: dart.fieldType(dart.nullable(core.String)),
+    canRefreshText: dart.fieldType(dart.nullable(core.String)),
+    canTwoLevelText: dart.fieldType(dart.nullable(core.String)),
+    idleLoadingText: dart.fieldType(dart.nullable(core.String)),
+    idleRefreshText: dart.fieldType(dart.nullable(core.String)),
+    loadFailedText: dart.fieldType(dart.nullable(core.String)),
+    loadingText: dart.fieldType(dart.nullable(core.String)),
+    noMoreText: dart.fieldType(dart.nullable(core.String)),
+    refreshCompleteText: dart.fieldType(dart.nullable(core.String)),
+    refreshFailedText: dart.fieldType(dart.nullable(core.String)),
+    refreshingText: dart.fieldType(dart.nullable(core.String))
+  }));
+  dart.trackLibraries("packages/pull_to_refresh/src/internals/refresh_localizations.dart", {
+    "package:pull_to_refresh/src/internals/refresh_localizations.dart": refresh_localizations
+  }, {
+  }, '{"version":3,"sourceRoot":"","sources":["refresh_localizations.dart"],"names":[],"mappings":"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","file":"../../../../../../../../../packages/pull_to_refresh/src/internals/refresh_localizations.dart.lib.js"}');
+  // Exports:
+  return {
+    src__internals__refresh_localizations: refresh_localizations
+  };
+}));
+
+//# sourceMappingURL=refresh_localizations.dart.lib.js.map
