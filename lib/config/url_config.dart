@@ -9,6 +9,7 @@ class UrlConfig{
     'Content-Type': 'application/json',
   };
 
-  static String feedUrl = '${baseUrl}v2/feed?num=1';
+  // ${baseUrl}v2/feed?num=1
+  static String feedUrl = 'v2/feed?num=1';
 
 }

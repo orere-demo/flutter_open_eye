@@ -23,9 +23,8 @@ class HomeBodyViewModel extends BaseChangeNotifier {
     videoList.clear();
     bannerList.clear();
 
-    await HttpManager.requestHttpData(UrlConfig.feedUrl, onSuccess: (s){
-      type = LoadingWidget.DONE;
-      // var bean = home_body_bean.HomeBodyBean.fromJson(s);
-    });
+    var data = await Request.get(UrlConfig.feedUrl);
+
+    print('-------------------------------$data---------------------------------');
   }
 }
