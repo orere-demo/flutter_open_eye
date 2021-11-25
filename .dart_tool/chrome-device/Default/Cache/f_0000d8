@@ -1,0 +1,434 @@
+define(['dart_sdk', 'packages/flutter/src/widgets/widget_span.dart', 'packages/flutter/src/widgets/page_view.dart', 'packages/flutter/src/material/icon_button.dart', 'packages/flutter/src/painting/basic_types.dart', 'packages/demo2_eye/root_page/home_page/home_page_widget.dart', 'packages/demo2_eye/root_page/my_page/my_page_widget.dart', 'packages/demo2_eye/provider/provider_widget.dart', 'packages/demo2_eye/view_model/home_view_model/home_tab_view_model.dart', 'packages/demo2_eye/utils/theme.dart', 'packages/flutter/src/widgets/bottom_navigation_bar_item.dart', 'packages/flutter/src/widgets/icon.dart', 'packages/flutter/src/material/icons.dart'], (function load__packages__demo2_eye__root_page__root_page_dart(dart_sdk, packages__flutter__src__widgets__widget_span$46dart, packages__flutter__src__widgets__page_view$46dart, packages__flutter__src__material__icon_button$46dart, packages__flutter__src__painting__basic_types$46dart, packages__demo2_eye__root_page__home_page__home_page_widget$46dart, packages__demo2_eye__root_page__my_page__my_page_widget$46dart, packages__demo2_eye__provider__provider_widget$46dart, packages__demo2_eye__view_model__home_view_model__home_tab_view_model$46dart, packages__demo2_eye__utils__theme$46dart, packages__flutter__src__widgets__bottom_navigation_bar_item$46dart, packages__flutter__src__widgets__icon$46dart, packages__flutter__src__material__icons$46dart) {
+  'use strict';
+  const core = dart_sdk.core;
+  const _internal = dart_sdk._internal;
+  const _interceptors = dart_sdk._interceptors;
+  const ui = dart_sdk.ui;
+  const dart = dart_sdk.dart;
+  const dartx = dart_sdk.dartx;
+  const framework = packages__flutter__src__widgets__widget_span$46dart.src__widgets__framework;
+  const widget_inspector = packages__flutter__src__widgets__widget_span$46dart.src__widgets__widget_inspector;
+  const page_view = packages__flutter__src__widgets__page_view$46dart.src__widgets__page_view;
+  const scaffold = packages__flutter__src__material__icon_button$46dart.src__material__scaffold;
+  const bottom_navigation_bar = packages__flutter__src__material__icon_button$46dart.src__material__bottom_navigation_bar;
+  const basic_types = packages__flutter__src__painting__basic_types$46dart.src__painting__basic_types;
+  const home_page_widget = packages__demo2_eye__root_page__home_page__home_page_widget$46dart.root_page__home_page__home_page_widget;
+  const my_page_widget = packages__demo2_eye__root_page__my_page__my_page_widget$46dart.root_page__my_page__my_page_widget;
+  const provider_widget = packages__demo2_eye__provider__provider_widget$46dart.provider__provider_widget;
+  const home_tab_view_model = packages__demo2_eye__view_model__home_view_model__home_tab_view_model$46dart.view_model__home_view_model__home_tab_view_model;
+  const theme = packages__demo2_eye__utils__theme$46dart.utils__theme;
+  const bottom_navigation_bar_item = packages__flutter__src__widgets__bottom_navigation_bar_item$46dart.src__widgets__bottom_navigation_bar_item;
+  const icon = packages__flutter__src__widgets__icon$46dart.src__widgets__icon;
+  const icons = packages__flutter__src__material__icons$46dart.src__material__icons;
+  var root_page = Object.create(dart.library);
+  dart._checkModuleNullSafetyMode(true);
+  var T = {
+    JSArrayOfWidget: () => (T.JSArrayOfWidget = dart.constFn(_interceptors.JSArray$(framework.Widget)))(),
+    ProviderWidgetOfHomeTabViewModel: () => (T.ProviderWidgetOfHomeTabViewModel = dart.constFn(provider_widget.ProviderWidget$(home_tab_view_model.HomeTabViewModel)))(),
+    intTovoid: () => (T.intTovoid = dart.constFn(dart.fnType(dart.void, [core.int])))(),
+    JSArrayOfBottomNavigationBarItem: () => (T.JSArrayOfBottomNavigationBarItem = dart.constFn(_interceptors.JSArray$(bottom_navigation_bar_item.BottomNavigationBarItem)))(),
+    WidgetN: () => (T.WidgetN = dart.constFn(dart.nullable(framework.Widget)))(),
+    BuildContextAndHomeTabViewModelAndWidgetNToBottomNavigationBar: () => (T.BuildContextAndHomeTabViewModelAndWidgetNToBottomNavigationBar = dart.constFn(dart.fnType(bottom_navigation_bar.BottomNavigationBar, [framework.BuildContext, home_tab_view_model.HomeTabViewModel, T.WidgetN()])))()
+  };
+  const CT = Object.create({
+    _: () => (C, CT)
+  });
+  dart.defineLazy(CT, {
+    get C1() {
+      return C[1] = dart.constList([], widget_inspector._Location);
+    },
+    get C0() {
+      return C[0] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[1] || CT.C1,
+        [_Location_name]: null,
+        [_Location_column]: 11,
+        [_Location_line]: 35,
+        [_Location_file]: "file:///D:/1024/github_myDamo/flutter_open_eye/lib/root_page/root_page.dart"
+      });
+    },
+    get C2() {
+      return C[2] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[1] || CT.C1,
+        [_Location_name]: null,
+        [_Location_column]: 11,
+        [_Location_line]: 37,
+        [_Location_file]: "file:///D:/1024/github_myDamo/flutter_open_eye/lib/root_page/root_page.dart"
+      });
+    },
+    get C5() {
+      return C[5] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "scrollDirection",
+        [_Location_column]: 9,
+        [_Location_line]: 30,
+        [_Location_file]: null
+      });
+    },
+    get C6() {
+      return C[6] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "reverse",
+        [_Location_column]: 9,
+        [_Location_line]: 31,
+        [_Location_file]: null
+      });
+    },
+    get C7() {
+      return C[7] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "controller",
+        [_Location_column]: 9,
+        [_Location_line]: 32,
+        [_Location_file]: null
+      });
+    },
+    get C8() {
+      return C[8] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "children",
+        [_Location_column]: 9,
+        [_Location_line]: 33,
+        [_Location_file]: null
+      });
+    },
+    get C4() {
+      return C[4] = dart.constList([C[5] || CT.C5, C[6] || CT.C6, C[7] || CT.C7, C[8] || CT.C8], widget_inspector._Location);
+    },
+    get C3() {
+      return C[3] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[4] || CT.C4,
+        [_Location_name]: null,
+        [_Location_column]: 13,
+        [_Location_line]: 29,
+        [_Location_file]: "file:///D:/1024/github_myDamo/flutter_open_eye/lib/root_page/root_page.dart"
+      });
+    },
+    get C11() {
+      return C[11] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "icon",
+        [_Location_column]: 58,
+        [_Location_line]: 52,
+        [_Location_file]: null
+      });
+    },
+    get C10() {
+      return C[10] = dart.constList([C[11] || CT.C11], widget_inspector._Location);
+    },
+    get C9() {
+      return C[9] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[10] || CT.C10,
+        [_Location_name]: null,
+        [_Location_column]: 47,
+        [_Location_line]: 52,
+        [_Location_file]: "file:///D:/1024/github_myDamo/flutter_open_eye/lib/root_page/root_page.dart"
+      });
+    },
+    get C14() {
+      return C[14] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "icon",
+        [_Location_column]: 88,
+        [_Location_line]: 52,
+        [_Location_file]: null
+      });
+    },
+    get C15() {
+      return C[15] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "color",
+        [_Location_column]: 94,
+        [_Location_line]: 52,
+        [_Location_file]: null
+      });
+    },
+    get C13() {
+      return C[13] = dart.constList([C[14] || CT.C14, C[15] || CT.C15], widget_inspector._Location);
+    },
+    get C12() {
+      return C[12] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[13] || CT.C13,
+        [_Location_name]: null,
+        [_Location_column]: 77,
+        [_Location_line]: 52,
+        [_Location_file]: "file:///D:/1024/github_myDamo/flutter_open_eye/lib/root_page/root_page.dart"
+      });
+    },
+    get C18() {
+      return C[18] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "icon",
+        [_Location_column]: 58,
+        [_Location_line]: 53,
+        [_Location_file]: null
+      });
+    },
+    get C17() {
+      return C[17] = dart.constList([C[18] || CT.C18], widget_inspector._Location);
+    },
+    get C16() {
+      return C[16] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[17] || CT.C17,
+        [_Location_name]: null,
+        [_Location_column]: 47,
+        [_Location_line]: 53,
+        [_Location_file]: "file:///D:/1024/github_myDamo/flutter_open_eye/lib/root_page/root_page.dart"
+      });
+    },
+    get C21() {
+      return C[21] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "icon",
+        [_Location_column]: 91,
+        [_Location_line]: 53,
+        [_Location_file]: null
+      });
+    },
+    get C22() {
+      return C[22] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "color",
+        [_Location_column]: 100,
+        [_Location_line]: 53,
+        [_Location_file]: null
+      });
+    },
+    get C20() {
+      return C[20] = dart.constList([C[21] || CT.C21, C[22] || CT.C22], widget_inspector._Location);
+    },
+    get C19() {
+      return C[19] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[20] || CT.C20,
+        [_Location_name]: null,
+        [_Location_column]: 80,
+        [_Location_line]: 53,
+        [_Location_file]: "file:///D:/1024/github_myDamo/flutter_open_eye/lib/root_page/root_page.dart"
+      });
+    },
+    get C25() {
+      return C[25] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "currentIndex",
+        [_Location_column]: 13,
+        [_Location_line]: 44,
+        [_Location_file]: null
+      });
+    },
+    get C26() {
+      return C[26] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "selectedItemColor",
+        [_Location_column]: 15,
+        [_Location_line]: 45,
+        [_Location_file]: null
+      });
+    },
+    get C27() {
+      return C[27] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "unselectedItemColor",
+        [_Location_column]: 15,
+        [_Location_line]: 46,
+        [_Location_file]: null
+      });
+    },
+    get C28() {
+      return C[28] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "onTap",
+        [_Location_column]: 15,
+        [_Location_line]: 47,
+        [_Location_file]: null
+      });
+    },
+    get C29() {
+      return C[29] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "items",
+        [_Location_column]: 15,
+        [_Location_line]: 51,
+        [_Location_file]: null
+      });
+    },
+    get C24() {
+      return C[24] = dart.constList([C[25] || CT.C25, C[26] || CT.C26, C[27] || CT.C27, C[28] || CT.C28, C[29] || CT.C29], widget_inspector._Location);
+    },
+    get C23() {
+      return C[23] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[24] || CT.C24,
+        [_Location_name]: null,
+        [_Location_column]: 18,
+        [_Location_line]: 43,
+        [_Location_file]: "file:///D:/1024/github_myDamo/flutter_open_eye/lib/root_page/root_page.dart"
+      });
+    },
+    get C32() {
+      return C[32] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "model",
+        [_Location_column]: 9,
+        [_Location_line]: 41,
+        [_Location_file]: null
+      });
+    },
+    get C33() {
+      return C[33] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "builder",
+        [_Location_column]: 9,
+        [_Location_line]: 42,
+        [_Location_file]: null
+      });
+    },
+    get C31() {
+      return C[31] = dart.constList([C[32] || CT.C32, C[33] || CT.C33], widget_inspector._Location);
+    },
+    get C30() {
+      return C[30] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[31] || CT.C31,
+        [_Location_name]: null,
+        [_Location_column]: 28,
+        [_Location_line]: 40,
+        [_Location_file]: "file:///D:/1024/github_myDamo/flutter_open_eye/lib/root_page/root_page.dart"
+      });
+    },
+    get C36() {
+      return C[36] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "body",
+        [_Location_column]: 7,
+        [_Location_line]: 29,
+        [_Location_file]: null
+      });
+    },
+    get C37() {
+      return C[37] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "bottomNavigationBar",
+        [_Location_column]: 7,
+        [_Location_line]: 40,
+        [_Location_file]: null
+      });
+    },
+    get C35() {
+      return C[35] = dart.constList([C[36] || CT.C36, C[37] || CT.C37], widget_inspector._Location);
+    },
+    get C34() {
+      return C[34] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[35] || CT.C35,
+        [_Location_name]: null,
+        [_Location_column]: 12,
+        [_Location_line]: 28,
+        [_Location_file]: "file:///D:/1024/github_myDamo/flutter_open_eye/lib/root_page/root_page.dart"
+      });
+    }
+  }, false);
+  var C = Array(38).fill(void 0);
+  var I = ["package:demo2_eye/root_page/root_page.dart"];
+  root_page.RootPage = class RootPage extends framework.StatefulWidget {
+    createState() {
+      return new root_page._RootPageState.new();
+    }
+  };
+  (root_page.RootPage.new = function(opts) {
+    let $36creationLocationd_0dea112b090073317d4 = opts && '$creationLocationd_0dea112b090073317d4' in opts ? opts.$creationLocationd_0dea112b090073317d4 : null;
+    root_page.RootPage.__proto__.new.call(this, {$creationLocationd_0dea112b090073317d4: $36creationLocationd_0dea112b090073317d4});
+    ;
+  }).prototype = root_page.RootPage.prototype;
+  dart.addTypeTests(root_page.RootPage);
+  dart.addTypeCaches(root_page.RootPage);
+  dart.setMethodSignature(root_page.RootPage, () => ({
+    __proto__: dart.getMethods(root_page.RootPage.__proto__),
+    createState: dart.fnType(root_page._RootPageState, [])
+  }));
+  dart.setLibraryUri(root_page.RootPage, I[0]);
+  var ___RootPageState_pageController = dart.privateName(root_page, "_#_RootPageState#pageController");
+  var _Location_parameterLocations = dart.privateName(widget_inspector, "_Location.parameterLocations");
+  var _Location_name = dart.privateName(widget_inspector, "_Location.name");
+  var _Location_column = dart.privateName(widget_inspector, "_Location.column");
+  var _Location_line = dart.privateName(widget_inspector, "_Location.line");
+  var _Location_file = dart.privateName(widget_inspector, "_Location.file");
+  root_page._RootPageState = class _RootPageState extends framework.State$(root_page.RootPage) {
+    get pageController() {
+      let t0;
+      t0 = this[___RootPageState_pageController];
+      return t0 == null ? dart.throw(new _internal.LateError.fieldNI("pageController")) : t0;
+    }
+    set pageController(t0) {
+      this[___RootPageState_pageController] = t0;
+    }
+    initState() {
+      super.initState();
+      this.pageController = new page_view.PageController.new();
+    }
+    build(context) {
+      return new scaffold.Scaffold.new({body: new page_view.PageView.new({scrollDirection: basic_types.Axis.vertical, reverse: true, controller: this.pageController, children: T.JSArrayOfWidget().of([new home_page_widget.HomePageWidget.new({$creationLocationd_0dea112b090073317d4: C[0] || CT.C0}), new my_page_widget.MyPageWidget.new({$creationLocationd_0dea112b090073317d4: C[2] || CT.C2})]), $creationLocationd_0dea112b090073317d4: C[3] || CT.C3}), bottomNavigationBar: new (T.ProviderWidgetOfHomeTabViewModel()).new({model: new home_tab_view_model.HomeTabViewModel.new(), builder: dart.fn((context, model, child) => new bottom_navigation_bar.BottomNavigationBar.new({currentIndex: model.currentIndex, selectedItemColor: theme.themeColor(), unselectedItemColor: new ui.Color.new(4288322202), onTap: dart.fn(index => {
+              this.pageController.jumpToPage(index);
+              model.changeBottomTabIndex(index);
+            }, T.intTovoid()), items: T.JSArrayOfBottomNavigationBarItem().of([new bottom_navigation_bar_item.BottomNavigationBarItem.new({icon: new icon.Icon.new(icons.Icons.home, {$creationLocationd_0dea112b090073317d4: C[9] || CT.C9}), activeIcon: new icon.Icon.new(icons.Icons.home, {color: theme.themeColor(), $creationLocationd_0dea112b090073317d4: C[12] || CT.C12}), label: "首页"}), new bottom_navigation_bar_item.BottomNavigationBarItem.new({icon: new icon.Icon.new(icons.Icons.android, {$creationLocationd_0dea112b090073317d4: C[16] || CT.C16}), activeIcon: new icon.Icon.new(icons.Icons.android, {color: theme.themeColor(), $creationLocationd_0dea112b090073317d4: C[19] || CT.C19}), label: "我的"})]), $creationLocationd_0dea112b090073317d4: C[23] || CT.C23}), T.BuildContextAndHomeTabViewModelAndWidgetNToBottomNavigationBar()), $creationLocationd_0dea112b090073317d4: C[30] || CT.C30}), $creationLocationd_0dea112b090073317d4: C[34] || CT.C34});
+    }
+  };
+  (root_page._RootPageState.new = function() {
+    this[___RootPageState_pageController] = null;
+    root_page._RootPageState.__proto__.new.call(this);
+    ;
+  }).prototype = root_page._RootPageState.prototype;
+  dart.addTypeTests(root_page._RootPageState);
+  dart.addTypeCaches(root_page._RootPageState);
+  dart.setMethodSignature(root_page._RootPageState, () => ({
+    __proto__: dart.getMethods(root_page._RootPageState.__proto__),
+    build: dart.fnType(framework.Widget, [framework.BuildContext])
+  }));
+  dart.setGetterSignature(root_page._RootPageState, () => ({
+    __proto__: dart.getGetters(root_page._RootPageState.__proto__),
+    pageController: page_view.PageController
+  }));
+  dart.setSetterSignature(root_page._RootPageState, () => ({
+    __proto__: dart.getSetters(root_page._RootPageState.__proto__),
+    pageController: page_view.PageController
+  }));
+  dart.setLibraryUri(root_page._RootPageState, I[0]);
+  dart.setFieldSignature(root_page._RootPageState, () => ({
+    __proto__: dart.getFields(root_page._RootPageState.__proto__),
+    [___RootPageState_pageController]: dart.fieldType(dart.nullable(page_view.PageController))
+  }));
+  dart.trackLibraries("packages/demo2_eye/root_page/root_page.dart", {
+    "package:demo2_eye/root_page/root_page.dart": root_page
+  }, {
+  }, '{"version":3,"sourceRoot":"","sources":["root_page.dart"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAYkC;IAAgB;;;;;;EAClD;;;;;;;;;;;;;;;;;AAGsB;;IAAc;;AAAd;IAAc;;AAKf,MAAX;AAC2B,MAAjC,sBAAiB;IACnB;UAG0B;AACxB,YAAO,kCACC,6CACkB,oCACb,kBACG,+BACF,wBAER,kGAEA,8KAGiB,uDACZ,yDACE,SAAC,SAAS,OAAO,UACjB,iEACS,AAAM,KAAD,kCACE,yCACE,iBAAM,oBACpB,QAAC;AAC0B,cAAhC,AAAe,+BAAW,KAAK;AACE,cAAjC,AAAM,KAAD,sBAAsB,KAAK;sCAE3B,yCACL,kEAA8B,kBAAW,wFAAmB,kBAAW,0BAAa,sFAAsB,QAC1G,kEAA8B,kBAAW,6FAAsB,kBAAW,6BAAgB,sFAAsB;IAM9H;;;4CA1CoB;;;EA2CtB","file":"../../../../../packages/demo2_eye/root_page/root_page.dart.lib.js"}');
+  // Exports:
+  return {
+    root_page__root_page: root_page
+  };
+}));
+
+//# sourceMappingURL=root_page.dart.lib.js.map

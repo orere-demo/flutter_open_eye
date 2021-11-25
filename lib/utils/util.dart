@@ -1,5 +1,6 @@
 import 'package:demo2_eye/config/color_config.dart';
 import 'package:flutter/material.dart';
+import 'package:extended_image/extended_image.dart';
 
 PreferredSizeWidget appBar(String title, {Color? backgroundColor}){
   return AppBar(
@@ -16,3 +17,10 @@ PreferredSizeWidget appBar(String title, {Color? backgroundColor}){
   );
 }
 // , Color backgroundColor
+
+ImageProvider cachedNetworkImageProvider(String url){
+  return ExtendedNetworkImageProvider(url);
+}
+
+
+

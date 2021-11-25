@@ -10,6 +10,6 @@ class UrlConfig{
   };
 
   // ${baseUrl}v2/feed?num=1
-  static String feedUrl = 'v2/feed?num=1';
+  static String feedUrl = '${baseUrl}v2/feed?num=1';
 
 }

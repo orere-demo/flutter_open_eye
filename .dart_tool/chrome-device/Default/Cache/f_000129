@@ -1,0 +1,2450 @@
+define(['dart_sdk', 'packages/flutter/src/painting/placeholder_span.dart', 'packages/flutter/src/painting/edge_insets.dart', 'packages/flutter/src/foundation/change_notifier.dart', 'packages/characters/src/extensions.dart', 'packages/flutter/src/services/text_input.dart', 'packages/flutter/src/services/raw_keyboard_windows.dart', 'packages/flutter/src/services/keyboard_key.dart', 'packages/flutter/src/services/text_editing.dart', 'packages/flutter/src/services/clipboard.dart', 'packages/flutter/src/foundation/_platform_web.dart', 'packages/flutter/src/semantics/semantics.dart', 'packages/flutter/src/gestures/tap.dart', 'packages/flutter/src/gestures/multitap.dart', 'packages/flutter/src/gestures/long_press.dart', 'packages/flutter/src/rendering/layer.dart', 'packages/flutter/src/painting/basic_types.dart', 'packages/flutter/src/gestures/hit_test.dart', 'packages/flutter/src/gestures/events.dart', 'packages/flutter/src/painting/colors.dart', 'packages/flutter/src/foundation/debug.dart', 'packages/flutter/src/rendering/viewport_offset.dart', 'packages/flutter/src/painting/strut_style.dart'], (function load__packages__flutter__src__rendering__editable_dart(dart_sdk, packages__flutter__src__painting__placeholder_span$46dart, packages__flutter__src__painting__edge_insets$46dart, packages__flutter__src__foundation__change_notifier$46dart, packages__characters__src__extensions$46dart, packages__flutter__src__services__text_input$46dart, packages__flutter__src__services__raw_keyboard_windows$46dart, packages__flutter__src__services__keyboard_key$46dart, packages__flutter__src__services__text_editing$46dart, packages__flutter__src__services__clipboard$46dart, packages__flutter__src__foundation___platform_web$46dart, packages__flutter__src__semantics__semantics$46dart, packages__flutter__src__gestures__tap$46dart, packages__flutter__src__gestures__multitap$46dart, packages__flutter__src__gestures__long_press$46dart, packages__flutter__src__rendering__layer$46dart, packages__flutter__src__painting__basic_types$46dart, packages__flutter__src__gestures__hit_test$46dart, packages__flutter__src__gestures__events$46dart, packages__flutter__src__painting__colors$46dart, packages__flutter__src__foundation__debug$46dart, packages__flutter__src__rendering__viewport_offset$46dart, packages__flutter__src__painting__strut_style$46dart) {
+  'use strict';
+  const core = dart_sdk.core;
+  const ui = dart_sdk.ui;
+  const _interceptors = dart_sdk._interceptors;
+  const _internal = dart_sdk._internal;
+  const math = dart_sdk.math;
+  const async = dart_sdk.async;
+  const collection = dart_sdk.collection;
+  const dart = dart_sdk.dart;
+  const dartx = dart_sdk.dartx;
+  const text_painter = packages__flutter__src__painting__placeholder_span$46dart.src__painting__text_painter;
+  const text_span = packages__flutter__src__painting__placeholder_span$46dart.src__painting__text_span;
+  const inline_span = packages__flutter__src__painting__placeholder_span$46dart.src__painting__inline_span;
+  const edge_insets = packages__flutter__src__painting__edge_insets$46dart.src__painting__edge_insets;
+  const change_notifier = packages__flutter__src__foundation__change_notifier$46dart.src__foundation__change_notifier;
+  const extensions = packages__characters__src__extensions$46dart.src__extensions;
+  const text_input = packages__flutter__src__services__text_input$46dart.src__services__text_input;
+  const raw_keyboard = packages__flutter__src__services__raw_keyboard_windows$46dart.src__services__raw_keyboard;
+  const raw_keyboard_macos = packages__flutter__src__services__raw_keyboard_windows$46dart.src__services__raw_keyboard_macos;
+  const keyboard_key = packages__flutter__src__services__keyboard_key$46dart.src__services__keyboard_key;
+  const text_editing = packages__flutter__src__services__text_editing$46dart.src__services__text_editing;
+  const clipboard = packages__flutter__src__services__clipboard$46dart.src__services__clipboard;
+  const platform = packages__flutter__src__foundation___platform_web$46dart.src__foundation__platform;
+  const semantics = packages__flutter__src__semantics__semantics$46dart.src__semantics__semantics;
+  const tap = packages__flutter__src__gestures__tap$46dart.src__gestures__tap;
+  const multitap = packages__flutter__src__gestures__multitap$46dart.src__gestures__multitap;
+  const long_press = packages__flutter__src__gestures__long_press$46dart.src__gestures__long_press;
+  const object = packages__flutter__src__rendering__layer$46dart.src__rendering__object;
+  const box = packages__flutter__src__rendering__layer$46dart.src__rendering__box;
+  const layer = packages__flutter__src__rendering__layer$46dart.src__rendering__layer;
+  const basic_types = packages__flutter__src__painting__basic_types$46dart.src__painting__basic_types;
+  const hit_test = packages__flutter__src__gestures__hit_test$46dart.src__gestures__hit_test;
+  const events = packages__flutter__src__gestures__events$46dart.src__gestures__events;
+  const colors = packages__flutter__src__painting__colors$46dart.src__painting__colors;
+  const diagnostics = packages__flutter__src__foundation__debug$46dart.src__foundation__diagnostics;
+  const viewport_offset = packages__flutter__src__rendering__viewport_offset$46dart.src__rendering__viewport_offset;
+  const strut_style = packages__flutter__src__painting__strut_style$46dart.src__painting__strut_style;
+  var editable = Object.create(dart.library);
+  var $length = dartx.length;
+  var $add = dartx.add;
+  var $isNotEmpty = dartx.isNotEmpty;
+  var $codeUnitAt = dartx.codeUnitAt;
+  var $first = dartx.first;
+  var $toString = dartx.toString;
+  var $substring = dartx.substring;
+  var $_equals = dartx._equals;
+  var $any = dartx.any;
+  var $times = dartx['*'];
+  var $isEmpty = dartx.isEmpty;
+  var $skip = dartx.skip;
+  var $floorToDouble = dartx.floorToDouble;
+  var $ceilToDouble = dartx.ceilToDouble;
+  var $runtimeType = dartx.runtimeType;
+  var $last = dartx.last;
+  var $fold = dartx.fold;
+  var $isFinite = dartx.isFinite;
+  var $round = dartx.round;
+  var $_get = dartx._get;
+  var $clamp = dartx.clamp;
+  var $iterator = dartx.iterator;
+  dart._checkModuleNullSafetyMode(true);
+  var T = {
+    ValueNotifierOfbool: () => (T.ValueNotifierOfbool = dart.constFn(change_notifier.ValueNotifier$(core.bool)))(),
+    JSArrayOfRenderEditablePainter: () => (T.JSArrayOfRenderEditablePainter = dart.constFn(_interceptors.JSArray$(editable.RenderEditablePainter)))(),
+    StringTobool: () => (T.StringTobool = dart.constFn(dart.fnType(core.bool, [core.String])))(),
+    VoidToTextSelection: () => (T.VoidToTextSelection = dart.constFn(dart.fnType(text_editing.TextSelection, [])))(),
+    TextSelectionTodynamic: () => (T.TextSelectionTodynamic = dart.constFn(dart.fnType(dart.dynamic, [text_editing.TextSelection])))(),
+    TextSpanN: () => (T.TextSpanN = dart.constFn(dart.nullable(text_span.TextSpan)))(),
+    InlineSpanSemanticsInformationTobool: () => (T.InlineSpanSemanticsInformationTobool = dart.constFn(dart.fnType(core.bool, [inline_span.InlineSpanSemanticsInformation])))(),
+    JSArrayOfSemanticsNode: () => (T.JSArrayOfSemanticsNode = dart.constFn(_interceptors.JSArray$(semantics.SemanticsNode)))(),
+    ListQueueOfSemanticsNode: () => (T.ListQueueOfSemanticsNode = dart.constFn(collection.ListQueue$(semantics.SemanticsNode)))(),
+    JSArrayOfTextBox: () => (T.JSArrayOfTextBox = dart.constFn(_interceptors.JSArray$(ui.TextBox)))(),
+    JSArrayOfTextSelectionPoint: () => (T.JSArrayOfTextSelectionPoint = dart.constFn(_interceptors.JSArray$(editable.TextSelectionPoint)))(),
+    RectN: () => (T.RectN = dart.constFn(dart.nullable(ui.Rect)))(),
+    RectNAndTextBoxToRect: () => (T.RectNAndTextBoxToRect = dart.constFn(dart.fnType(ui.Rect, [T.RectN(), ui.TextBox])))(),
+    DiagnosticsPropertyOfValueNotifierOfbool: () => (T.DiagnosticsPropertyOfValueNotifierOfbool = dart.constFn(diagnostics.DiagnosticsProperty$(T.ValueNotifierOfbool())))(),
+    DiagnosticsPropertyOfbool: () => (T.DiagnosticsPropertyOfbool = dart.constFn(diagnostics.DiagnosticsProperty$(core.bool)))(),
+    DiagnosticsPropertyOfLocale: () => (T.DiagnosticsPropertyOfLocale = dart.constFn(diagnostics.DiagnosticsProperty$(ui.Locale)))(),
+    DiagnosticsPropertyOfTextSelection: () => (T.DiagnosticsPropertyOfTextSelection = dart.constFn(diagnostics.DiagnosticsProperty$(text_editing.TextSelection)))(),
+    DiagnosticsPropertyOfViewportOffset: () => (T.DiagnosticsPropertyOfViewportOffset = dart.constFn(diagnostics.DiagnosticsProperty$(viewport_offset.ViewportOffset)))(),
+    JSArrayOfDiagnosticsNode: () => (T.JSArrayOfDiagnosticsNode = dart.constFn(_interceptors.JSArray$(diagnostics.DiagnosticsNode)))(),
+    LinkedHashSetOfLogicalKeyboardKey: () => (T.LinkedHashSetOfLogicalKeyboardKey = dart.constFn(collection.LinkedHashSet$(keyboard_key.LogicalKeyboardKey)))(),
+    RenderEditableN: () => (T.RenderEditableN = dart.constFn(dart.nullable(editable.RenderEditable)))()
+  };
+  const CT = Object.create({
+    _: () => (C, CT)
+  });
+  dart.defineLazy(CT, {
+    get C0() {
+      return C[0] = dart.const({
+        __proto__: ui.TextDirection.prototype,
+        [_name]: "TextDirection.ltr",
+        index: 1
+      });
+    },
+    get C1() {
+      return C[1] = dart.const({
+        __proto__: ui.TextDirection.prototype,
+        [_name]: "TextDirection.rtl",
+        index: 0
+      });
+    },
+    get C2() {
+      return C[2] = dart.const({
+        __proto__: ui.TextAlign.prototype,
+        [_name]: "TextAlign.start",
+        index: 4
+      });
+    },
+    get C3() {
+      return C[3] = dart.const({
+        __proto__: text_painter.TextWidthBasis.prototype,
+        [_name$]: "TextWidthBasis.parent",
+        index: 0
+      });
+    },
+    get C4() {
+      return C[4] = dart.const({
+        __proto__: ui.Offset.prototype,
+        [OffsetBase__dy]: 0,
+        [OffsetBase__dx]: 0
+      });
+    },
+    get C5() {
+      return C[5] = dart.const({
+        __proto__: ui.BoxHeightStyle.prototype,
+        [_name]: "BoxHeightStyle.tight",
+        index: 0
+      });
+    },
+    get C6() {
+      return C[6] = dart.const({
+        __proto__: ui.BoxWidthStyle.prototype,
+        [_name]: "BoxWidthStyle.tight",
+        index: 0
+      });
+    },
+    get C7() {
+      return C[7] = dart.const({
+        __proto__: edge_insets.EdgeInsets.prototype,
+        [EdgeInsets_bottom]: 5,
+        [EdgeInsets_right]: 4,
+        [EdgeInsets_top]: 4,
+        [EdgeInsets_left]: 4
+      });
+    },
+    get C8() {
+      return C[8] = dart.const({
+        __proto__: ui.Clip.prototype,
+        [_name]: "Clip.hardEdge",
+        index: 1
+      });
+    },
+    get C10() {
+      return C[10] = dart.const({
+        __proto__: ui.TextAffinity.prototype,
+        [_name]: "TextAffinity.downstream",
+        index: 1
+      });
+    },
+    get C9() {
+      return C[9] = dart.const({
+        __proto__: text_editing.TextSelection.prototype,
+        [TextRange_end]: 0,
+        [TextRange_start]: 0,
+        [TextSelection_isDirectional]: false,
+        [TextSelection_affinity]: C[10] || CT.C10,
+        [TextSelection_extentOffset]: 0,
+        [TextSelection_baseOffset]: 0
+      });
+    },
+    get C11() {
+      return C[11] = dart.const({
+        __proto__: basic_types.Axis.prototype,
+        [_name$0]: "Axis.horizontal",
+        index: 0
+      });
+    },
+    get C12() {
+      return C[12] = dart.const({
+        __proto__: basic_types.Axis.prototype,
+        [_name$0]: "Axis.vertical",
+        index: 1
+      });
+    },
+    get C13() {
+      return C[13] = dart.const({
+        __proto__: platform.TargetPlatform.prototype,
+        [_name$1]: "TargetPlatform.iOS",
+        index: 2
+      });
+    },
+    get C14() {
+      return C[14] = dart.const({
+        __proto__: platform.TargetPlatform.prototype,
+        [_name$1]: "TargetPlatform.android",
+        index: 0
+      });
+    },
+    get C15() {
+      return C[15] = dart.const({
+        __proto__: platform.TargetPlatform.prototype,
+        [_name$1]: "TargetPlatform.fuchsia",
+        index: 1
+      });
+    },
+    get C16() {
+      return C[16] = dart.const({
+        __proto__: platform.TargetPlatform.prototype,
+        [_name$1]: "TargetPlatform.macOS",
+        index: 4
+      });
+    },
+    get C17() {
+      return C[17] = dart.const({
+        __proto__: platform.TargetPlatform.prototype,
+        [_name$1]: "TargetPlatform.linux",
+        index: 3
+      });
+    },
+    get C18() {
+      return C[18] = dart.const({
+        __proto__: platform.TargetPlatform.prototype,
+        [_name$1]: "TargetPlatform.windows",
+        index: 5
+      });
+    },
+    get C19() {
+      return C[19] = dart.const({
+        __proto__: edge_insets.EdgeInsets.prototype,
+        [EdgeInsets_bottom]: 1,
+        [EdgeInsets_right]: 0.5,
+        [EdgeInsets_top]: 1,
+        [EdgeInsets_left]: 0.5
+      });
+    },
+    get C20() {
+      return C[20] = dart.const({
+        __proto__: ui.Radius.prototype,
+        [Radius_y]: 1,
+        [Radius_x]: 1
+      });
+    }
+  }, false);
+  var C = Array(21).fill(void 0);
+  var I = [
+    "file:///D:/flutter/flutter2.0.2/packages/flutter/lib/src/rendering/editable.dart",
+    "package:flutter/src/rendering/editable.dart"
+  ];
+  var point$ = dart.privateName(editable, "TextSelectionPoint.point");
+  var direction$ = dart.privateName(editable, "TextSelectionPoint.direction");
+  var _name = dart.privateName(ui, "_name");
+  editable.TextSelectionPoint = class TextSelectionPoint extends core.Object {
+    get point() {
+      return this[point$];
+    }
+    set point(value) {
+      super.point = value;
+    }
+    get direction() {
+      return this[direction$];
+    }
+    set direction(value) {
+      super.direction = value;
+    }
+    toString() {
+      switch (this.direction) {
+        case C[0] || CT.C0:
+        {
+          return dart.str(this.point) + "-ltr";
+        }
+        case C[1] || CT.C1:
+        {
+          return dart.str(this.point) + "-rtl";
+        }
+        case null:
+        {
+          return dart.str(this.point);
+        }
+      }
+    }
+  };
+  (editable.TextSelectionPoint.new = function(point, direction) {
+    this[point$] = point;
+    this[direction$] = direction;
+    if (!(point !== null)) dart.assertFailed(null, I[0], 56, 14, "point != null");
+    ;
+  }).prototype = editable.TextSelectionPoint.prototype;
+  dart.addTypeTests(editable.TextSelectionPoint);
+  dart.addTypeCaches(editable.TextSelectionPoint);
+  dart.setLibraryUri(editable.TextSelectionPoint, I[1]);
+  dart.setFieldSignature(editable.TextSelectionPoint, () => ({
+    __proto__: dart.getFields(editable.TextSelectionPoint.__proto__),
+    point: dart.finalFieldType(ui.Offset),
+    direction: dart.finalFieldType(dart.nullable(ui.TextDirection))
+  }));
+  dart.defineExtensionMethods(editable.TextSelectionPoint, ['toString']);
+  var onSelectionChanged$ = dart.privateName(editable, "RenderEditable.onSelectionChanged");
+  var onCaretChanged$ = dart.privateName(editable, "RenderEditable.onCaretChanged");
+  var ignorePointer$ = dart.privateName(editable, "RenderEditable.ignorePointer");
+  var textSelectionDelegate$ = dart.privateName(editable, "RenderEditable.textSelectionDelegate");
+  var floatingCursorAddedMargin$ = dart.privateName(editable, "RenderEditable.floatingCursorAddedMargin");
+  var _name$ = dart.privateName(text_painter, "_name");
+  var OffsetBase__dy = dart.privateName(ui, "OffsetBase._dy");
+  var OffsetBase__dx = dart.privateName(ui, "OffsetBase._dx");
+  var EdgeInsets_bottom = dart.privateName(edge_insets, "EdgeInsets.bottom");
+  var EdgeInsets_right = dart.privateName(edge_insets, "EdgeInsets.right");
+  var EdgeInsets_top = dart.privateName(edge_insets, "EdgeInsets.top");
+  var EdgeInsets_left = dart.privateName(edge_insets, "EdgeInsets.left");
+  var _foregroundRenderObject = dart.privateName(editable, "_foregroundRenderObject");
+  var _backgroundRenderObject = dart.privateName(editable, "_backgroundRenderObject");
+  var _foregroundPainter = dart.privateName(editable, "_foregroundPainter");
+  var _painter = dart.privateName(editable, "_painter");
+  var __RenderEditable__caretPainter = dart.privateName(editable, "_#RenderEditable#_caretPainter");
+  var _selectionPainter = dart.privateName(editable, "_selectionPainter");
+  var _autocorrectHighlightPainter = dart.privateName(editable, "_autocorrectHighlightPainter");
+  var _cachedBuiltInForegroundPainters = dart.privateName(editable, "_cachedBuiltInForegroundPainters");
+  var _cachedBuiltInPainters = dart.privateName(editable, "_cachedBuiltInPainters");
+  var _textLayoutLastMaxWidth = dart.privateName(editable, "_textLayoutLastMaxWidth");
+  var _textLayoutLastMinWidth = dart.privateName(editable, "_textLayoutLastMinWidth");
+  var _lastCaretRect = dart.privateName(editable, "_lastCaretRect");
+  var _selectionStartInViewport = dart.privateName(editable, "_selectionStartInViewport");
+  var _selectionEndInViewport = dart.privateName(editable, "_selectionEndInViewport");
+  var _cursorResetLocation = dart.privateName(editable, "_cursorResetLocation");
+  var _wasSelectingVerticallyWithKeyboard = dart.privateName(editable, "_wasSelectingVerticallyWithKeyboard");
+  var _cachedPlainText = dart.privateName(editable, "_cachedPlainText");
+  var _hasFocus = dart.privateName(editable, "_hasFocus");
+  var _listenerAttached = dart.privateName(editable, "_listenerAttached");
+  var _forceLine = dart.privateName(editable, "_forceLine");
+  var _readOnly = dart.privateName(editable, "_readOnly");
+  var _cursorWidth = dart.privateName(editable, "_cursorWidth");
+  var _floatingCursorOn = dart.privateName(editable, "_floatingCursorOn");
+  var __RenderEditable__floatingCursorTextPosition = dart.privateName(editable, "_#RenderEditable#_floatingCursorTextPosition");
+  var _maxScrollExtent = dart.privateName(editable, "_maxScrollExtent");
+  var _clipBehavior = dart.privateName(editable, "_clipBehavior");
+  var _semanticsInfo = dart.privateName(editable, "_semanticsInfo");
+  var _cachedChildNodes = dart.privateName(editable, "_cachedChildNodes");
+  var __RenderEditable__tap = dart.privateName(editable, "_#RenderEditable#_tap");
+  var __RenderEditable__longPress = dart.privateName(editable, "_#RenderEditable#_longPress");
+  var _lastTapDownPosition = dart.privateName(editable, "_lastTapDownPosition");
+  var _lastSecondaryTapDownPosition = dart.privateName(editable, "_lastSecondaryTapDownPosition");
+  var __RenderEditable__caretPrototype = dart.privateName(editable, "_#RenderEditable#_caretPrototype");
+  var _relativeOrigin = dart.privateName(editable, "_relativeOrigin");
+  var _previousOffset = dart.privateName(editable, "_previousOffset");
+  var _resetOriginOnLeft = dart.privateName(editable, "_resetOriginOnLeft");
+  var _resetOriginOnRight = dart.privateName(editable, "_resetOriginOnRight");
+  var _resetOriginOnTop = dart.privateName(editable, "_resetOriginOnTop");
+  var _resetOriginOnBottom = dart.privateName(editable, "_resetOriginOnBottom");
+  var _resetFloatingCursorAnimationValue = dart.privateName(editable, "_resetFloatingCursorAnimationValue");
+  var _clipRectLayer = dart.privateName(editable, "_clipRectLayer");
+  var _textPainter = dart.privateName(editable, "_textPainter");
+  var _showCursor = dart.privateName(editable, "_showCursor");
+  var _maxLines = dart.privateName(editable, "_maxLines");
+  var _minLines = dart.privateName(editable, "_minLines");
+  var _expands = dart.privateName(editable, "_expands");
+  var _selection = dart.privateName(editable, "_selection");
+  var _offset = dart.privateName(editable, "_offset");
+  var _cursorHeight = dart.privateName(editable, "_cursorHeight");
+  var _paintCursorOnTop = dart.privateName(editable, "_paintCursorOnTop");
+  var _enableInteractiveSelection = dart.privateName(editable, "_enableInteractiveSelection");
+  var _devicePixelRatio = dart.privateName(editable, "_devicePixelRatio");
+  var _startHandleLayerLink = dart.privateName(editable, "_startHandleLayerLink");
+  var _endHandleLayerLink = dart.privateName(editable, "_endHandleLayerLink");
+  var _obscuringCharacter = dart.privateName(editable, "_obscuringCharacter");
+  var _obscureText = dart.privateName(editable, "_obscureText");
+  var _caretPainter = dart.privateName(editable, "_caretPainter");
+  var _updateForegroundPainter = dart.privateName(editable, "_updateForegroundPainter");
+  var _updatePainter = dart.privateName(editable, "_updatePainter");
+  var _builtInForegroundPainters = dart.privateName(editable, "_builtInForegroundPainters");
+  var _builtInPainters = dart.privateName(editable, "_builtInPainters");
+  var _onCaretChanged = dart.privateName(editable, "_onCaretChanged");
+  var _createBuiltInForegroundPainters = dart.privateName(editable, "_createBuiltInForegroundPainters");
+  var _createBuiltInPainters = dart.privateName(editable, "_createBuiltInPainters");
+  var _caretPrototype = dart.privateName(editable, "_caretPrototype");
+  var _updateSelectionExtentsVisibility = dart.privateName(editable, "_updateSelectionExtentsVisibility");
+  var _setTextEditingValue = dart.privateName(editable, "_setTextEditingValue");
+  var _handleSelectionChange = dart.privateName(editable, "_handleSelectionChange");
+  var _setSelection = dart.privateName(editable, "_setSelection");
+  var _handleShortcuts = dart.privateName(editable, "_handleShortcuts");
+  var _handleDelete = dart.privateName(editable, "_handleDelete");
+  var _handleKeyEvent = dart.privateName(editable, "_handleKeyEvent");
+  var _plainText = dart.privateName(editable, "_plainText");
+  var _extendSelectionToEnd = dart.privateName(editable, "_extendSelectionToEnd");
+  var _extendSelectionToStart = dart.privateName(editable, "_extendSelectionToStart");
+  var _getTextPositionVertical = dart.privateName(editable, "_getTextPositionVertical");
+  var _getTextPositionAbove = dart.privateName(editable, "_getTextPositionAbove");
+  var _getTextPositionBelow = dart.privateName(editable, "_getTextPositionBelow");
+  var _getLineAtOffset = dart.privateName(editable, "_getLineAtOffset");
+  var TextRange_end = dart.privateName(ui, "TextRange.end");
+  var TextRange_start = dart.privateName(ui, "TextRange.start");
+  var TextSelection_isDirectional = dart.privateName(text_editing, "TextSelection.isDirectional");
+  var TextSelection_affinity = dart.privateName(text_editing, "TextSelection.affinity");
+  var TextSelection_extentOffset = dart.privateName(text_editing, "TextSelection.extentOffset");
+  var TextSelection_baseOffset = dart.privateName(text_editing, "TextSelection.baseOffset");
+  var _showHideCursor = dart.privateName(editable, "_showHideCursor");
+  var _floatingCursorTextPosition = dart.privateName(editable, "_floatingCursorTextPosition");
+  var _caretMargin = dart.privateName(editable, "_caretMargin");
+  var _isMultiline = dart.privateName(editable, "_isMultiline");
+  var _handleSetSelection = dart.privateName(editable, "_handleSetSelection");
+  var _handleSetText = dart.privateName(editable, "_handleSetText");
+  var _handleMoveCursorBackwardByWord = dart.privateName(editable, "_handleMoveCursorBackwardByWord");
+  var _handleMoveCursorBackwardByCharacter = dart.privateName(editable, "_handleMoveCursorBackwardByCharacter");
+  var _handleMoveCursorForwardByWord = dart.privateName(editable, "_handleMoveCursorForwardByWord");
+  var _handleMoveCursorForwardByCharacter = dart.privateName(editable, "_handleMoveCursorForwardByCharacter");
+  var _getNextWord = dart.privateName(editable, "_getNextWord");
+  var _getPreviousWord = dart.privateName(editable, "_getPreviousWord");
+  var _onlyWhitespace = dart.privateName(editable, "_onlyWhitespace");
+  var _tap = dart.privateName(editable, "_tap");
+  var _handleTapDown = dart.privateName(editable, "_handleTapDown");
+  var _handleTap = dart.privateName(editable, "_handleTap");
+  var _longPress = dart.privateName(editable, "_longPress");
+  var _handleLongPress = dart.privateName(editable, "_handleLongPress");
+  var _viewportAxis = dart.privateName(editable, "_viewportAxis");
+  var _name$0 = dart.privateName(basic_types, "_name");
+  var _paintOffset = dart.privateName(editable, "_paintOffset");
+  var _viewportExtent = dart.privateName(editable, "_viewportExtent");
+  var _getMaxScrollExtent = dart.privateName(editable, "_getMaxScrollExtent");
+  var _hasVisualOverflow = dart.privateName(editable, "_hasVisualOverflow");
+  var _layoutText = dart.privateName(editable, "_layoutText");
+  var _snapToPhysicalPixel = dart.privateName(editable, "_snapToPhysicalPixel");
+  var _preferredHeight = dart.privateName(editable, "_preferredHeight");
+  var _getWordAtOffset = dart.privateName(editable, "_getWordAtOffset");
+  var _name$1 = dart.privateName(platform, "_name");
+  var _computeCaretPrototype = dart.privateName(editable, "_computeCaretPrototype");
+  var _paintContents = dart.privateName(editable, "_paintContents");
+  var _paintHandleLayers = dart.privateName(editable, "_paintHandleLayers");
+  const RenderBox_RelayoutWhenSystemFontsChangeMixin$36 = class RenderBox_RelayoutWhenSystemFontsChangeMixin extends box.RenderBox {};
+  (RenderBox_RelayoutWhenSystemFontsChangeMixin$36.new = function() {
+    RenderBox_RelayoutWhenSystemFontsChangeMixin$36.__proto__.new.call(this);
+  }).prototype = RenderBox_RelayoutWhenSystemFontsChangeMixin$36.prototype;
+  dart.applyMixin(RenderBox_RelayoutWhenSystemFontsChangeMixin$36, object.RelayoutWhenSystemFontsChangeMixin);
+  editable.RenderEditable = class RenderEditable extends RenderBox_RelayoutWhenSystemFontsChangeMixin$36 {
+    get onSelectionChanged() {
+      return this[onSelectionChanged$];
+    }
+    set onSelectionChanged(value) {
+      this[onSelectionChanged$] = value;
+    }
+    get onCaretChanged() {
+      return this[onCaretChanged$];
+    }
+    set onCaretChanged(value) {
+      this[onCaretChanged$] = value;
+    }
+    get ignorePointer() {
+      return this[ignorePointer$];
+    }
+    set ignorePointer(value) {
+      this[ignorePointer$] = value;
+    }
+    get textSelectionDelegate() {
+      return this[textSelectionDelegate$];
+    }
+    set textSelectionDelegate(value) {
+      this[textSelectionDelegate$] = value;
+    }
+    get floatingCursorAddedMargin() {
+      return this[floatingCursorAddedMargin$];
+    }
+    set floatingCursorAddedMargin(value) {
+      this[floatingCursorAddedMargin$] = value;
+    }
+    [_updateForegroundPainter](newPainter) {
+      let t0;
+      let effectivePainter = newPainter == null ? this[_builtInForegroundPainters] : new editable._CompositeRenderEditablePainter.new({painters: T.JSArrayOfRenderEditablePainter().of([this[_builtInForegroundPainters], newPainter])});
+      if (this[_foregroundRenderObject] == null) {
+        let foregroundRenderObject = new editable._RenderEditableCustomPaint.new({painter: effectivePainter});
+        this.adoptChild(foregroundRenderObject);
+        this[_foregroundRenderObject] = foregroundRenderObject;
+      } else {
+        t0 = this[_foregroundRenderObject];
+        t0 == null ? null : t0.painter = effectivePainter;
+      }
+      this[_foregroundPainter] = newPainter;
+    }
+    get foregroundPainter() {
+      return this[_foregroundPainter];
+    }
+    set foregroundPainter(newPainter) {
+      if (dart.equals(newPainter, this[_foregroundPainter])) return;
+      this[_updateForegroundPainter](newPainter);
+    }
+    [_updatePainter](newPainter) {
+      let t0;
+      let effectivePainter = newPainter == null ? this[_builtInPainters] : new editable._CompositeRenderEditablePainter.new({painters: T.JSArrayOfRenderEditablePainter().of([this[_builtInPainters], newPainter])});
+      if (this[_backgroundRenderObject] == null) {
+        let backgroundRenderObject = new editable._RenderEditableCustomPaint.new({painter: effectivePainter});
+        this.adoptChild(backgroundRenderObject);
+        this[_backgroundRenderObject] = backgroundRenderObject;
+      } else {
+        t0 = this[_backgroundRenderObject];
+        t0 == null ? null : t0.painter = effectivePainter;
+      }
+      this[_painter] = newPainter;
+    }
+    get painter() {
+      return this[_painter];
+    }
+    set painter(newPainter) {
+      if (dart.equals(newPainter, this[_painter])) return;
+      this[_updatePainter](newPainter);
+    }
+    get [_caretPainter]() {
+      let t1, t0;
+      t0 = this[__RenderEditable__caretPainter];
+      return t0 == null ? (t1 = new editable._FloatingCursorPainter.new(dart.bind(this, _onCaretChanged)), this[__RenderEditable__caretPainter] == null ? this[__RenderEditable__caretPainter] = t1 : dart.throw(new _internal.LateError.fieldADI("_caretPainter"))) : t0;
+    }
+    get [_builtInForegroundPainters]() {
+      let t0;
+      t0 = this[_cachedBuiltInForegroundPainters];
+      return t0 == null ? this[_cachedBuiltInForegroundPainters] = this[_createBuiltInForegroundPainters]() : t0;
+    }
+    [_createBuiltInForegroundPainters]() {
+      return new editable._CompositeRenderEditablePainter.new({painters: (() => {
+          let t0 = T.JSArrayOfRenderEditablePainter().of([]);
+          if (this.paintCursorAboveText) t0[$add](this[_caretPainter]);
+          return t0;
+        })()});
+    }
+    get [_builtInPainters]() {
+      let t1;
+      t1 = this[_cachedBuiltInPainters];
+      return t1 == null ? this[_cachedBuiltInPainters] = this[_createBuiltInPainters]() : t1;
+    }
+    [_createBuiltInPainters]() {
+      return new editable._CompositeRenderEditablePainter.new({painters: (() => {
+          let t1 = T.JSArrayOfRenderEditablePainter().of([this[_autocorrectHighlightPainter], this[_selectionPainter]]);
+          if (!this.paintCursorAboveText) t1[$add](this[_caretPainter]);
+          return t1;
+        })()});
+    }
+    [_onCaretChanged](caretRect) {
+      let t2;
+      if (!dart.equals(this[_lastCaretRect], caretRect)) {
+        t2 = this.onCaretChanged;
+        t2 == null ? null : t2(caretRect);
+      }
+      this[_lastCaretRect] = this.onCaretChanged == null ? null : caretRect;
+    }
+    get textHeightBehavior() {
+      return this[_textPainter].textHeightBehavior;
+    }
+    set textHeightBehavior(value) {
+      if (dart.equals(this[_textPainter].textHeightBehavior, value)) return;
+      this[_textPainter].textHeightBehavior = value;
+      this.markNeedsTextLayout();
+    }
+    get textWidthBasis() {
+      return this[_textPainter].textWidthBasis;
+    }
+    set textWidthBasis(value) {
+      if (!(value !== null)) dart.assertFailed(null, I[0], 425, 12, "value != null");
+      if (this[_textPainter].textWidthBasis === value) return;
+      this[_textPainter].textWidthBasis = value;
+      this.markNeedsTextLayout();
+    }
+    get devicePixelRatio() {
+      return this[_devicePixelRatio];
+    }
+    set devicePixelRatio(value) {
+      if (this.devicePixelRatio === value) return;
+      this[_devicePixelRatio] = value;
+      this.markNeedsTextLayout();
+    }
+    get obscuringCharacter() {
+      return this[_obscuringCharacter];
+    }
+    set obscuringCharacter(value) {
+      if (this[_obscuringCharacter] === value) {
+        return;
+      }
+      if (!(value !== null && extensions['StringCharacters|get#characters'](value)[$length] === 1)) dart.assertFailed(null, I[0], 453, 12, "value != null && value.characters.length == 1");
+      this[_obscuringCharacter] = value;
+      this.markNeedsLayout();
+    }
+    get obscureText() {
+      return this[_obscureText];
+    }
+    set obscureText(value) {
+      if (this[_obscureText] === value) return;
+      this[_obscureText] = value;
+      this.markNeedsSemanticsUpdate();
+    }
+    get selectionHeightStyle() {
+      return this[_selectionPainter].selectionHeightStyle;
+    }
+    set selectionHeightStyle(value) {
+      this[_selectionPainter].selectionHeightStyle = value;
+    }
+    get selectionWidthStyle() {
+      return this[_selectionPainter].selectionWidthStyle;
+    }
+    set selectionWidthStyle(value) {
+      this[_selectionPainter].selectionWidthStyle = value;
+    }
+    get selectionStartInViewport() {
+      return this[_selectionStartInViewport];
+    }
+    get selectionEndInViewport() {
+      return this[_selectionEndInViewport];
+    }
+    [_updateSelectionExtentsVisibility](effectiveOffset) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 519, 12, "selection != null");
+      let visibleRegion = ui.Offset.zero['&'](this.size);
+      let startOffset = this[_textPainter].getOffsetForCaret(new ui.TextPosition.new({offset: dart.nullCheck(this.selection).start, affinity: dart.nullCheck(this.selection).affinity}), this[_caretPrototype]);
+      this[_selectionStartInViewport].value = visibleRegion.inflate(0.5).contains(startOffset['+'](effectiveOffset));
+      let endOffset = this[_textPainter].getOffsetForCaret(new ui.TextPosition.new({offset: dart.nullCheck(this.selection).end, affinity: dart.nullCheck(this.selection).affinity}), this[_caretPrototype]);
+      this[_selectionEndInViewport].value = visibleRegion.inflate(0.5).contains(endOffset['+'](effectiveOffset));
+    }
+    [_setTextEditingValue](newValue, cause) {
+      this.textSelectionDelegate.textEditingValue = newValue;
+      this.textSelectionDelegate.userUpdateTextEditingValue(newValue, cause);
+    }
+    [_setSelection](nextSelection, cause) {
+      if (nextSelection.isValid) {
+        let textLength = this.textSelectionDelegate.textEditingValue.text.length;
+        nextSelection = nextSelection.copyWith({baseOffset: math.min(core.int, nextSelection.baseOffset, textLength), extentOffset: math.min(core.int, nextSelection.extentOffset, textLength)});
+      }
+      this[_handleSelectionChange](nextSelection, cause);
+      this[_setTextEditingValue](this.textSelectionDelegate.textEditingValue.copyWith({selection: nextSelection}), cause);
+    }
+    [_handleSelectionChange](nextSelection, cause) {
+      let t2;
+      let focusingEmpty = nextSelection.baseOffset === 0 && nextSelection.extentOffset === 0 && !this.hasFocus;
+      if (nextSelection._equals(this.selection) && cause !== text_input.SelectionChangedCause.keyboard && !focusingEmpty) {
+        return;
+      }
+      t2 = this.onSelectionChanged;
+      t2 == null ? null : t2(nextSelection, this, cause);
+    }
+    [_handleKeyEvent](keyEvent) {
+      if (true) {
+        return;
+      }
+      if (!raw_keyboard.RawKeyDownEvent.is(keyEvent)) return;
+      let keysPressed = keyboard_key.LogicalKeyboardKey.collapseSynonyms(raw_keyboard.RawKeyboard.instance.keysPressed);
+      let key = keyEvent.logicalKey;
+      let isMacOS = raw_keyboard_macos.RawKeyEventDataMacOs.is(keyEvent.data);
+      if (!editable.RenderEditable._nonModifierKeys.contains(key) || keysPressed.difference(isMacOS ? editable.RenderEditable._macOsModifierKeys : editable.RenderEditable._modifierKeys)[$length] > 1 || keysPressed.difference(editable.RenderEditable._interestingKeys)[$isNotEmpty]) {
+        return;
+      }
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 666, 12, "selection != null");
+      let isShortcutModifierPressed = isMacOS ? keyEvent.isMetaPressed : keyEvent.isControlPressed;
+      if (isShortcutModifierPressed && editable.RenderEditable._shortcutKeys.contains(key)) {
+        this[_handleShortcuts](key);
+      } else if (key._equals(keyboard_key.LogicalKeyboardKey.delete)) {
+        this[_handleDelete]({forward: true});
+      } else if (key._equals(keyboard_key.LogicalKeyboardKey.backspace)) {
+        this[_handleDelete]({forward: false});
+      }
+    }
+    static nextCharacter(index, string, includeWhitespace = true) {
+      if (!(index >= 0 && index <= string.length)) dart.assertFailed(null, I[0], 693, 12, "index >= 0 && index <= string.length");
+      if (index === string.length) {
+        return string.length;
+      }
+      let count = 0;
+      let remaining = extensions['StringCharacters|get#characters'](string).skipWhile(dart.fn(currentString => {
+        if (count <= index) {
+          count = count + currentString.length;
+          return true;
+        }
+        if (includeWhitespace) {
+          return false;
+        }
+        return editable._isWhitespace(currentString[$codeUnitAt](0));
+      }, T.StringTobool()));
+      return string.length - remaining.toString().length;
+    }
+    static previousCharacter(index, string, includeWhitespace = true) {
+      let t2;
+      if (!(index >= 0 && index <= string.length)) dart.assertFailed(null, I[0], 725, 12, "index >= 0 && index <= string.length");
+      if (index === 0) {
+        return 0;
+      }
+      let count = 0;
+      let lastNonWhitespace = null;
+      for (let currentString of extensions['StringCharacters|get#characters'](string)) {
+        if (!includeWhitespace && !editable._isWhitespace(extensions['StringCharacters|get#characters'](currentString)[$first][$toString]()[$codeUnitAt](0))) {
+          lastNonWhitespace = count;
+        }
+        if (count + currentString.length >= index) {
+          return includeWhitespace ? count : (t2 = lastNonWhitespace, t2 == null ? 0 : t2);
+        }
+        count = count + currentString.length;
+      }
+      return 0;
+    }
+    static _moveGivenSelectionLeft(selection, text) {
+      if (selection.isCollapsed && selection.extentOffset <= 0) {
+        return selection;
+      }
+      let previousExtent = null;
+      if (selection.start !== selection.end) {
+        previousExtent = selection.start;
+      } else {
+        previousExtent = editable.RenderEditable.previousCharacter(selection.extentOffset, text);
+      }
+      let newSelection = selection.copyWith({extentOffset: previousExtent});
+      let newOffset = newSelection.extentOffset;
+      return new text_editing.TextSelection.fromPosition(new ui.TextPosition.new({offset: newOffset}));
+    }
+    static _moveGivenSelectionRight(selection, text) {
+      if (selection.isCollapsed && selection.extentOffset >= text.length) {
+        return selection;
+      }
+      let nextExtent = null;
+      if (selection.start !== selection.end) {
+        nextExtent = selection.end;
+      } else {
+        nextExtent = editable.RenderEditable.nextCharacter(selection.extentOffset, text);
+      }
+      let nextSelection = selection.copyWith({extentOffset: nextExtent});
+      let newOffset = nextSelection.extentOffset;
+      newOffset = nextSelection.baseOffset > nextSelection.extentOffset ? nextSelection.baseOffset : nextSelection.extentOffset;
+      return new text_editing.TextSelection.fromPosition(new ui.TextPosition.new({offset: newOffset}));
+    }
+    static _getLeftByWord(textPainter, offset, includeWhitespace = true) {
+      if (offset <= 0) {
+        return offset;
+      }
+      if (offset === 1) {
+        return 0;
+      }
+      let text = dart.nullCheck(textPainter.text).toPlainText();
+      let startPoint = editable.RenderEditable.previousCharacter(offset, text, includeWhitespace);
+      let word = textPainter.getWordBoundary(new ui.TextPosition.new({offset: startPoint}));
+      return word.start;
+    }
+    static _getRightByWord(textPainter, offset, includeWhitespace = true) {
+      let text = dart.nullCheck(textPainter.text).toPlainText();
+      if (offset === text.length) {
+        return offset;
+      }
+      if (offset === text.length - 1 || offset === text.length) {
+        return text.length;
+      }
+      let startPoint = includeWhitespace || !editable._isWhitespace(text[$codeUnitAt](offset)) ? offset : editable.RenderEditable.nextCharacter(offset, text, includeWhitespace);
+      let nextWord = textPainter.getWordBoundary(new ui.TextPosition.new({offset: startPoint}));
+      return nextWord.end;
+    }
+    static _extendGivenSelectionLeftByWord(textPainter, selection, includeWhitespace = true, stopAtReversal = false) {
+      if (selection.isCollapsed && selection.extentOffset <= 0) {
+        return selection;
+      }
+      let leftOffset = editable.RenderEditable._getLeftByWord(textPainter, selection.extentOffset, includeWhitespace);
+      if (stopAtReversal && selection.extentOffset > selection.baseOffset && leftOffset < selection.baseOffset) {
+        return selection.copyWith({extentOffset: selection.baseOffset});
+      }
+      return selection.copyWith({extentOffset: leftOffset});
+    }
+    static _extendGivenSelectionRightByWord(textPainter, selection, includeWhitespace = true, stopAtReversal = false) {
+      let text = dart.nullCheck(textPainter.text).toPlainText();
+      if (selection.isCollapsed && selection.extentOffset === text.length) {
+        return selection;
+      }
+      let rightOffset = editable.RenderEditable._getRightByWord(textPainter, selection.extentOffset, includeWhitespace);
+      if (stopAtReversal && selection.baseOffset > selection.extentOffset && rightOffset > selection.baseOffset) {
+        return selection.copyWith({extentOffset: selection.baseOffset});
+      }
+      return selection.copyWith({extentOffset: rightOffset});
+    }
+    static _moveGivenSelectionLeftByWord(textPainter, selection, includeWhitespace = true) {
+      if (selection.isCollapsed && selection.extentOffset <= 0) {
+        return selection;
+      }
+      let leftOffset = editable.RenderEditable._getLeftByWord(textPainter, selection.extentOffset, includeWhitespace);
+      return selection.copyWith({baseOffset: leftOffset, extentOffset: leftOffset});
+    }
+    static _moveGivenSelectionRightByWord(textPainter, selection, includeWhitespace = true) {
+      let text = dart.nullCheck(textPainter.text).toPlainText();
+      if (selection.isCollapsed && selection.extentOffset === text.length) {
+        return selection;
+      }
+      let rightOffset = editable.RenderEditable._getRightByWord(textPainter, selection.extentOffset, includeWhitespace);
+      return selection.copyWith({baseOffset: rightOffset, extentOffset: rightOffset});
+    }
+    static _extendGivenSelectionLeft(selection, text, includeWhitespace = true) {
+      if (selection.extentOffset <= 0) {
+        return selection;
+      }
+      let previousExtent = editable.RenderEditable.previousCharacter(selection.extentOffset, text, includeWhitespace);
+      return selection.copyWith({extentOffset: previousExtent});
+    }
+    static _extendGivenSelectionRight(selection, text, includeWhitespace = true) {
+      if (selection.extentOffset >= text.length) {
+        return selection;
+      }
+      let nextExtent = editable.RenderEditable.nextCharacter(selection.extentOffset, text, includeWhitespace);
+      return selection.copyWith({extentOffset: nextExtent});
+    }
+    [_extendSelectionToEnd](cause) {
+      if (dart.nullCheck(this.selection).extentOffset === this[_plainText].length) {
+        return;
+      }
+      if (!this.selectionEnabled) {
+        return this.moveSelectionToEnd(cause);
+      }
+      let nextSelection = dart.nullCheck(this.selection).copyWith({extentOffset: this[_plainText].length});
+      this[_setSelection](nextSelection, cause);
+    }
+    [_extendSelectionToStart](cause) {
+      if (dart.nullCheck(this.selection).extentOffset === 0) {
+        return;
+      }
+      if (!this.selectionEnabled) {
+        return this.moveSelectionToStart(cause);
+      }
+      let nextSelection = dart.nullCheck(this.selection).copyWith({extentOffset: 0});
+      this[_setSelection](nextSelection, cause);
+    }
+    [_getTextPositionVertical](textOffset, verticalOffset) {
+      let caretOffset = this[_textPainter].getOffsetForCaret(new ui.TextPosition.new({offset: textOffset}), this[_caretPrototype]);
+      let caretOffsetTranslated = caretOffset.translate(0.0, verticalOffset);
+      return this[_textPainter].getPositionForOffset(caretOffsetTranslated);
+    }
+    [_getTextPositionAbove](offset) {
+      let preferredLineHeight = this[_textPainter].preferredLineHeight;
+      let verticalOffset = -0.5 * preferredLineHeight;
+      return this[_getTextPositionVertical](offset, verticalOffset);
+    }
+    [_getTextPositionBelow](offset) {
+      let preferredLineHeight = this[_textPainter].preferredLineHeight;
+      let verticalOffset = 1.5 * preferredLineHeight;
+      return this[_getTextPositionVertical](offset, verticalOffset);
+    }
+    extendSelectionDown(cause) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1033, 12, "selection != null");
+      if (dart.nullCheck(this.selection).isCollapsed && dart.nullCheck(this.selection).extentOffset >= this[_plainText].length) {
+        return;
+      }
+      if (!this.selectionEnabled) {
+        return this.moveSelectionDown(cause);
+      }
+      let positionBelow = this[_getTextPositionBelow](dart.nullCheck(this.selection).extentOffset);
+      let nextSelection = null;
+      function nextSelection$35get() {
+        let t3;
+        t3 = nextSelection;
+        return t3 == null ? dart.throw(new _internal.LateError.localNI("nextSelection")) : t3;
+      }
+      dart.fn(nextSelection$35get, T.VoidToTextSelection());
+      function nextSelection$35set(t4) {
+        if (nextSelection == null)
+          return nextSelection = t4;
+        else
+          dart.throw(new _internal.LateError.localAI("nextSelection"));
+      }
+      dart.fn(nextSelection$35set, T.TextSelectionTodynamic());
+      if (positionBelow.offset === dart.nullCheck(this.selection).extentOffset) {
+        nextSelection$35set(dart.nullCheck(this.selection).copyWith({extentOffset: this[_plainText].length}));
+        this[_wasSelectingVerticallyWithKeyboard] = true;
+      } else if (this[_wasSelectingVerticallyWithKeyboard]) {
+        nextSelection$35set(dart.nullCheck(this.selection).copyWith({extentOffset: this[_cursorResetLocation]}));
+        this[_wasSelectingVerticallyWithKeyboard] = false;
+      } else {
+        nextSelection$35set(dart.nullCheck(this.selection).copyWith({extentOffset: positionBelow.offset}));
+        this[_cursorResetLocation] = nextSelection$35get().extentOffset;
+      }
+      this[_setSelection](nextSelection$35get(), cause);
+    }
+    expandSelectionToEnd(cause) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1081, 12, "selection != null");
+      if (dart.nullCheck(this.selection).extentOffset === this[_plainText].length) {
+        return;
+      }
+      if (!this.selectionEnabled) {
+        return this.moveSelectionToEnd(cause);
+      }
+      let firstOffset = math.max(core.int, 0, math.min(core.int, dart.nullCheck(this.selection).baseOffset, dart.nullCheck(this.selection).extentOffset));
+      let nextSelection = new text_editing.TextSelection.new({baseOffset: firstOffset, extentOffset: this[_plainText].length});
+      this[_setSelection](nextSelection, cause);
+    }
+    extendSelectionLeft(cause) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1113, 12, "selection != null");
+      if (!this.selectionEnabled) {
+        return this.moveSelectionLeft(cause);
+      }
+      let nextSelection = editable.RenderEditable._extendGivenSelectionLeft(dart.nullCheck(this.selection), this[_plainText]);
+      if (nextSelection._equals(this.selection)) {
+        return;
+      }
+      let distance = dart.nullCheck(this.selection).extentOffset - nextSelection.extentOffset;
+      this[_cursorResetLocation] = this[_cursorResetLocation] - distance;
+      this[_setSelection](nextSelection, cause);
+    }
+    extendSelectionLeftByLine(cause) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1150, 12, "selection != null");
+      if (!this.selectionEnabled) {
+        return this.moveSelectionLeftByLine(cause);
+      }
+      let startPoint = editable.RenderEditable.previousCharacter(dart.nullCheck(this.selection).extentOffset, this[_plainText], false);
+      let selectedLine = this[_getLineAtOffset](new ui.TextPosition.new({offset: startPoint}));
+      let nextSelection = null;
+      function nextSelection$35get() {
+        let t7;
+        t7 = nextSelection;
+        return t7 == null ? dart.throw(new _internal.LateError.localNI("nextSelection")) : t7;
+      }
+      dart.fn(nextSelection$35get, T.VoidToTextSelection());
+      function nextSelection$35set(t8) {
+        if (nextSelection == null)
+          return nextSelection = t8;
+        else
+          dart.throw(new _internal.LateError.localAI("nextSelection"));
+      }
+      dart.fn(nextSelection$35set, T.TextSelectionTodynamic());
+      if (dart.nullCheck(this.selection).extentOffset > dart.nullCheck(this.selection).baseOffset) {
+        nextSelection$35set(dart.nullCheck(this.selection).copyWith({extentOffset: dart.nullCheck(this.selection).baseOffset}));
+      } else {
+        nextSelection$35set(dart.nullCheck(this.selection).copyWith({extentOffset: selectedLine.baseOffset}));
+      }
+      this[_setSelection](nextSelection$35get(), cause);
+    }
+    extendSelectionRight(cause) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1189, 12, "selection != null");
+      if (!this.selectionEnabled) {
+        return this.moveSelectionRight(cause);
+      }
+      let nextSelection = editable.RenderEditable._extendGivenSelectionRight(dart.nullCheck(this.selection), this[_plainText]);
+      if (nextSelection._equals(this.selection)) {
+        return;
+      }
+      let distance = nextSelection.extentOffset - dart.nullCheck(this.selection).extentOffset;
+      this[_cursorResetLocation] = this[_cursorResetLocation] + distance;
+      this[_setSelection](nextSelection, cause);
+    }
+    extendSelectionRightByLine(cause) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1226, 12, "selection != null");
+      if (!this.selectionEnabled) {
+        return this.moveSelectionRightByLine(cause);
+      }
+      let startPoint = editable.RenderEditable.nextCharacter(dart.nullCheck(this.selection).extentOffset, this[_plainText], false);
+      let selectedLine = this[_getLineAtOffset](new ui.TextPosition.new({offset: startPoint}));
+      let nextSelection = null;
+      function nextSelection$35get() {
+        let t11;
+        t11 = nextSelection;
+        return t11 == null ? dart.throw(new _internal.LateError.localNI("nextSelection")) : t11;
+      }
+      dart.fn(nextSelection$35get, T.VoidToTextSelection());
+      function nextSelection$35set(t12) {
+        if (nextSelection == null)
+          return nextSelection = t12;
+        else
+          dart.throw(new _internal.LateError.localAI("nextSelection"));
+      }
+      dart.fn(nextSelection$35set, T.TextSelectionTodynamic());
+      if (dart.nullCheck(this.selection).extentOffset < dart.nullCheck(this.selection).baseOffset) {
+        nextSelection$35set(dart.nullCheck(this.selection).copyWith({extentOffset: dart.nullCheck(this.selection).baseOffset}));
+      } else {
+        nextSelection$35set(dart.nullCheck(this.selection).copyWith({extentOffset: selectedLine.extentOffset}));
+      }
+      this[_setSelection](nextSelection$35get(), cause);
+    }
+    extendSelectionUp(cause) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1263, 12, "selection != null");
+      if (dart.nullCheck(this.selection).isCollapsed && dart.nullCheck(this.selection).extentOffset <= 0.0) {
+        return;
+      }
+      if (!this.selectionEnabled) {
+        return this.moveSelectionUp(cause);
+      }
+      let positionAbove = this[_getTextPositionAbove](dart.nullCheck(this.selection).extentOffset);
+      let nextSelection = null;
+      function nextSelection$35get() {
+        let t15;
+        t15 = nextSelection;
+        return t15 == null ? dart.throw(new _internal.LateError.localNI("nextSelection")) : t15;
+      }
+      dart.fn(nextSelection$35get, T.VoidToTextSelection());
+      function nextSelection$35set(t16) {
+        if (nextSelection == null)
+          return nextSelection = t16;
+        else
+          dart.throw(new _internal.LateError.localAI("nextSelection"));
+      }
+      dart.fn(nextSelection$35set, T.TextSelectionTodynamic());
+      if (positionAbove.offset === dart.nullCheck(this.selection).extentOffset) {
+        nextSelection$35set(dart.nullCheck(this.selection).copyWith({extentOffset: 0}));
+        this[_wasSelectingVerticallyWithKeyboard] = true;
+      } else if (this[_wasSelectingVerticallyWithKeyboard]) {
+        nextSelection$35set(dart.nullCheck(this.selection).copyWith({baseOffset: dart.nullCheck(this.selection).baseOffset, extentOffset: this[_cursorResetLocation]}));
+        this[_wasSelectingVerticallyWithKeyboard] = false;
+      } else {
+        nextSelection$35set(dart.nullCheck(this.selection).copyWith({baseOffset: dart.nullCheck(this.selection).baseOffset, extentOffset: positionAbove.offset}));
+        this[_cursorResetLocation] = nextSelection$35get().extentOffset;
+      }
+      this[_setSelection](nextSelection$35get(), cause);
+    }
+    expandSelectionToStart(cause) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1314, 12, "selection != null");
+      if (dart.nullCheck(this.selection).extentOffset === 0) {
+        return;
+      }
+      if (!this.selectionEnabled) {
+        return this.moveSelectionToStart(cause);
+      }
+      let lastOffset = math.max(core.int, 0, math.max(core.int, dart.nullCheck(this.selection).baseOffset, dart.nullCheck(this.selection).extentOffset));
+      let nextSelection = new text_editing.TextSelection.new({baseOffset: lastOffset, extentOffset: 0});
+      this[_setSelection](nextSelection, cause);
+    }
+    expandSelectionLeftByLine(cause) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1350, 12, "selection != null");
+      if (!this.selectionEnabled) {
+        return this.moveSelectionLeftByLine(cause);
+      }
+      let firstOffset = math.min(core.int, dart.nullCheck(this.selection).baseOffset, dart.nullCheck(this.selection).extentOffset);
+      let startPoint = editable.RenderEditable.previousCharacter(firstOffset, this[_plainText], false);
+      let selectedLine = this[_getLineAtOffset](new ui.TextPosition.new({offset: startPoint}));
+      let nextSelection = null;
+      function nextSelection$35get() {
+        let t19;
+        t19 = nextSelection;
+        return t19 == null ? dart.throw(new _internal.LateError.localNI("nextSelection")) : t19;
+      }
+      dart.fn(nextSelection$35get, T.VoidToTextSelection());
+      function nextSelection$35set(t20) {
+        if (nextSelection == null)
+          return nextSelection = t20;
+        else
+          dart.throw(new _internal.LateError.localAI("nextSelection"));
+      }
+      dart.fn(nextSelection$35set, T.TextSelectionTodynamic());
+      if (dart.nullCheck(this.selection).extentOffset <= dart.nullCheck(this.selection).baseOffset) {
+        nextSelection$35set(dart.nullCheck(this.selection).copyWith({extentOffset: selectedLine.baseOffset}));
+      } else {
+        nextSelection$35set(dart.nullCheck(this.selection).copyWith({baseOffset: selectedLine.baseOffset}));
+      }
+      this[_setSelection](nextSelection$35get(), cause);
+    }
+    extendSelectionLeftByWord(cause, includeWhitespace = true, stopAtReversal = false) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1395, 12, "selection != null");
+      if (this.obscureText) {
+        return this[_extendSelectionToStart](cause);
+      }
+      if (!(this[_textLayoutLastMaxWidth] === this.constraints.maxWidth && this[_textLayoutLastMinWidth] === this.constraints.minWidth)) dart.assertFailed("Last width (" + dart.str(this[_textLayoutLastMinWidth]) + ", " + dart.str(this[_textLayoutLastMaxWidth]) + ") not the same as max width constraint (" + dart.str(this.constraints.minWidth) + ", " + dart.str(this.constraints.maxWidth) + ").", I[0], 1403, 7, "_textLayoutLastMaxWidth == constraints.maxWidth &&\r\n      _textLayoutLastMinWidth == constraints.minWidth");
+      let nextSelection = editable.RenderEditable._extendGivenSelectionLeftByWord(this[_textPainter], dart.nullCheck(this.selection), includeWhitespace, stopAtReversal);
+      if (nextSelection._equals(this.selection)) {
+        return;
+      }
+      this[_setSelection](nextSelection, cause);
+    }
+    extendSelectionRightByWord(cause, includeWhitespace = true, stopAtReversal = false) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1435, 12, "selection != null");
+      if (this.obscureText) {
+        return this[_extendSelectionToEnd](cause);
+      }
+      if (!(this[_textLayoutLastMaxWidth] === this.constraints.maxWidth && this[_textLayoutLastMinWidth] === this.constraints.minWidth)) dart.assertFailed("Last width (" + dart.str(this[_textLayoutLastMinWidth]) + ", " + dart.str(this[_textLayoutLastMaxWidth]) + ") not the same as max width constraint (" + dart.str(this.constraints.minWidth) + ", " + dart.str(this.constraints.maxWidth) + ").", I[0], 1443, 7, "_textLayoutLastMaxWidth == constraints.maxWidth &&\r\n      _textLayoutLastMinWidth == constraints.minWidth");
+      let nextSelection = editable.RenderEditable._extendGivenSelectionRightByWord(this[_textPainter], dart.nullCheck(this.selection), includeWhitespace, stopAtReversal);
+      if (nextSelection._equals(this.selection)) {
+        return;
+      }
+      this[_setSelection](nextSelection, cause);
+    }
+    expandSelectionRightByLine(cause) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1475, 12, "selection != null");
+      if (!this.selectionEnabled) {
+        return this.moveSelectionRightByLine(cause);
+      }
+      let lastOffset = math.max(core.int, dart.nullCheck(this.selection).baseOffset, dart.nullCheck(this.selection).extentOffset);
+      let startPoint = editable.RenderEditable.nextCharacter(lastOffset, this[_plainText], false);
+      let selectedLine = this[_getLineAtOffset](new ui.TextPosition.new({offset: startPoint}));
+      let nextSelection = null;
+      function nextSelection$35get() {
+        let t23;
+        t23 = nextSelection;
+        return t23 == null ? dart.throw(new _internal.LateError.localNI("nextSelection")) : t23;
+      }
+      dart.fn(nextSelection$35get, T.VoidToTextSelection());
+      function nextSelection$35set(t24) {
+        if (nextSelection == null)
+          return nextSelection = t24;
+        else
+          dart.throw(new _internal.LateError.localAI("nextSelection"));
+      }
+      dart.fn(nextSelection$35set, T.TextSelectionTodynamic());
+      if (dart.nullCheck(this.selection).extentOffset >= dart.nullCheck(this.selection).baseOffset) {
+        nextSelection$35set(dart.nullCheck(this.selection).copyWith({extentOffset: selectedLine.extentOffset}));
+      } else {
+        nextSelection$35set(dart.nullCheck(this.selection).copyWith({baseOffset: selectedLine.extentOffset}));
+      }
+      this[_setSelection](nextSelection$35get(), cause);
+    }
+    moveSelectionDown(cause) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1507, 12, "selection != null");
+      if (dart.nullCheck(this.selection).isCollapsed && dart.nullCheck(this.selection).extentOffset >= this[_plainText].length) {
+        return;
+      }
+      let positionBelow = this[_getTextPositionBelow](dart.nullCheck(this.selection).extentOffset);
+      let nextSelection = null;
+      function nextSelection$35get() {
+        let t27;
+        t27 = nextSelection;
+        return t27 == null ? dart.throw(new _internal.LateError.localNI("nextSelection")) : t27;
+      }
+      dart.fn(nextSelection$35get, T.VoidToTextSelection());
+      function nextSelection$35set(t28) {
+        if (nextSelection == null)
+          return nextSelection = t28;
+        else
+          dart.throw(new _internal.LateError.localAI("nextSelection"));
+      }
+      dart.fn(nextSelection$35set, T.TextSelectionTodynamic());
+      if (positionBelow.offset === dart.nullCheck(this.selection).extentOffset) {
+        nextSelection$35set(dart.nullCheck(this.selection).copyWith({baseOffset: this[_plainText].length, extentOffset: this[_plainText].length}));
+        this[_wasSelectingVerticallyWithKeyboard] = false;
+      } else {
+        nextSelection$35set(new text_editing.TextSelection.fromPosition(positionBelow));
+        this[_cursorResetLocation] = nextSelection$35get().extentOffset;
+      }
+      this[_setSelection](nextSelection$35get(), cause);
+    }
+    moveSelectionLeft(cause) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1540, 12, "selection != null");
+      let nextSelection = editable.RenderEditable._moveGivenSelectionLeft(dart.nullCheck(this.selection), this[_plainText]);
+      if (nextSelection._equals(this.selection)) {
+        return;
+      }
+      this[_cursorResetLocation] = this[_cursorResetLocation] - (dart.nullCheck(this.selection).extentOffset - nextSelection.extentOffset);
+      this[_setSelection](nextSelection, cause);
+    }
+    moveSelectionLeftByLine(cause) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1562, 12, "selection != null");
+      let previousPoint = editable.RenderEditable.previousCharacter(dart.nullCheck(this.selection).extentOffset, this[_plainText], true);
+      let line = this[_getLineAtOffset](new ui.TextPosition.new({offset: previousPoint}));
+      if (line.extentOffset === previousPoint) {
+        return;
+      }
+      let startPoint = editable.RenderEditable.previousCharacter(dart.nullCheck(this.selection).extentOffset, this[_plainText], false);
+      let selectedLine = this[_getLineAtOffset](new ui.TextPosition.new({offset: startPoint}));
+      let nextSelection = new text_editing.TextSelection.collapsed({offset: selectedLine.baseOffset});
+      this[_setSelection](nextSelection, cause);
+    }
+    moveSelectionLeftByWord(cause, includeWhitespace = true) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1597, 12, "selection != null");
+      if (this.obscureText) {
+        return this.moveSelectionToStart(cause);
+      }
+      if (!(this[_textLayoutLastMaxWidth] === this.constraints.maxWidth && this[_textLayoutLastMinWidth] === this.constraints.minWidth)) dart.assertFailed("Last width (" + dart.str(this[_textLayoutLastMinWidth]) + ", " + dart.str(this[_textLayoutLastMaxWidth]) + ") not the same as max width constraint (" + dart.str(this.constraints.minWidth) + ", " + dart.str(this.constraints.maxWidth) + ").", I[0], 1605, 7, "_textLayoutLastMaxWidth == constraints.maxWidth &&\r\n      _textLayoutLastMinWidth == constraints.minWidth");
+      let nextSelection = editable.RenderEditable._moveGivenSelectionLeftByWord(this[_textPainter], dart.nullCheck(this.selection), includeWhitespace);
+      if (nextSelection._equals(this.selection)) {
+        return;
+      }
+      this[_setSelection](nextSelection, cause);
+    }
+    moveSelectionRight(cause) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1628, 12, "selection != null");
+      let nextSelection = editable.RenderEditable._moveGivenSelectionRight(dart.nullCheck(this.selection), this[_plainText]);
+      if (nextSelection._equals(this.selection)) {
+        return;
+      }
+      this[_setSelection](nextSelection, cause);
+    }
+    moveSelectionRightByLine(cause) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1649, 12, "selection != null");
+      let currentLine = this[_getLineAtOffset](new ui.TextPosition.new({offset: dart.nullCheck(this.selection).extentOffset}));
+      if (currentLine.extentOffset === dart.nullCheck(this.selection).extentOffset) {
+        return;
+      }
+      let startPoint = editable.RenderEditable.nextCharacter(dart.nullCheck(this.selection).extentOffset, this[_plainText], false);
+      let selectedLine = this[_getLineAtOffset](new ui.TextPosition.new({offset: startPoint}));
+      let nextSelection = new text_editing.TextSelection.collapsed({offset: selectedLine.extentOffset});
+      this[_setSelection](nextSelection, cause);
+    }
+    moveSelectionRightByWord(cause, includeWhitespace = true) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1685, 12, "selection != null");
+      if (this.obscureText) {
+        return this.moveSelectionToEnd(cause);
+      }
+      if (!(this[_textLayoutLastMaxWidth] === this.constraints.maxWidth && this[_textLayoutLastMinWidth] === this.constraints.minWidth)) dart.assertFailed("Last width (" + dart.str(this[_textLayoutLastMinWidth]) + ", " + dart.str(this[_textLayoutLastMaxWidth]) + ") not the same as max width constraint (" + dart.str(this.constraints.minWidth) + ", " + dart.str(this.constraints.maxWidth) + ").", I[0], 1693, 7, "_textLayoutLastMaxWidth == constraints.maxWidth &&\r\n      _textLayoutLastMinWidth == constraints.minWidth");
+      let nextSelection = editable.RenderEditable._moveGivenSelectionRightByWord(this[_textPainter], dart.nullCheck(this.selection), includeWhitespace);
+      if (nextSelection._equals(this.selection)) {
+        return;
+      }
+      this[_setSelection](nextSelection, cause);
+    }
+    moveSelectionToEnd(cause) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1717, 12, "selection != null");
+      if (dart.nullCheck(this.selection).isCollapsed && dart.nullCheck(this.selection).extentOffset === this[_plainText].length) {
+        return;
+      }
+      let nextSelection = new text_editing.TextSelection.collapsed({offset: this[_plainText].length});
+      this[_setSelection](nextSelection, cause);
+    }
+    moveSelectionToStart(cause) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1736, 12, "selection != null");
+      if (dart.nullCheck(this.selection).isCollapsed && dart.nullCheck(this.selection).extentOffset === 0) {
+        return;
+      }
+      let nextSelection = C[9] || CT.C9;
+      this[_setSelection](nextSelection, cause);
+    }
+    moveSelectionUp(cause) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 1753, 12, "selection != null");
+      if (dart.nullCheck(this.selection).isCollapsed && dart.nullCheck(this.selection).extentOffset <= 0.0) {
+        return;
+      }
+      let positionAbove = this[_getTextPositionAbove](dart.nullCheck(this.selection).extentOffset);
+      let nextSelection = null;
+      function nextSelection$35get() {
+        let t31;
+        t31 = nextSelection;
+        return t31 == null ? dart.throw(new _internal.LateError.localNI("nextSelection")) : t31;
+      }
+      dart.fn(nextSelection$35get, T.VoidToTextSelection());
+      function nextSelection$35set(t32) {
+        if (nextSelection == null)
+          return nextSelection = t32;
+        else
+          dart.throw(new _internal.LateError.localAI("nextSelection"));
+      }
+      dart.fn(nextSelection$35set, T.TextSelectionTodynamic());
+      if (positionAbove.offset === dart.nullCheck(this.selection).extentOffset) {
+        nextSelection$35set(dart.nullCheck(this.selection).copyWith({baseOffset: 0, extentOffset: 0}));
+        this[_wasSelectingVerticallyWithKeyboard] = false;
+      } else {
+        nextSelection$35set(dart.nullCheck(this.selection).copyWith({baseOffset: positionAbove.offset, extentOffset: positionAbove.offset}));
+        this[_cursorResetLocation] = nextSelection$35get().extentOffset;
+      }
+      this[_setSelection](nextSelection$35get(), cause);
+    }
+    [_handleShortcuts](key) {
+      return async.async(dart.void, (function* _handleShortcuts() {
+        let selection = this.textSelectionDelegate.textEditingValue.selection;
+        let text = this.textSelectionDelegate.textEditingValue.text;
+        if (!(selection !== null)) dart.assertFailed(null, I[0], 1782, 12, "selection != null");
+        if (!editable.RenderEditable._shortcutKeys.contains(key)) dart.assertFailed("shortcut key " + dart.str(key) + " not recognized.", I[0], 1783, 12, "_shortcutKeys.contains(key)");
+        if (key._equals(keyboard_key.LogicalKeyboardKey.keyC)) {
+          if (!selection.isCollapsed) {
+            clipboard.Clipboard.setData(new clipboard.ClipboardData.new({text: selection.textInside(text)}));
+          }
+          return;
+        }
+        let value = null;
+        if (key._equals(keyboard_key.LogicalKeyboardKey.keyX) && !this[_readOnly]) {
+          if (!selection.isCollapsed) {
+            clipboard.Clipboard.setData(new clipboard.ClipboardData.new({text: selection.textInside(text)}));
+            value = new text_input.TextEditingValue.new({text: selection.textBefore(text) + selection.textAfter(text), selection: new text_editing.TextSelection.collapsed({offset: math.min(core.int, selection.start, selection.end)})});
+          }
+        } else if (key._equals(keyboard_key.LogicalKeyboardKey.keyV) && !this[_readOnly]) {
+          let data = (yield clipboard.Clipboard.getData("text/plain"));
+          if (data != null) {
+            value = new text_input.TextEditingValue.new({text: selection.textBefore(text) + dart.nullCheck(data.text) + selection.textAfter(text), selection: new text_editing.TextSelection.collapsed({offset: math.min(core.int, selection.start, selection.end) + dart.nullCheck(data.text).length})});
+          }
+        } else if (key._equals(keyboard_key.LogicalKeyboardKey.keyA)) {
+          value = new text_input.TextEditingValue.new({text: text, selection: selection.copyWith({baseOffset: 0, extentOffset: this.textSelectionDelegate.textEditingValue.text.length})});
+        }
+        if (value != null) {
+          this[_setTextEditingValue](value, text_input.SelectionChangedCause.keyboard);
+        }
+      }).bind(this));
+    }
+    [_handleDelete](opts) {
+      let forward = opts && 'forward' in opts ? opts.forward : null;
+      let selection = this.textSelectionDelegate.textEditingValue.selection;
+      let text = this.textSelectionDelegate.textEditingValue.text;
+      if (!(this[_selection] != null)) dart.assertFailed(null, I[0], 1831, 12, "_selection != null");
+      if (this[_readOnly] || !selection.isValid) {
+        return;
+      }
+      let textBefore = selection.textBefore(text);
+      let textAfter = selection.textAfter(text);
+      let cursorPosition = math.min(core.int, selection.start, selection.end);
+      if (selection.isCollapsed) {
+        if (!forward && textBefore[$isNotEmpty]) {
+          let characterBoundary = editable.RenderEditable.previousCharacter(textBefore.length, textBefore);
+          textBefore = textBefore[$substring](0, characterBoundary);
+          cursorPosition = characterBoundary;
+        }
+        if (forward && textAfter[$isNotEmpty]) {
+          let deleteCount = editable.RenderEditable.nextCharacter(0, textAfter);
+          textAfter = textAfter[$substring](deleteCount);
+        }
+      }
+      let newSelection = new text_editing.TextSelection.collapsed({offset: cursorPosition});
+      this[_setTextEditingValue](new text_input.TextEditingValue.new({text: textBefore + textAfter, selection: newSelection}), text_input.SelectionChangedCause.keyboard);
+    }
+    markNeedsPaint() {
+      let t34, t34$;
+      super.markNeedsPaint();
+      t34 = this[_foregroundRenderObject];
+      t34 == null ? null : t34.markNeedsPaint();
+      t34$ = this[_backgroundRenderObject];
+      t34$ == null ? null : t34$.markNeedsPaint();
+    }
+    markNeedsTextLayout() {
+      this[_textLayoutLastMaxWidth] = null;
+      this[_textLayoutLastMinWidth] = null;
+      this.markNeedsLayout();
+    }
+    systemFontsDidChange() {
+      super.systemFontsDidChange();
+      this[_textPainter].markNeedsLayout();
+      this[_textLayoutLastMaxWidth] = null;
+      this[_textLayoutLastMinWidth] = null;
+    }
+    get [_plainText]() {
+      this[_cachedPlainText] == null ? this[_cachedPlainText] = dart.nullCheck(this[_textPainter].text).toPlainText({includeSemanticsLabels: false}) : null;
+      return dart.nullCheck(this[_cachedPlainText]);
+    }
+    get text() {
+      return T.TextSpanN().as(this[_textPainter].text);
+    }
+    set text(value) {
+      if (dart.equals(this[_textPainter].text, value)) return;
+      this[_textPainter].text = value;
+      this[_cachedPlainText] = null;
+      this.markNeedsTextLayout();
+      this.markNeedsSemanticsUpdate();
+    }
+    get textAlign() {
+      return this[_textPainter].textAlign;
+    }
+    set textAlign(value) {
+      if (!(value !== null)) dart.assertFailed(null, I[0], 1914, 12, "value != null");
+      if (this[_textPainter].textAlign === value) return;
+      this[_textPainter].textAlign = value;
+      this.markNeedsTextLayout();
+    }
+    get textDirection() {
+      return dart.nullCheck(this[_textPainter].textDirection);
+    }
+    set textDirection(value) {
+      if (!(value !== null)) dart.assertFailed(null, I[0], 1939, 12, "value != null");
+      if (this[_textPainter].textDirection === value) return;
+      this[_textPainter].textDirection = value;
+      this.markNeedsTextLayout();
+      this.markNeedsSemanticsUpdate();
+    }
+    get locale() {
+      return this[_textPainter].locale;
+    }
+    set locale(value) {
+      if (dart.equals(this[_textPainter].locale, value)) return;
+      this[_textPainter].locale = value;
+      this.markNeedsTextLayout();
+    }
+    get strutStyle() {
+      return this[_textPainter].strutStyle;
+    }
+    set strutStyle(value) {
+      if (dart.equals(this[_textPainter].strutStyle, value)) return;
+      this[_textPainter].strutStyle = value;
+      this.markNeedsTextLayout();
+    }
+    get cursorColor() {
+      return this[_caretPainter].caretColor;
+    }
+    set cursorColor(value) {
+      this[_caretPainter].caretColor = value;
+    }
+    get backgroundCursorColor() {
+      return this[_caretPainter].backgroundCursorColor;
+    }
+    set backgroundCursorColor(value) {
+      this[_caretPainter].backgroundCursorColor = value;
+    }
+    get showCursor() {
+      return this[_showCursor];
+    }
+    set showCursor(value) {
+      if (!(value !== null)) dart.assertFailed(null, I[0], 1994, 12, "value != null");
+      if (this[_showCursor][$_equals](value)) return;
+      if (this.attached) this[_showCursor].removeListener(dart.bind(this, _showHideCursor));
+      this[_showCursor] = value;
+      if (this.attached) {
+        this[_showHideCursor]();
+        this[_showCursor].addListener(dart.bind(this, _showHideCursor));
+      }
+    }
+    [_showHideCursor]() {
+      this[_caretPainter].shouldPaint = this.showCursor.value;
+    }
+    get hasFocus() {
+      return this[_hasFocus];
+    }
+    set hasFocus(value) {
+      if (!(value !== null)) dart.assertFailed(null, I[0], 2015, 12, "value != null");
+      if (this[_hasFocus] === value) return;
+      this[_hasFocus] = value;
+      this.markNeedsSemanticsUpdate();
+      if (!this.attached) {
+        if (!!this[_listenerAttached]) dart.assertFailed(null, I[0], 2022, 14, "!_listenerAttached");
+        return;
+      }
+      if (this[_hasFocus]) {
+        if (!!this[_listenerAttached]) dart.assertFailed(null, I[0], 2027, 14, "!_listenerAttached");
+        raw_keyboard.RawKeyboard.instance.addListener(dart.bind(this, _handleKeyEvent));
+        this[_listenerAttached] = true;
+      } else {
+        if (!this[_listenerAttached]) dart.assertFailed(null, I[0], 2033, 14, "_listenerAttached");
+        raw_keyboard.RawKeyboard.instance.removeListener(dart.bind(this, _handleKeyEvent));
+        this[_listenerAttached] = false;
+      }
+    }
+    get forceLine() {
+      return this[_forceLine];
+    }
+    set forceLine(value) {
+      if (!(value !== null)) dart.assertFailed(null, I[0], 2045, 12, "value != null");
+      if (this[_forceLine] === value) return;
+      this[_forceLine] = value;
+      this.markNeedsLayout();
+    }
+    get readOnly() {
+      return this[_readOnly];
+    }
+    set readOnly(value) {
+      if (!(value !== null)) dart.assertFailed(null, I[0], 2056, 12, "value != null");
+      if (this[_readOnly] === value) return;
+      this[_readOnly] = value;
+      this.markNeedsSemanticsUpdate();
+    }
+    get maxLines() {
+      return this[_maxLines];
+    }
+    set maxLines(value) {
+      if (!(value == null || dart.notNull(value) > 0)) dart.assertFailed(null, I[0], 2077, 12, "value == null || value > 0");
+      if (this.maxLines == value) return;
+      this[_maxLines] = value;
+      this.markNeedsTextLayout();
+    }
+    get minLines() {
+      return this[_minLines];
+    }
+    set minLines(value) {
+      if (!(value == null || dart.notNull(value) > 0)) dart.assertFailed(null, I[0], 2089, 12, "value == null || value > 0");
+      if (this.minLines == value) return;
+      this[_minLines] = value;
+      this.markNeedsTextLayout();
+    }
+    get expands() {
+      return this[_expands];
+    }
+    set expands(value) {
+      if (!(value !== null)) dart.assertFailed(null, I[0], 2100, 12, "value != null");
+      if (this.expands === value) return;
+      this[_expands] = value;
+      this.markNeedsTextLayout();
+    }
+    get selectionColor() {
+      return this[_selectionPainter].highlightColor;
+    }
+    set selectionColor(value) {
+      this[_selectionPainter].highlightColor = value;
+    }
+    get textScaleFactor() {
+      return this[_textPainter].textScaleFactor;
+    }
+    set textScaleFactor(value) {
+      if (!(value !== null)) dart.assertFailed(null, I[0], 2119, 12, "value != null");
+      if (this[_textPainter].textScaleFactor === value) return;
+      this[_textPainter].textScaleFactor = value;
+      this.markNeedsTextLayout();
+    }
+    get selection() {
+      return this[_selection];
+    }
+    set selection(value) {
+      if (dart.equals(this[_selection], value)) return;
+      this[_selection] = value;
+      this[_selectionPainter].highlightedRange = value;
+      this.markNeedsPaint();
+      this.markNeedsSemanticsUpdate();
+    }
+    get offset() {
+      return this[_offset];
+    }
+    set offset(value) {
+      if (!(value !== null)) dart.assertFailed(null, I[0], 2151, 12, "value != null");
+      if (this[_offset][$_equals](value)) return;
+      if (this.attached) this[_offset].removeListener(dart.bind(this, 'markNeedsPaint'));
+      this[_offset] = value;
+      if (this.attached) this[_offset].addListener(dart.bind(this, 'markNeedsPaint'));
+      this.markNeedsLayout();
+    }
+    get cursorWidth() {
+      return this[_cursorWidth];
+    }
+    set cursorWidth(value) {
+      if (this[_cursorWidth] === value) return;
+      this[_cursorWidth] = value;
+      this.markNeedsLayout();
+    }
+    get cursorHeight() {
+      let t34;
+      t34 = this[_cursorHeight];
+      return t34 == null ? this.preferredLineHeight : t34;
+    }
+    set cursorHeight(value) {
+      if (this[_cursorHeight] == value) return;
+      this[_cursorHeight] = value;
+      this.markNeedsLayout();
+    }
+    get paintCursorAboveText() {
+      return this[_paintCursorOnTop];
+    }
+    set paintCursorAboveText(value) {
+      if (this[_paintCursorOnTop] === value) return;
+      this[_paintCursorOnTop] = value;
+      this[_cachedBuiltInForegroundPainters] = null;
+      this[_cachedBuiltInPainters] = null;
+      this[_updateForegroundPainter](this[_foregroundPainter]);
+      this[_updatePainter](this[_painter]);
+    }
+    get cursorOffset() {
+      return this[_caretPainter].cursorOffset;
+    }
+    set cursorOffset(value) {
+      this[_caretPainter].cursorOffset = value;
+    }
+    get cursorRadius() {
+      return this[_caretPainter].cursorRadius;
+    }
+    set cursorRadius(value) {
+      this[_caretPainter].cursorRadius = value;
+    }
+    get startHandleLayerLink() {
+      return this[_startHandleLayerLink];
+    }
+    set startHandleLayerLink(value) {
+      if (this[_startHandleLayerLink][$_equals](value)) return;
+      this[_startHandleLayerLink] = value;
+      this.markNeedsPaint();
+    }
+    get endHandleLayerLink() {
+      return this[_endHandleLayerLink];
+    }
+    set endHandleLayerLink(value) {
+      if (this[_endHandleLayerLink][$_equals](value)) return;
+      this[_endHandleLayerLink] = value;
+      this.markNeedsPaint();
+    }
+    set [_floatingCursorTextPosition](t34) {
+      this[__RenderEditable__floatingCursorTextPosition] = t34;
+    }
+    get [_floatingCursorTextPosition]() {
+      let t35;
+      t35 = this[__RenderEditable__floatingCursorTextPosition];
+      return t35 == null ? dart.throw(new _internal.LateError.fieldNI("_floatingCursorTextPosition")) : t35;
+    }
+    get enableInteractiveSelection() {
+      return this[_enableInteractiveSelection];
+    }
+    set enableInteractiveSelection(value) {
+      if (this[_enableInteractiveSelection] == value) return;
+      this[_enableInteractiveSelection] = value;
+      this.markNeedsTextLayout();
+      this.markNeedsSemanticsUpdate();
+    }
+    get selectionEnabled() {
+      let t35;
+      t35 = this.enableInteractiveSelection;
+      return t35 == null ? !this.obscureText : t35;
+    }
+    get promptRectColor() {
+      return this[_autocorrectHighlightPainter].highlightColor;
+    }
+    set promptRectColor(newValue) {
+      this[_autocorrectHighlightPainter].highlightColor = newValue;
+    }
+    setPromptRectRange(newRange) {
+      this[_autocorrectHighlightPainter].highlightedRange = newRange;
+    }
+    get maxScrollExtent() {
+      return this[_maxScrollExtent];
+    }
+    get [_caretMargin]() {
+      return 1 + this.cursorWidth;
+    }
+    get clipBehavior() {
+      return this[_clipBehavior];
+    }
+    set clipBehavior(value) {
+      if (!(value !== null)) dart.assertFailed(null, I[0], 2348, 12, "value != null");
+      if (value !== this[_clipBehavior]) {
+        this[_clipBehavior] = value;
+        this.markNeedsPaint();
+        this.markNeedsSemanticsUpdate();
+      }
+    }
+    describeSemanticsConfiguration(config) {
+      let t35, t35$, t35$0, t35$1, t35$2;
+      super.describeSemanticsConfiguration(config);
+      this[_semanticsInfo] = dart.nullCheck(this[_textPainter].text).getSemanticsInformation();
+      if (dart.nullCheck(this[_semanticsInfo])[$any](dart.fn(info => info.recognizer != null, T.InlineSpanSemanticsInformationTobool())) && platform.defaultTargetPlatform !== platform.TargetPlatform.macOS) {
+        if (!(this.readOnly && !this.obscureText)) dart.assertFailed(null, I[0], 2376, 14, "readOnly && !obscureText");
+        t35 = config;
+        (() => {
+          t35.isSemanticBoundary = true;
+          t35.explicitChildNodes = true;
+          return t35;
+        })();
+        return;
+      }
+      t35$ = config;
+      (() => {
+        t35$.value = this.obscureText ? this.obscuringCharacter[$times](this[_plainText].length) : this[_plainText];
+        t35$.isObscured = this.obscureText;
+        t35$.isMultiline = this[_isMultiline];
+        t35$.textDirection = this.textDirection;
+        t35$.isFocused = this.hasFocus;
+        t35$.isTextField = true;
+        t35$.isReadOnly = this.readOnly;
+        return t35$;
+      })();
+      if (this.hasFocus && this.selectionEnabled) config.onSetSelection = dart.bind(this, _handleSetSelection);
+      if (this.hasFocus && !this.readOnly) config.onSetText = dart.bind(this, _handleSetText);
+      if (this.selectionEnabled && (t35$0 = this.selection, t35$0 == null ? null : t35$0.isValid) === true) {
+        config.textSelection = this.selection;
+        if (this[_textPainter].getOffsetBefore(dart.nullCheck(this.selection).extentOffset) != null) {
+          t35$1 = config;
+          (() => {
+            t35$1.onMoveCursorBackwardByWord = dart.bind(this, _handleMoveCursorBackwardByWord);
+            t35$1.onMoveCursorBackwardByCharacter = dart.bind(this, _handleMoveCursorBackwardByCharacter);
+            return t35$1;
+          })();
+        }
+        if (this[_textPainter].getOffsetAfter(dart.nullCheck(this.selection).extentOffset) != null) {
+          t35$2 = config;
+          (() => {
+            t35$2.onMoveCursorForwardByWord = dart.bind(this, _handleMoveCursorForwardByWord);
+            t35$2.onMoveCursorForwardByCharacter = dart.bind(this, _handleMoveCursorForwardByCharacter);
+            return t35$2;
+          })();
+        }
+      }
+    }
+    [_handleSetText](text) {
+      this.textSelectionDelegate.userUpdateTextEditingValue(new text_input.TextEditingValue.new({text: text, selection: new text_editing.TextSelection.collapsed({offset: text.length})}), text_input.SelectionChangedCause.keyboard);
+    }
+    assembleSemanticsNode(node, config, children) {
+      let t36, t36$, t35, t35$, t35$0;
+      if (!(this[_semanticsInfo] != null && dart.nullCheck(this[_semanticsInfo])[$isNotEmpty])) dart.assertFailed(null, I[0], 2428, 12, "_semanticsInfo != null && _semanticsInfo!.isNotEmpty");
+      let newChildren = T.JSArrayOfSemanticsNode().of([]);
+      let currentDirection = this.textDirection;
+      let currentRect = null;
+      let ordinal = 0.0;
+      let start = 0;
+      let newChildCache = new (T.ListQueueOfSemanticsNode()).new();
+      for (let info of inline_span.combineSemanticsInfo(dart.nullCheck(this[_semanticsInfo]))) {
+        if (!!info.isPlaceholder) dart.assertFailed(null, I[0], 2436, 14, "!info.isPlaceholder");
+        let selection = new text_editing.TextSelection.new({baseOffset: start, extentOffset: start + info.text.length});
+        start = start + info.text.length;
+        let initialDirection = currentDirection;
+        let rects = this[_textPainter].getBoxesForSelection(selection);
+        if (rects[$isEmpty]) {
+          continue;
+        }
+        let rect = rects[$first].toRect();
+        currentDirection = rects[$first].direction;
+        for (let textBox of rects[$skip](1)) {
+          rect = rect.expandToInclude(textBox.toRect());
+          currentDirection = textBox.direction;
+        }
+        rect = new ui.Rect.fromLTWH(math.max(core.double, 0.0, rect.left), math.max(core.double, 0.0, rect.top), math.min(core.double, rect.width, this.constraints.maxWidth), math.min(core.double, rect.height, this.constraints.maxHeight));
+        currentRect = new ui.Rect.fromLTRB(rect.left[$floorToDouble]() - 4.0, rect.top[$floorToDouble]() - 4.0, rect.right[$ceilToDouble]() + 4.0, rect.bottom[$ceilToDouble]() + 4.0);
+        let configuration = (t35 = new semantics.SemanticsConfiguration.new(), (() => {
+          t35.sortKey = new semantics.OrdinalSortKey.new((t36 = ordinal, ordinal = t36 + 1, t36));
+          t35.textDirection = initialDirection;
+          t35.label = (t36$ = info.semanticsLabel, t36$ == null ? info.text : t36$);
+          return t35;
+        })());
+        let recognizer = info.recognizer;
+        if (recognizer != null) {
+          if (tap.TapGestureRecognizer.is(recognizer)) {
+            if (recognizer.onTap != null) {
+              configuration.onTap = recognizer.onTap;
+              configuration.isLink = true;
+            }
+          } else if (multitap.DoubleTapGestureRecognizer.is(recognizer)) {
+            if (recognizer.onDoubleTap != null) {
+              configuration.onTap = recognizer.onDoubleTap;
+              configuration.isLink = true;
+            }
+          } else if (long_press.LongPressGestureRecognizer.is(recognizer)) {
+            if (recognizer.onLongPress != null) {
+              configuration.onLongPress = recognizer.onLongPress;
+            }
+          } else {
+            if (!false) dart.assertFailed(dart.str(dart.runtimeType(recognizer)) + " is not supported.", I[0], 2491, 18, "false");
+          }
+        }
+        let newChild = (t35$ = this[_cachedChildNodes], t35$ == null ? null : t35$[$isNotEmpty]) === true ? dart.nullCheck(this[_cachedChildNodes]).removeFirst() : new semantics.SemanticsNode.new();
+        t35$0 = newChild;
+        (() => {
+          t35$0.updateWith({config: configuration});
+          t35$0.rect = currentRect;
+          return t35$0;
+        })();
+        newChildCache.addLast(newChild);
+        newChildren[$add](newChild);
+      }
+      this[_cachedChildNodes] = newChildCache;
+      node.updateWith({config: config, childrenInInversePaintOrder: newChildren});
+    }
+    [_handleSetSelection](selection) {
+      this[_setSelection](selection, text_input.SelectionChangedCause.keyboard);
+    }
+    [_handleMoveCursorForwardByCharacter](extentSelection) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 2516, 12, "selection != null");
+      let extentOffset = this[_textPainter].getOffsetAfter(dart.nullCheck(this.selection).extentOffset);
+      if (extentOffset == null) return;
+      let baseOffset = !extentSelection ? extentOffset : dart.nullCheck(this.selection).baseOffset;
+      this[_setSelection](new text_editing.TextSelection.new({baseOffset: baseOffset, extentOffset: extentOffset}), text_input.SelectionChangedCause.keyboard);
+    }
+    [_handleMoveCursorBackwardByCharacter](extentSelection) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 2528, 12, "selection != null");
+      let extentOffset = this[_textPainter].getOffsetBefore(dart.nullCheck(this.selection).extentOffset);
+      if (extentOffset == null) return;
+      let baseOffset = !extentSelection ? extentOffset : dart.nullCheck(this.selection).baseOffset;
+      this[_setSelection](new text_editing.TextSelection.new({baseOffset: baseOffset, extentOffset: extentOffset}), text_input.SelectionChangedCause.keyboard);
+    }
+    [_handleMoveCursorForwardByWord](extentSelection) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 2540, 12, "selection != null");
+      let currentWord = this[_textPainter].getWordBoundary(dart.nullCheck(this.selection).extent);
+      let nextWord = this[_getNextWord](currentWord.end);
+      if (nextWord == null) return;
+      let baseOffset = extentSelection ? dart.nullCheck(this.selection).baseOffset : nextWord.start;
+      this[_setSelection](new text_editing.TextSelection.new({baseOffset: baseOffset, extentOffset: nextWord.start}), text_input.SelectionChangedCause.keyboard);
+    }
+    [_handleMoveCursorBackwardByWord](extentSelection) {
+      if (!(this.selection != null)) dart.assertFailed(null, I[0], 2556, 12, "selection != null");
+      let currentWord = this[_textPainter].getWordBoundary(dart.nullCheck(this.selection).extent);
+      let previousWord = this[_getPreviousWord](currentWord.start - 1);
+      if (previousWord == null) return;
+      let baseOffset = extentSelection ? dart.nullCheck(this.selection).baseOffset : previousWord.start;
+      this[_setSelection](new text_editing.TextSelection.new({baseOffset: baseOffset, extentOffset: previousWord.start}), text_input.SelectionChangedCause.keyboard);
+    }
+    [_getNextWord](offset) {
+      while (true) {
+        let range = this[_textPainter].getWordBoundary(new ui.TextPosition.new({offset: offset}));
+        if (range === null || !range.isValid || range.isCollapsed) return null;
+        if (!this[_onlyWhitespace](range)) return range;
+        offset = range.end;
+      }
+    }
+    [_getPreviousWord](offset) {
+      while (offset >= 0) {
+        let range = this[_textPainter].getWordBoundary(new ui.TextPosition.new({offset: offset}));
+        if (range === null || !range.isValid || range.isCollapsed) return null;
+        if (!this[_onlyWhitespace](range)) return range;
+        offset = range.start - 1;
+      }
+      return null;
+    }
+    [_onlyWhitespace](range) {
+      for (let i = range.start; i < range.end; i = i + 1) {
+        let codeUnit = dart.nullCheck(dart.nullCheck(this.text).codeUnitAt(i));
+        if (!editable._isWhitespace(codeUnit)) {
+          return false;
+        }
+      }
+      return true;
+    }
+    attach(owner) {
+      let t35, t35$, t35$0, t35$1;
+      object.PipelineOwner.as(owner);
+      super.attach(owner);
+      t35 = this[_foregroundRenderObject];
+      t35 == null ? null : t35.attach(owner);
+      t35$ = this[_backgroundRenderObject];
+      t35$ == null ? null : t35$.attach(owner);
+      this[_tap] = (t35$0 = new tap.TapGestureRecognizer.new({debugOwner: this}), (() => {
+        t35$0.onTapDown = dart.bind(this, _handleTapDown);
+        t35$0.onTap = dart.bind(this, _handleTap);
+        return t35$0;
+      })());
+      this[_longPress] = (t35$1 = new long_press.LongPressGestureRecognizer.new({debugOwner: this}), (() => {
+        t35$1.onLongPress = dart.bind(this, _handleLongPress);
+        return t35$1;
+      })());
+      this[_offset].addListener(dart.bind(this, 'markNeedsPaint'));
+      this[_showHideCursor]();
+      this[_showCursor].addListener(dart.bind(this, _showHideCursor));
+      if (!!this[_listenerAttached]) dart.assertFailed(null, I[0], 2623, 12, "!_listenerAttached");
+      if (this[_hasFocus]) {
+        raw_keyboard.RawKeyboard.instance.addListener(dart.bind(this, _handleKeyEvent));
+        this[_listenerAttached] = true;
+      }
+    }
+    detach() {
+      let t35, t35$;
+      this[_tap].dispose();
+      this[_longPress].dispose();
+      this[_offset].removeListener(dart.bind(this, 'markNeedsPaint'));
+      this[_showCursor].removeListener(dart.bind(this, _showHideCursor));
+      if (this[_listenerAttached]) {
+        raw_keyboard.RawKeyboard.instance.removeListener(dart.bind(this, _handleKeyEvent));
+        this[_listenerAttached] = false;
+      }
+      super.detach();
+      t35 = this[_foregroundRenderObject];
+      t35 == null ? null : t35.detach();
+      t35$ = this[_backgroundRenderObject];
+      t35$ == null ? null : t35$.detach();
+    }
+    redepthChildren() {
+      let foregroundChild = this[_foregroundRenderObject];
+      let backgroundChild = this[_backgroundRenderObject];
+      if (foregroundChild != null) this.redepthChild(foregroundChild);
+      if (backgroundChild != null) this.redepthChild(backgroundChild);
+    }
+    visitChildren(visitor) {
+      let foregroundChild = this[_foregroundRenderObject];
+      let backgroundChild = this[_backgroundRenderObject];
+      if (foregroundChild != null) visitor(foregroundChild);
+      if (backgroundChild != null) visitor(backgroundChild);
+    }
+    get [_isMultiline]() {
+      return this.maxLines !== 1;
+    }
+    get [_viewportAxis]() {
+      return this[_isMultiline] ? basic_types.Axis.vertical : basic_types.Axis.horizontal;
+    }
+    get [_paintOffset]() {
+      switch (this[_viewportAxis]) {
+        case C[11] || CT.C11:
+        {
+          return new ui.Offset.new(-this.offset.pixels, 0.0);
+        }
+        case C[12] || CT.C12:
+        {
+          return new ui.Offset.new(0.0, -this.offset.pixels);
+        }
+      }
+    }
+    get [_viewportExtent]() {
+      if (!this.hasSize) dart.assertFailed(null, I[0], 2681, 12, "hasSize");
+      switch (this[_viewportAxis]) {
+        case C[11] || CT.C11:
+        {
+          return this.size.width;
+        }
+        case C[12] || CT.C12:
+        {
+          return this.size.height;
+        }
+      }
+    }
+    [_getMaxScrollExtent](contentSize) {
+      if (!this.hasSize) dart.assertFailed(null, I[0], 2691, 12, "hasSize");
+      switch (this[_viewportAxis]) {
+        case C[11] || CT.C11:
+        {
+          return math.max(core.double, 0.0, contentSize.width - this.size.width);
+        }
+        case C[12] || CT.C12:
+        {
+          return math.max(core.double, 0.0, contentSize.height - this.size.height);
+        }
+      }
+    }
+    get [_hasVisualOverflow]() {
+      return this[_maxScrollExtent] > 0 || !this[_paintOffset]._equals(ui.Offset.zero);
+    }
+    getEndpointsForSelection(selection) {
+      if (!(this.constraints !== null)) dart.assertFailed(null, I[0], 2717, 12, "constraints != null");
+      this[_layoutText]({minWidth: this.constraints.minWidth, maxWidth: this.constraints.maxWidth});
+      let paintOffset = this[_paintOffset];
+      let boxes = selection.isCollapsed ? T.JSArrayOfTextBox().of([]) : this[_textPainter].getBoxesForSelection(selection);
+      if (boxes[$isEmpty]) {
+        let caretOffset = this[_textPainter].getOffsetForCaret(selection.extent, this[_caretPrototype]);
+        let start = new ui.Offset.new(0.0, this.preferredLineHeight)['+'](caretOffset)['+'](paintOffset);
+        return T.JSArrayOfTextSelectionPoint().of([new editable.TextSelectionPoint.new(start, null)]);
+      } else {
+        let start = new ui.Offset.new(boxes[$first].start, boxes[$first].bottom)['+'](paintOffset);
+        let end = new ui.Offset.new(boxes[$last].end, boxes[$last].bottom)['+'](paintOffset);
+        return T.JSArrayOfTextSelectionPoint().of([new editable.TextSelectionPoint.new(start, boxes[$first].direction), new editable.TextSelectionPoint.new(end, boxes[$last].direction)]);
+      }
+    }
+    getRectForComposingRange(range) {
+      let t35;
+      if (!(this.constraints !== null)) dart.assertFailed(null, I[0], 2748, 12, "constraints != null");
+      if (!range.isValid || range.isCollapsed) return null;
+      this[_layoutText]({minWidth: this.constraints.minWidth, maxWidth: this.constraints.maxWidth});
+      let boxes = this[_textPainter].getBoxesForSelection(new text_editing.TextSelection.new({baseOffset: range.start, extentOffset: range.end}));
+      t35 = boxes[$fold](T.RectN(), null, dart.fn((accum, incoming) => {
+        let t35, t35$;
+        t35$ = (t35 = accum, t35 == null ? null : t35.expandToInclude(incoming.toRect()));
+        return t35$ == null ? incoming.toRect() : t35$;
+      }, T.RectNAndTextBoxToRect()));
+      return t35 == null ? null : t35.shift(this[_paintOffset]);
+    }
+    getPositionForPoint(globalPosition) {
+      this[_layoutText]({minWidth: this.constraints.minWidth, maxWidth: this.constraints.maxWidth});
+      globalPosition = globalPosition['+'](this[_paintOffset]._negate());
+      return this[_textPainter].getPositionForOffset(this.globalToLocal(globalPosition));
+    }
+    getLocalRectForCaret(caretPosition) {
+      this[_layoutText]({minWidth: this.constraints.minWidth, maxWidth: this.constraints.maxWidth});
+      let caretOffset = this[_textPainter].getOffsetForCaret(caretPosition, this[_caretPrototype]);
+      let rect = new ui.Rect.fromLTWH(0.0, 0.0, this.cursorWidth, this.cursorHeight).shift(caretOffset['+'](this[_paintOffset])['+'](this.cursorOffset));
+      return rect.shift(this[_snapToPhysicalPixel](rect.topLeft));
+    }
+    computeMinIntrinsicWidth(height) {
+      this[_layoutText]({maxWidth: 1 / 0});
+      return this[_textPainter].minIntrinsicWidth;
+    }
+    computeMaxIntrinsicWidth(height) {
+      this[_layoutText]({maxWidth: 1 / 0});
+      return this[_textPainter].maxIntrinsicWidth + this.cursorWidth;
+    }
+    get preferredLineHeight() {
+      return this[_textPainter].preferredLineHeight;
+    }
+    [_preferredHeight](width) {
+      let lockedMax = this.maxLines != null && this.minLines == null;
+      let lockedBoth = this.minLines != null && this.minLines == this.maxLines;
+      let singleLine = this.maxLines === 1;
+      if (singleLine || lockedMax || lockedBoth) {
+        return this.preferredLineHeight * dart.nullCheck(this.maxLines);
+      }
+      let minLimited = this.minLines != null && dart.nullCheck(this.minLines) > 1;
+      let maxLimited = this.maxLines != null;
+      if (minLimited || maxLimited) {
+        this[_layoutText]({maxWidth: width});
+        if (minLimited && this[_textPainter].height < this.preferredLineHeight * dart.nullCheck(this.minLines)) {
+          return this.preferredLineHeight * dart.nullCheck(this.minLines);
+        }
+        if (maxLimited && this[_textPainter].height > this.preferredLineHeight * dart.nullCheck(this.maxLines)) {
+          return this.preferredLineHeight * dart.nullCheck(this.maxLines);
+        }
+      }
+      if (width === 1 / 0) {
+        let text = this[_plainText];
+        let lines = 1;
+        for (let index = 0; index < text.length; index = index + 1) {
+          if (text[$codeUnitAt](index) === 10) lines = lines + 1;
+        }
+        return this.preferredLineHeight * lines;
+      }
+      this[_layoutText]({maxWidth: width});
+      return math.max(core.double, this.preferredLineHeight, this[_textPainter].height);
+    }
+    computeMinIntrinsicHeight(width) {
+      return this[_preferredHeight](width);
+    }
+    computeMaxIntrinsicHeight(width) {
+      return this[_preferredHeight](width);
+    }
+    computeDistanceToActualBaseline(baseline) {
+      this[_layoutText]({minWidth: this.constraints.minWidth, maxWidth: this.constraints.maxWidth});
+      return this[_textPainter].computeDistanceToActualBaseline(baseline);
+    }
+    hitTestSelf(position) {
+      return true;
+    }
+    hitTestChildren(result, opts) {
+      let position = opts && 'position' in opts ? opts.position : null;
+      let textPosition = this[_textPainter].getPositionForOffset(position);
+      let span = dart.nullCheck(this[_textPainter].text).getSpanForPosition(textPosition);
+      if (span != null && hit_test.HitTestTarget.is(span)) {
+        result.add(new hit_test.HitTestEntry.new(hit_test.HitTestTarget.as(span)));
+        return true;
+      }
+      return false;
+    }
+    set [_tap](t35) {
+      this[__RenderEditable__tap] = t35;
+    }
+    get [_tap]() {
+      let t36;
+      t36 = this[__RenderEditable__tap];
+      return t36 == null ? dart.throw(new _internal.LateError.fieldNI("_tap")) : t36;
+    }
+    set [_longPress](t36) {
+      this[__RenderEditable__longPress] = t36;
+    }
+    get [_longPress]() {
+      let t37;
+      t37 = this[__RenderEditable__longPress];
+      return t37 == null ? dart.throw(new _internal.LateError.fieldNI("_longPress")) : t37;
+    }
+    handleEvent(event, entry) {
+      box.BoxHitTestEntry.as(entry);
+      if (!this.debugHandleEvent(event, entry)) dart.assertFailed(null, I[0], 2885, 12, "debugHandleEvent(event, entry)");
+      if (events.PointerDownEvent.is(event)) {
+        if (!!this.debugNeedsLayout) dart.assertFailed(null, I[0], 2887, 14, "!debugNeedsLayout");
+        if (!this.ignorePointer) {
+          this[_tap].addPointer(event);
+          this[_longPress].addPointer(event);
+        }
+      }
+    }
+    get lastSecondaryTapDownPosition() {
+      return this[_lastSecondaryTapDownPosition];
+    }
+    handleSecondaryTapDown(details) {
+      this[_lastTapDownPosition] = details.globalPosition;
+      this[_lastSecondaryTapDownPosition] = details.globalPosition;
+    }
+    handleTapDown(details) {
+      this[_lastTapDownPosition] = details.globalPosition;
+    }
+    [_handleTapDown](details) {
+      if (!!this.ignorePointer) dart.assertFailed(null, I[0], 2923, 12, "!ignorePointer");
+      this.handleTapDown(details);
+    }
+    handleTap() {
+      this.selectPosition({cause: text_input.SelectionChangedCause.tap});
+    }
+    [_handleTap]() {
+      if (!!this.ignorePointer) dart.assertFailed(null, I[0], 2937, 12, "!ignorePointer");
+      this.handleTap();
+    }
+    handleDoubleTap() {
+      this.selectWord({cause: text_input.SelectionChangedCause.doubleTap});
+    }
+    handleLongPress() {
+      this.selectWord({cause: text_input.SelectionChangedCause.longPress});
+    }
+    [_handleLongPress]() {
+      if (!!this.ignorePointer) dart.assertFailed(null, I[0], 2961, 12, "!ignorePointer");
+      this.handleLongPress();
+    }
+    selectPosition(opts) {
+      let cause = opts && 'cause' in opts ? opts.cause : null;
+      this.selectPositionAt({from: dart.nullCheck(this[_lastTapDownPosition]), cause: cause});
+    }
+    selectPositionAt(opts) {
+      let t37, t37$;
+      let from = opts && 'from' in opts ? opts.from : null;
+      let to = opts && 'to' in opts ? opts.to : null;
+      let cause = opts && 'cause' in opts ? opts.cause : null;
+      if (!(cause !== null)) dart.assertFailed(null, I[0], 2984, 12, "cause != null");
+      if (!(from !== null)) dart.assertFailed(null, I[0], 2985, 12, "from != null");
+      this[_layoutText]({minWidth: this.constraints.minWidth, maxWidth: this.constraints.maxWidth});
+      let fromPosition = this[_textPainter].getPositionForOffset(this.globalToLocal(from['-'](this[_paintOffset])));
+      let toPosition = to == null ? null : this[_textPainter].getPositionForOffset(this.globalToLocal(to['-'](this[_paintOffset])));
+      let baseOffset = fromPosition.offset;
+      let extentOffset = (t37$ = (t37 = toPosition, t37 == null ? null : t37.offset), t37$ == null ? fromPosition.offset : t37$);
+      let newSelection = new text_editing.TextSelection.new({baseOffset: baseOffset, extentOffset: extentOffset, affinity: fromPosition.affinity});
+      this[_setSelection](newSelection, cause);
+    }
+    selectWord(opts) {
+      let cause = opts && 'cause' in opts ? opts.cause : null;
+      this.selectWordsInRange({from: dart.nullCheck(this[_lastTapDownPosition]), cause: cause});
+    }
+    selectWordsInRange(opts) {
+      let from = opts && 'from' in opts ? opts.from : null;
+      let to = opts && 'to' in opts ? opts.to : null;
+      let cause = opts && 'cause' in opts ? opts.cause : null;
+      if (!(cause !== null)) dart.assertFailed(null, I[0], 3017, 12, "cause != null");
+      if (!(from !== null)) dart.assertFailed(null, I[0], 3018, 12, "from != null");
+      this[_layoutText]({minWidth: this.constraints.minWidth, maxWidth: this.constraints.maxWidth});
+      let firstPosition = this[_textPainter].getPositionForOffset(this.globalToLocal(from['-'](this[_paintOffset])));
+      let firstWord = this[_getWordAtOffset](firstPosition);
+      let lastWord = to == null ? firstWord : this[_getWordAtOffset](this[_textPainter].getPositionForOffset(this.globalToLocal(to['-'](this[_paintOffset]))));
+      this[_setSelection](new text_editing.TextSelection.new({baseOffset: firstWord.base.offset, extentOffset: lastWord.extent.offset, affinity: firstWord.affinity}), cause);
+    }
+    selectWordEdge(opts) {
+      let cause = opts && 'cause' in opts ? opts.cause : null;
+      if (!(cause !== null)) dart.assertFailed(null, I[0], 3039, 12, "cause != null");
+      this[_layoutText]({minWidth: this.constraints.minWidth, maxWidth: this.constraints.maxWidth});
+      if (!(this[_lastTapDownPosition] != null)) dart.assertFailed(null, I[0], 3041, 12, "_lastTapDownPosition != null");
+      let position = this[_textPainter].getPositionForOffset(this.globalToLocal(dart.nullCheck(this[_lastTapDownPosition])['-'](this[_paintOffset])));
+      let word = this[_textPainter].getWordBoundary(position);
+      let newSelection = null;
+      function newSelection$35get() {
+        let t38;
+        t38 = newSelection;
+        return t38 == null ? dart.throw(new _internal.LateError.localNI("newSelection")) : t38;
+      }
+      dart.fn(newSelection$35get, T.VoidToTextSelection());
+      function newSelection$35set(t39) {
+        return newSelection = t39;
+      }
+      dart.fn(newSelection$35set, T.TextSelectionTodynamic());
+      if (position.offset - word.start <= 1) {
+        newSelection$35set(new text_editing.TextSelection.collapsed({offset: word.start, affinity: ui.TextAffinity.downstream}));
+      } else {
+        newSelection$35set(new text_editing.TextSelection.collapsed({offset: word.end, affinity: ui.TextAffinity.upstream}));
+      }
+      this[_setSelection](newSelection$35get(), cause);
+    }
+    [_getWordAtOffset](position) {
+      if (!(this[_textLayoutLastMaxWidth] === this.constraints.maxWidth && this[_textLayoutLastMinWidth] === this.constraints.minWidth)) dart.assertFailed("Last width (" + dart.str(this[_textLayoutLastMinWidth]) + ", " + dart.str(this[_textLayoutLastMaxWidth]) + ") not the same as max width constraint (" + dart.str(this.constraints.minWidth) + ", " + dart.str(this.constraints.maxWidth) + ").", I[0], 3055, 7, "_textLayoutLastMaxWidth == constraints.maxWidth &&\r\n      _textLayoutLastMinWidth == constraints.minWidth");
+      let word = this[_textPainter].getWordBoundary(position);
+      if (position.offset >= word.end) return new text_editing.TextSelection.fromPosition(position);
+      if (this.obscureText) {
+        return new text_editing.TextSelection.new({baseOffset: 0, extentOffset: this[_plainText].length});
+      } else if (editable._isWhitespace(this[_plainText][$codeUnitAt](position.offset)) && position.offset > 0) {
+        if (!(platform.defaultTargetPlatform !== null)) dart.assertFailed(null, I[0], 3075, 14, "defaultTargetPlatform != null");
+        let previousWord = this[_getPreviousWord](word.start);
+        switch (platform.defaultTargetPlatform) {
+          case C[13] || CT.C13:
+          {
+            if (previousWord == null) {
+              let nextWord = this[_getNextWord](word.start);
+              if (nextWord == null) {
+                return new text_editing.TextSelection.collapsed({offset: position.offset});
+              }
+              return new text_editing.TextSelection.new({baseOffset: position.offset, extentOffset: nextWord.end});
+            }
+            return new text_editing.TextSelection.new({baseOffset: previousWord.start, extentOffset: position.offset});
+          }
+          case C[14] || CT.C14:
+          {
+            if (this.readOnly) {
+              if (previousWord == null) {
+                return new text_editing.TextSelection.new({baseOffset: position.offset, extentOffset: position.offset + 1});
+              }
+              return new text_editing.TextSelection.new({baseOffset: previousWord.start, extentOffset: position.offset});
+            }
+            break;
+          }
+          case C[15] || CT.C15:
+          case C[16] || CT.C16:
+          case C[17] || CT.C17:
+          case C[18] || CT.C18:
+          {
+            break;
+          }
+        }
+      }
+      return new text_editing.TextSelection.new({baseOffset: word.start, extentOffset: word.end});
+    }
+    [_getLineAtOffset](position) {
+      if (!(this[_textLayoutLastMaxWidth] === this.constraints.maxWidth && this[_textLayoutLastMinWidth] === this.constraints.minWidth)) dart.assertFailed("Last width (" + dart.str(this[_textLayoutLastMinWidth]) + ", " + dart.str(this[_textLayoutLastMaxWidth]) + ") not the same as max width constraint (" + dart.str(this.constraints.minWidth) + ", " + dart.str(this.constraints.maxWidth) + ").", I[0], 3120, 7, "_textLayoutLastMaxWidth == constraints.maxWidth &&\r\n      _textLayoutLastMinWidth == constraints.minWidth");
+      let line = this[_textPainter].getLineBoundary(position);
+      if (position.offset >= line.end) return new text_editing.TextSelection.fromPosition(position);
+      if (this.obscureText) {
+        return new text_editing.TextSelection.new({baseOffset: 0, extentOffset: this[_plainText].length});
+      }
+      return new text_editing.TextSelection.new({baseOffset: line.start, extentOffset: line.end});
+    }
+    [_layoutText](opts) {
+      let minWidth = opts && 'minWidth' in opts ? opts.minWidth : 0;
+      let maxWidth = opts && 'maxWidth' in opts ? opts.maxWidth : 1 / 0;
+      if (!(maxWidth !== null && minWidth !== null)) dart.assertFailed(null, I[0], 3135, 12, "maxWidth != null && minWidth != null");
+      if (this[_textLayoutLastMaxWidth] === maxWidth && this[_textLayoutLastMinWidth] === minWidth) return;
+      let availableMaxWidth = math.max(core.double, 0.0, maxWidth - this[_caretMargin]);
+      let availableMinWidth = math.min(core.double, minWidth, availableMaxWidth);
+      let textMaxWidth = this[_isMultiline] ? availableMaxWidth : 1 / 0;
+      let textMinWidth = this.forceLine ? availableMaxWidth : availableMinWidth;
+      this[_textPainter].layout({minWidth: textMinWidth, maxWidth: textMaxWidth});
+      this[_textLayoutLastMinWidth] = minWidth;
+      this[_textLayoutLastMaxWidth] = maxWidth;
+    }
+    set [_caretPrototype](t41) {
+      this[__RenderEditable__caretPrototype] = t41;
+    }
+    get [_caretPrototype]() {
+      let t42;
+      t42 = this[__RenderEditable__caretPrototype];
+      return t42 == null ? dart.throw(new _internal.LateError.fieldNI("_caretPrototype")) : t42;
+    }
+    [_computeCaretPrototype]() {
+      if (!(platform.defaultTargetPlatform !== null)) dart.assertFailed(null, I[0], 3164, 12, "defaultTargetPlatform != null");
+      switch (platform.defaultTargetPlatform) {
+        case C[13] || CT.C13:
+        case C[16] || CT.C16:
+        {
+          this[_caretPrototype] = new ui.Rect.fromLTWH(0.0, 0.0, this.cursorWidth, this.cursorHeight + 2);
+          break;
+        }
+        case C[14] || CT.C14:
+        case C[15] || CT.C15:
+        case C[17] || CT.C17:
+        case C[18] || CT.C18:
+        {
+          this[_caretPrototype] = new ui.Rect.fromLTWH(0.0, 2, this.cursorWidth, this.cursorHeight - 2.0 * 2);
+          break;
+        }
+      }
+    }
+    [_snapToPhysicalPixel](sourceOffset) {
+      let globalOffset = this.localToGlobal(sourceOffset);
+      let pixelMultiple = 1.0 / this[_devicePixelRatio];
+      return new ui.Offset.new(globalOffset.dx[$isFinite] ? (globalOffset.dx / pixelMultiple)[$round]() * pixelMultiple - globalOffset.dx : 0.0, globalOffset.dy[$isFinite] ? (globalOffset.dy / pixelMultiple)[$round]() * pixelMultiple - globalOffset.dy : 0.0);
+    }
+    computeDryLayout(constraints) {
+      this[_layoutText]({minWidth: constraints.minWidth, maxWidth: constraints.maxWidth});
+      let width = this.forceLine ? constraints.maxWidth : constraints.constrainWidth(this[_textPainter].size.width + this[_caretMargin]);
+      return new ui.Size.new(width, constraints.constrainHeight(this[_preferredHeight](constraints.maxWidth)));
+    }
+    performLayout() {
+      let t42, t42$;
+      let constraints = this.constraints;
+      this[_layoutText]({minWidth: constraints.minWidth, maxWidth: constraints.maxWidth});
+      this[_computeCaretPrototype]();
+      let textPainterSize = this[_textPainter].size;
+      let width = this.forceLine ? constraints.maxWidth : constraints.constrainWidth(this[_textPainter].size.width + this[_caretMargin]);
+      this.size = new ui.Size.new(width, constraints.constrainHeight(this[_preferredHeight](constraints.maxWidth)));
+      let contentSize = new ui.Size.new(textPainterSize.width + this[_caretMargin], textPainterSize.height);
+      let painterConstraints = new box.BoxConstraints.tight(contentSize);
+      t42 = this[_foregroundRenderObject];
+      t42 == null ? null : t42.layout(painterConstraints);
+      t42$ = this[_backgroundRenderObject];
+      t42$ == null ? null : t42$.layout(painterConstraints);
+      this[_maxScrollExtent] = this[_getMaxScrollExtent](contentSize);
+      this.offset.applyViewportDimension(this[_viewportExtent]);
+      this.offset.applyContentDimensions(0.0, this[_maxScrollExtent]);
+    }
+    calculateBoundedFloatingCursorOffset(rawCursorOffset) {
+      let deltaPosition = ui.Offset.zero;
+      let topBound = -this.floatingCursorAddedMargin.top;
+      let bottomBound = this[_textPainter].height - this.preferredLineHeight + this.floatingCursorAddedMargin.bottom;
+      let leftBound = -this.floatingCursorAddedMargin.left;
+      let rightBound = this[_textPainter].width + this.floatingCursorAddedMargin.right;
+      if (this[_previousOffset] != null) deltaPosition = rawCursorOffset['-'](dart.nullCheck(this[_previousOffset]));
+      if (this[_resetOriginOnLeft] && deltaPosition.dx > 0) {
+        this[_relativeOrigin] = new ui.Offset.new(rawCursorOffset.dx - leftBound, this[_relativeOrigin].dy);
+        this[_resetOriginOnLeft] = false;
+      } else if (this[_resetOriginOnRight] && deltaPosition.dx < 0) {
+        this[_relativeOrigin] = new ui.Offset.new(rawCursorOffset.dx - rightBound, this[_relativeOrigin].dy);
+        this[_resetOriginOnRight] = false;
+      }
+      if (this[_resetOriginOnTop] && deltaPosition.dy > 0) {
+        this[_relativeOrigin] = new ui.Offset.new(this[_relativeOrigin].dx, rawCursorOffset.dy - topBound);
+        this[_resetOriginOnTop] = false;
+      } else if (this[_resetOriginOnBottom] && deltaPosition.dy < 0) {
+        this[_relativeOrigin] = new ui.Offset.new(this[_relativeOrigin].dx, rawCursorOffset.dy - bottomBound);
+        this[_resetOriginOnBottom] = false;
+      }
+      let currentX = rawCursorOffset.dx - this[_relativeOrigin].dx;
+      let currentY = rawCursorOffset.dy - this[_relativeOrigin].dy;
+      let adjustedX = math.min(core.double, math.max(core.double, currentX, leftBound), rightBound);
+      let adjustedY = math.min(core.double, math.max(core.double, currentY, topBound), bottomBound);
+      let adjustedOffset = new ui.Offset.new(adjustedX, adjustedY);
+      if (currentX < leftBound && deltaPosition.dx < 0)
+        this[_resetOriginOnLeft] = true;
+      else if (currentX > rightBound && deltaPosition.dx > 0) this[_resetOriginOnRight] = true;
+      if (currentY < topBound && deltaPosition.dy < 0)
+        this[_resetOriginOnTop] = true;
+      else if (currentY > bottomBound && deltaPosition.dy > 0) this[_resetOriginOnBottom] = true;
+      this[_previousOffset] = rawCursorOffset;
+      return adjustedOffset;
+    }
+    setFloatingCursor(state, boundedOffset, lastTextPosition, opts) {
+      let resetLerpValue = opts && 'resetLerpValue' in opts ? opts.resetLerpValue : null;
+      if (!(state !== null)) dart.assertFailed(null, I[0], 3293, 12, "state != null");
+      if (!(boundedOffset !== null)) dart.assertFailed(null, I[0], 3294, 12, "boundedOffset != null");
+      if (!(lastTextPosition !== null)) dart.assertFailed(null, I[0], 3295, 12, "lastTextPosition != null");
+      if (state === text_input.FloatingCursorDragState.Start) {
+        this[_relativeOrigin] = ui.Offset.zero;
+        this[_previousOffset] = null;
+        this[_resetOriginOnBottom] = false;
+        this[_resetOriginOnTop] = false;
+        this[_resetOriginOnRight] = false;
+        this[_resetOriginOnBottom] = false;
+      }
+      this[_floatingCursorOn] = state !== text_input.FloatingCursorDragState.End;
+      this[_resetFloatingCursorAnimationValue] = resetLerpValue;
+      if (this[_floatingCursorOn]) {
+        this[_floatingCursorTextPosition] = lastTextPosition;
+        let animationValue = this[_resetFloatingCursorAnimationValue];
+        let sizeAdjustment = animationValue != null ? dart.nullCheck(edge_insets.EdgeInsets.lerp(editable._kFloatingCaretSizeIncrease, edge_insets.EdgeInsets.zero, animationValue)) : editable._kFloatingCaretSizeIncrease;
+        this[_caretPainter].floatingCursorRect = sizeAdjustment.inflateRect(this[_caretPrototype]).shift(boundedOffset);
+      } else {
+        this[_caretPainter].floatingCursorRect = null;
+      }
+      this[_caretPainter].showRegularCaret = this[_resetFloatingCursorAnimationValue] == null;
+    }
+    [_paintContents](context, offset) {
+      if (!(this[_textLayoutLastMaxWidth] === this.constraints.maxWidth && this[_textLayoutLastMinWidth] === this.constraints.minWidth)) dart.assertFailed("Last width (" + dart.str(this[_textLayoutLastMinWidth]) + ", " + dart.str(this[_textLayoutLastMaxWidth]) + ") not the same as max width constraint (" + dart.str(this.constraints.minWidth) + ", " + dart.str(this.constraints.maxWidth) + ").", I[0], 3321, 7, "_textLayoutLastMaxWidth == constraints.maxWidth &&\r\n      _textLayoutLastMinWidth == constraints.minWidth");
+      let effectiveOffset = offset['+'](this[_paintOffset]);
+      if (this.selection != null && !this[_floatingCursorOn]) {
+        this[_updateSelectionExtentsVisibility](effectiveOffset);
+      }
+      let foregroundChild = this[_foregroundRenderObject];
+      let backgroundChild = this[_backgroundRenderObject];
+      if (backgroundChild != null) context.paintChild(backgroundChild, offset);
+      this[_textPainter].paint(context.canvas, effectiveOffset);
+      if (foregroundChild != null) context.paintChild(foregroundChild, offset);
+    }
+    [_paintHandleLayers](context, endpoints) {
+      let startPoint = endpoints[$_get](0).point;
+      startPoint = new ui.Offset.new(startPoint.dx[$clamp](0.0, this.size.width), startPoint.dy[$clamp](0.0, this.size.height));
+      context.pushLayer(new layer.LeaderLayer.new({link: this.startHandleLayerLink, offset: startPoint}), dart.bind(this, 'paint', super.paint), ui.Offset.zero);
+      if (endpoints[$length] === 2) {
+        let endPoint = endpoints[$_get](1).point;
+        endPoint = new ui.Offset.new(endPoint.dx[$clamp](0.0, this.size.width), endPoint.dy[$clamp](0.0, this.size.height));
+        context.pushLayer(new layer.LeaderLayer.new({link: this.endHandleLayerLink, offset: endPoint}), dart.bind(this, 'paint', super.paint), ui.Offset.zero);
+      }
+    }
+    paint(context, offset) {
+      this[_layoutText]({minWidth: this.constraints.minWidth, maxWidth: this.constraints.maxWidth});
+      if (this[_hasVisualOverflow] && this.clipBehavior !== ui.Clip.none) {
+        this[_clipRectLayer] = context.pushClipRect(this.needsCompositing, offset, ui.Offset.zero['&'](this.size), dart.bind(this, _paintContents), {clipBehavior: this.clipBehavior, oldLayer: this[_clipRectLayer]});
+      } else {
+        this[_clipRectLayer] = null;
+        this[_paintContents](context, offset);
+      }
+      this[_paintHandleLayers](context, this.getEndpointsForSelection(dart.nullCheck(this.selection)));
+    }
+    describeApproximatePaintClip(child) {
+      object.RenderObject.as(child);
+      return this[_hasVisualOverflow] ? ui.Offset.zero['&'](this.size) : null;
+    }
+    debugFillProperties(properties) {
+      super.debugFillProperties(properties);
+      properties.add(new colors.ColorProperty.new("cursorColor", this.cursorColor));
+      properties.add(new (T.DiagnosticsPropertyOfValueNotifierOfbool()).new("showCursor", this.showCursor));
+      properties.add(new diagnostics.IntProperty.new("maxLines", this.maxLines));
+      properties.add(new diagnostics.IntProperty.new("minLines", this.minLines));
+      properties.add(new (T.DiagnosticsPropertyOfbool()).new("expands", this.expands, {defaultValue: false}));
+      properties.add(new colors.ColorProperty.new("selectionColor", this.selectionColor));
+      properties.add(new diagnostics.DoubleProperty.new("textScaleFactor", this.textScaleFactor));
+      properties.add(new (T.DiagnosticsPropertyOfLocale()).new("locale", this.locale, {defaultValue: null}));
+      properties.add(new (T.DiagnosticsPropertyOfTextSelection()).new("selection", this.selection));
+      properties.add(new (T.DiagnosticsPropertyOfViewportOffset()).new("offset", this.offset));
+    }
+    debugDescribeChildren() {
+      return (() => {
+        let t42 = T.JSArrayOfDiagnosticsNode().of([]);
+        if (this.text != null) t42[$add](dart.nullCheck(this.text).toDiagnosticsNode({name: "text", style: diagnostics.DiagnosticsTreeStyle.transition}));
+        return t42;
+      })();
+    }
+  };
+  (editable.RenderEditable.new = function(opts) {
+    let t0, t0$;
+    let text = opts && 'text' in opts ? opts.text : null;
+    let textDirection = opts && 'textDirection' in opts ? opts.textDirection : null;
+    let textAlign = opts && 'textAlign' in opts ? opts.textAlign : C[2] || CT.C2;
+    let cursorColor = opts && 'cursorColor' in opts ? opts.cursorColor : null;
+    let backgroundCursorColor = opts && 'backgroundCursorColor' in opts ? opts.backgroundCursorColor : null;
+    let showCursor = opts && 'showCursor' in opts ? opts.showCursor : null;
+    let hasFocus = opts && 'hasFocus' in opts ? opts.hasFocus : null;
+    let startHandleLayerLink = opts && 'startHandleLayerLink' in opts ? opts.startHandleLayerLink : null;
+    let endHandleLayerLink = opts && 'endHandleLayerLink' in opts ? opts.endHandleLayerLink : null;
+    let maxLines = opts && 'maxLines' in opts ? opts.maxLines : 1;
+    let minLines = opts && 'minLines' in opts ? opts.minLines : null;
+    let expands = opts && 'expands' in opts ? opts.expands : false;
+    let strutStyle = opts && 'strutStyle' in opts ? opts.strutStyle : null;
+    let selectionColor = opts && 'selectionColor' in opts ? opts.selectionColor : null;
+    let textScaleFactor = opts && 'textScaleFactor' in opts ? opts.textScaleFactor : 1;
+    let selection = opts && 'selection' in opts ? opts.selection : null;
+    let offset = opts && 'offset' in opts ? opts.offset : null;
+    let onSelectionChanged = opts && 'onSelectionChanged' in opts ? opts.onSelectionChanged : null;
+    let onCaretChanged = opts && 'onCaretChanged' in opts ? opts.onCaretChanged : null;
+    let ignorePointer = opts && 'ignorePointer' in opts ? opts.ignorePointer : false;
+    let readOnly = opts && 'readOnly' in opts ? opts.readOnly : false;
+    let forceLine = opts && 'forceLine' in opts ? opts.forceLine : true;
+    let textHeightBehavior = opts && 'textHeightBehavior' in opts ? opts.textHeightBehavior : null;
+    let textWidthBasis = opts && 'textWidthBasis' in opts ? opts.textWidthBasis : C[3] || CT.C3;
+    let obscuringCharacter = opts && 'obscuringCharacter' in opts ? opts.obscuringCharacter : "•";
+    let obscureText = opts && 'obscureText' in opts ? opts.obscureText : false;
+    let locale = opts && 'locale' in opts ? opts.locale : null;
+    let cursorWidth = opts && 'cursorWidth' in opts ? opts.cursorWidth : 1;
+    let cursorHeight = opts && 'cursorHeight' in opts ? opts.cursorHeight : null;
+    let cursorRadius = opts && 'cursorRadius' in opts ? opts.cursorRadius : null;
+    let paintCursorAboveText = opts && 'paintCursorAboveText' in opts ? opts.paintCursorAboveText : false;
+    let cursorOffset = opts && 'cursorOffset' in opts ? opts.cursorOffset : C[4] || CT.C4;
+    let devicePixelRatio = opts && 'devicePixelRatio' in opts ? opts.devicePixelRatio : 1;
+    let selectionHeightStyle = opts && 'selectionHeightStyle' in opts ? opts.selectionHeightStyle : C[5] || CT.C5;
+    let selectionWidthStyle = opts && 'selectionWidthStyle' in opts ? opts.selectionWidthStyle : C[6] || CT.C6;
+    let enableInteractiveSelection = opts && 'enableInteractiveSelection' in opts ? opts.enableInteractiveSelection : null;
+    let floatingCursorAddedMargin = opts && 'floatingCursorAddedMargin' in opts ? opts.floatingCursorAddedMargin : C[7] || CT.C7;
+    let promptRectRange = opts && 'promptRectRange' in opts ? opts.promptRectRange : null;
+    let promptRectColor = opts && 'promptRectColor' in opts ? opts.promptRectColor : null;
+    let clipBehavior = opts && 'clipBehavior' in opts ? opts.clipBehavior : C[8] || CT.C8;
+    let textSelectionDelegate = opts && 'textSelectionDelegate' in opts ? opts.textSelectionDelegate : null;
+    let painter = opts && 'painter' in opts ? opts.painter : null;
+    let foregroundPainter = opts && 'foregroundPainter' in opts ? opts.foregroundPainter : null;
+    this[_foregroundRenderObject] = null;
+    this[_backgroundRenderObject] = null;
+    this[_foregroundPainter] = null;
+    this[_painter] = null;
+    this[__RenderEditable__caretPainter] = null;
+    this[_selectionPainter] = new editable._TextHighlightPainter.new();
+    this[_autocorrectHighlightPainter] = new editable._TextHighlightPainter.new();
+    this[_cachedBuiltInForegroundPainters] = null;
+    this[_cachedBuiltInPainters] = null;
+    this[_textLayoutLastMaxWidth] = null;
+    this[_textLayoutLastMinWidth] = null;
+    this[_lastCaretRect] = null;
+    this[_selectionStartInViewport] = new (T.ValueNotifierOfbool()).new(true);
+    this[_selectionEndInViewport] = new (T.ValueNotifierOfbool()).new(true);
+    this[_cursorResetLocation] = -1;
+    this[_wasSelectingVerticallyWithKeyboard] = false;
+    this[_cachedPlainText] = null;
+    this[_hasFocus] = false;
+    this[_listenerAttached] = false;
+    this[_forceLine] = false;
+    this[_readOnly] = false;
+    this[_cursorWidth] = 1.0;
+    this[_floatingCursorOn] = false;
+    this[__RenderEditable__floatingCursorTextPosition] = null;
+    this[_maxScrollExtent] = 0.0;
+    this[_clipBehavior] = ui.Clip.hardEdge;
+    this[_semanticsInfo] = null;
+    this[_cachedChildNodes] = null;
+    this[__RenderEditable__tap] = null;
+    this[__RenderEditable__longPress] = null;
+    this[_lastTapDownPosition] = null;
+    this[_lastSecondaryTapDownPosition] = null;
+    this[__RenderEditable__caretPrototype] = null;
+    this[_relativeOrigin] = ui.Offset.zero;
+    this[_previousOffset] = null;
+    this[_resetOriginOnLeft] = false;
+    this[_resetOriginOnRight] = false;
+    this[_resetOriginOnTop] = false;
+    this[_resetOriginOnBottom] = false;
+    this[_resetFloatingCursorAnimationValue] = null;
+    this[_clipRectLayer] = null;
+    this[onSelectionChanged$] = onSelectionChanged;
+    this[onCaretChanged$] = onCaretChanged;
+    this[ignorePointer$] = ignorePointer;
+    this[floatingCursorAddedMargin$] = floatingCursorAddedMargin;
+    this[textSelectionDelegate$] = textSelectionDelegate;
+    if (!(textAlign !== null)) dart.assertFailed(null, I[0], 202, 15, "textAlign != null");
+    if (!(textDirection !== null)) dart.assertFailed("RenderEditable created without a textDirection.", I[0], 203, 15, "textDirection != null");
+    if (!(maxLines == null || dart.notNull(maxLines) > 0)) dart.assertFailed(null, I[0], 204, 15, "maxLines == null || maxLines > 0");
+    if (!(minLines == null || dart.notNull(minLines) > 0)) dart.assertFailed(null, I[0], 205, 15, "minLines == null || minLines > 0");
+    if (!(startHandleLayerLink !== null)) dart.assertFailed(null, I[0], 206, 15, "startHandleLayerLink != null");
+    if (!(endHandleLayerLink !== null)) dart.assertFailed(null, I[0], 207, 15, "endHandleLayerLink != null");
+    if (!(maxLines == null || minLines == null || dart.notNull(maxLines) >= dart.notNull(minLines))) dart.assertFailed("minLines can't be greater than maxLines", I[0], 209, 10, "(maxLines == null) || (minLines == null) || (maxLines >= minLines)");
+    if (!(expands !== null)) dart.assertFailed(null, I[0], 212, 15, "expands != null");
+    if (!(!expands || maxLines == null && minLines == null)) dart.assertFailed("minLines and maxLines must be null when expands is true.", I[0], 214, 10, "!expands || (maxLines == null && minLines == null)");
+    if (!(textScaleFactor !== null)) dart.assertFailed(null, I[0], 217, 15, "textScaleFactor != null");
+    if (!(offset !== null)) dart.assertFailed(null, I[0], 218, 15, "offset != null");
+    if (!(ignorePointer !== null)) dart.assertFailed(null, I[0], 219, 15, "ignorePointer != null");
+    if (!(textWidthBasis !== null)) dart.assertFailed(null, I[0], 220, 15, "textWidthBasis != null");
+    if (!(paintCursorAboveText !== null)) dart.assertFailed(null, I[0], 221, 15, "paintCursorAboveText != null");
+    if (!(obscuringCharacter !== null && extensions['StringCharacters|get#characters'](obscuringCharacter)[$length] === 1)) dart.assertFailed(null, I[0], 222, 15, "obscuringCharacter != null && obscuringCharacter.characters.length == 1");
+    if (!(obscureText !== null)) dart.assertFailed(null, I[0], 223, 15, "obscureText != null");
+    if (!(textSelectionDelegate !== null)) dart.assertFailed(null, I[0], 224, 15, "textSelectionDelegate != null");
+    if (!(cursorWidth !== null && cursorWidth >= 0.0)) dart.assertFailed(null, I[0], 225, 15, "cursorWidth != null && cursorWidth >= 0.0");
+    if (!(cursorHeight == null || dart.notNull(cursorHeight) >= 0.0)) dart.assertFailed(null, I[0], 226, 15, "cursorHeight == null || cursorHeight >= 0.0");
+    if (!(readOnly !== null)) dart.assertFailed(null, I[0], 227, 15, "readOnly != null");
+    if (!(forceLine !== null)) dart.assertFailed(null, I[0], 228, 15, "forceLine != null");
+    if (!(devicePixelRatio !== null)) dart.assertFailed(null, I[0], 229, 15, "devicePixelRatio != null");
+    if (!(selectionHeightStyle !== null)) dart.assertFailed(null, I[0], 230, 15, "selectionHeightStyle != null");
+    if (!(selectionWidthStyle !== null)) dart.assertFailed(null, I[0], 231, 15, "selectionWidthStyle != null");
+    if (!(clipBehavior !== null)) dart.assertFailed(null, I[0], 232, 15, "clipBehavior != null");
+    this[_textPainter] = new text_painter.TextPainter.new({text: text, textAlign: textAlign, textDirection: textDirection, textScaleFactor: textScaleFactor, locale: locale, strutStyle: strutStyle, textHeightBehavior: textHeightBehavior, textWidthBasis: textWidthBasis});
+    this[_showCursor] = (t0 = showCursor, t0 == null ? new (T.ValueNotifierOfbool()).new(false) : t0);
+    this[_maxLines] = maxLines;
+    this[_minLines] = minLines;
+    this[_expands] = expands;
+    this[_selection] = selection;
+    this[_offset] = offset;
+    this[_cursorWidth] = cursorWidth;
+    this[_cursorHeight] = cursorHeight;
+    this[_paintCursorOnTop] = paintCursorAboveText;
+    this[_enableInteractiveSelection] = enableInteractiveSelection;
+    this[_devicePixelRatio] = devicePixelRatio;
+    this[_startHandleLayerLink] = startHandleLayerLink;
+    this[_endHandleLayerLink] = endHandleLayerLink;
+    this[_obscuringCharacter] = obscuringCharacter;
+    this[_obscureText] = obscureText;
+    this[_readOnly] = readOnly;
+    this[_forceLine] = forceLine;
+    this[_clipBehavior] = clipBehavior;
+    this[_hasFocus] = (

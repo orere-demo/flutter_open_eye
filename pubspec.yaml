@@ -42,6 +42,15 @@ dependencies:
   # http: ^0.13.3
   dio: ^4.0.0
 
+  # banner [https://pub.dev/packages/flutter_swiper]
+  # flutter_swiper: ^1.1.6
+
+  # banner [https://pub.flutter-io.cn/packages/flutter_swiper_null_safety]
+  flutter_swiper_null_safety: ^1.0.2
+
+  #图片缓存  [https://pub.dev/packages/extended_image]
+  extended_image: ^4.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
