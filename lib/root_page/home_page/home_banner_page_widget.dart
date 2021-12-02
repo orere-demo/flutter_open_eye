@@ -55,6 +55,9 @@ class HomeBannerPageWidget extends StatelessWidget {
           ),
           onTap: (index){
             print('onTap banner: $index');
+            Navigator.push(context, router(
+              widget:
+            ));
           },
         ),
       ),

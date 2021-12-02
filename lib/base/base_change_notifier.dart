@@ -9,6 +9,7 @@ class BaseChangeNotifier with ChangeNotifier{
 
   // loading狀態
   int type = LoadingWidget.LOADING;
+  // int type = LoadingWidget.DONE;
 
   @override
   void dispose(){
@@ -19,6 +20,7 @@ class BaseChangeNotifier with ChangeNotifier{
   @override
   void notifyListeners(){
     // 当页面销毁的时候，不刷新页面
+    print('数据更新了 notifyListeners');
     if(!_dispose){
       super.notifyListeners();
     }

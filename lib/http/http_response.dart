@@ -33,10 +33,8 @@ class HttpResponse {
 
     try {
       // 以application/x-www-form-urlencoded格式发送数据
-      // print('$path$data$method');
       Response response = await _dio.request(path, data: data, options: Options(method: method));
-      if (response.statusCode == 200) { //  || response.statusCode == 201
-        // print('${response.data}');
+      if (response.statusCode == 200) { // || response.statusCode == 201
         try{
           String dataStr = json.encode(response.data);
           var data = json.decode(dataStr);
@@ -128,7 +126,6 @@ class HttpResponse {
   }
 
   static Future get(String path, {Map? params}){
-    print('get: --- ${path} ---');
     return _request(path, method: 'get', params: params);
   }
 
